@@ -67,6 +67,12 @@ excluded from release inventory, and never package content.
   in the GitHub profile README.
 - Added live `agent-instructions` and `context-engineering` repository topics;
   the About description already matched the documented authority.
+- Made Quick Start agent-operated: the coding agent runs validation, discovers
+  client state, and—after explicit approval—handles backups, installation,
+  smoke testing, evidence, and rollback preparation.
+- Configured and API-verified six ordered GitHub profile pins with ACS first,
+  followed by Portable Web Toolkit, pyenv-native, OllamaToolkit,
+  WebScraperToolkit, and Portfolio Sidekick.
 
 ## Validation baseline
 

@@ -11,6 +11,9 @@ levels.
   future-contributor attribution.
 - Added verified maintainer links, a prerelease-aware release badge, and focused
   `agent-instructions` and `context-engineering` discovery topics.
+- Reworked Quick Start so the coding agent owns package validation, client
+  inspection, backups, installation, smoke testing, lifecycle evidence, and
+  rollback preparation; the user supplies decisions and authorization.
 - Kept the published `v3.0.0-rc.4` tag and release artifacts immutable while
   preparing these package-content changes for the next candidate.
 

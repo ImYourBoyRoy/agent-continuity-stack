@@ -80,25 +80,40 @@ remote installation script or install every supported client automatically.
 
 ## Quick start
 
-Inspect the package without changing client state:
+Open the reviewed checkout in the selected coding client and give the coding
+agent this prompt. The agent performs the inspection and commands; the user
+reviews decisions and authorizes mutations rather than acting as a command
+runner.
 
-```bash
+```text
+Work from this reviewed checkout. Read AGENTS.md, README.md,
+INSTALL_PROTOCOL.md, CLIENT_COMPATIBILITY.md, and the applicable repository
+instructions.
+
+Perform the package inspection yourself without changing client state:
+
 python3 scripts/validate_bundle.py
 python3 scripts/inspect_contract.py source
 python3 scripts/inspect_tree.py . --exclude .git --exclude .env
 python3 tests/run_portable_tests.py
+
+Then inspect my installed coding-client versions, resolve their actual
+instruction and skill roots, inventory existing instructions and skills, and
+report status only. Do not install, merge, replace, update, create backups, or
+change client configuration until I approve the exact plan, targets, conflict
+handling, backup locations, tests, and rollback.
+
+Do not ask me to run commands, inspect files, create backups, perform the
+installation, or execute smoke tests. Those are the coding agent's
+responsibilities within the authorized environment. Ask me only for decisions,
+missing information that cannot be discovered safely, or authorization for the
+reviewed mutation plan.
 ```
 
-Then ask the coding agent:
-
-```text
-Read README.md and INSTALL_PROTOCOL.md in this reviewed checkout. Inspect my
-coding clients and existing instructions and skills, then report status only.
-Do not install, merge, replace, or update anything until I approve the exact
-plan, targets, backups, tests, and rollback.
-```
-
-Status and planning are read-only.
+Status and planning are read-only. After approval, the coding agent executes
+the approved work itself, creates and verifies backups, performs fresh-session
+smoke tests, records lifecycle evidence, and reports the completed result and
+rollback path.
 
 ## Choose the installation policy
 

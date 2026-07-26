@@ -137,6 +137,16 @@ On 2026-07-26:
   zero publishable references
 - RC4 inventory-driven archive round trip: 130 regular files, 191 total entries,
   no unsafe entries, and extracted bundle/conformance tests passed
+- Published the initial public `main` commit
+  `a6b1b72059fbca5ebc8c2cd3e1308e2cb36eb118`; local and remote heads matched
+- Initial GitHub validation passed on Python `3.10` and `3.14`; the Dependabot
+  configuration run also passed
+- Enabled private vulnerability reporting, dependency alerts, automated
+  security fixes, secret scanning, push protection, and read-only default
+  workflow permissions
+- Protected `main` with strict required Python `3.10` and `3.14` checks, linear
+  history, conversation resolution, and force-push/deletion prevention;
+  administrator enforcement remains disabled for maintainer recovery
 
 These are source and conformance results, not live installation or rollback
 evidence.
@@ -158,5 +168,5 @@ evidence.
 - Windows reparse-point behavior needs a Windows validation run.
 - The public repository has no final release commit or GitHub Release.
 
-Next: verify the initial public workflow, then complete the remaining live-client
-and recovery gates before promoting final `3.0.0`.
+Next: complete the remaining live-client and recovery gates before promoting
+final `3.0.0`.

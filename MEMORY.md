@@ -4,9 +4,16 @@
 
 - Package: Agent Continuity Stack
 - Current package version: `3.0.0-rc.4`
-- Release status: release candidate
+- Release status: public prerelease; not promoted to stable
 - Canonical repository:
   `https://github.com/ImYourBoyRoy/agent-continuity-stack`
+- Published prerelease:
+  `https://github.com/ImYourBoyRoy/agent-continuity-stack/releases/tag/v3.0.0-rc.4`
+- Release tag: `v3.0.0-rc.4`
+- Release commit: `0e24499b9455f1956d0e8390bbd49cf62f908e52`
+- Release date: `2026-07-26`
+- Release archive SHA-256:
+  `e159a83df32dacceb29ca93c118b2cf14b293e790ecd1b636fb33f166f059893`
 - License: MIT
 - Purpose: distribute one complete Expert Agent Operating Contract and portable
   on-demand skills across Codex, Cursor, Claude Code, and Antigravity.
@@ -159,6 +166,14 @@ On 2026-07-26:
   safe-tree, and portable conformance validation passed; `.env` remained
   ignored, untracked, and mode `0600`; package version authorities agreed on
   `3.0.0-rc.4`.
+- Published GitHub prerelease `v3.0.0-rc.4` on 2026-07-26 from commit
+  `0e24499b9455f1956d0e8390bbd49cf62f908e52`. The annotated tag resolves to
+  that commit; the release is non-draft and explicitly marked as a prerelease.
+  Both the ZIP and checksum sidecar are uploaded, and GitHub's recorded ZIP
+  digest matches the independently verified SHA-256.
+- Post-publication record pre-commit validation: bundle, canonical-contract,
+  safe-tree, and portable conformance checks passed with 0 errors and 0
+  warnings.
 
 These are source and conformance results, not live installation or rollback
 evidence.
@@ -178,10 +193,8 @@ evidence.
 - The RC4 copy-paste GitHub installation prompt has source/conformance coverage
   but not a complete four-client live installation exercise.
 - Windows reparse-point behavior needs a Windows validation run.
-- RC4 may be published as an explicitly labeled prerelease after all
-  prerelease integrity gates pass. Its publication must not be represented as
+- RC4 is published as an explicitly labeled prerelease. Its publication is not
   completion of any open stable-promotion gate.
 
-Next: publish the validated RC4 prerelease, then complete the remaining
-live-client, recovery, platform, and contract-review gates before promoting
-final `3.0.0`.
+Next: collect the remaining live-client, recovery, platform, and
+contract-review evidence before promoting final `3.0.0`.

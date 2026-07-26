@@ -92,8 +92,8 @@
     },
     {
       "path": "HANDOFF.md",
-      "sha256": "bad4390ef49dc3205a645334fe7f574ed704167f7841824dd44fe67bfa296376",
-      "bytes": 3820
+      "sha256": "a5999c98da237c9decc6c9ab8844561a48754a760e3dfe55cf76388679fba388",
+      "bytes": 4119
     },
     {
       "path": "INSTALL_PROTOCOL.md",
@@ -107,8 +107,8 @@
     },
     {
       "path": "MEMORY.md",
-      "sha256": "f966b0e886005c8b8436c38c1b93ec0e869680fd28a8178068951d99a9cbbf7e",
-      "bytes": 10401
+      "sha256": "4a1daf27cee153704156aaff0a006162c36bbbe72def2d88c15c4abcc96b3c3c",
+      "bytes": 11154
     },
     {
       "path": "MERGE_CHECKLIST.md",

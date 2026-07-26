@@ -17,7 +17,7 @@ Do not begin with a repository-wide scan. Do not read or print `.env`.
 - Branch: `main`
 - Canonical remote:
   `https://github.com/ImYourBoyRoy/agent-continuity-stack`
-- Publication: initial public repository
+- Publication target: GitHub prerelease `v3.0.0-rc.4`
 - Initial public commit:
   `a6b1b72059fbca5ebc8c2cd3e1308e2cb36eb118`
 - Initial validation: Python `3.10` and `3.14` GitHub jobs passed
@@ -48,6 +48,9 @@ excluded from release inventory, and never package content.
   (`agent-continuity-stack`) and bound validators to the canonical repository.
 - Enabled repository security controls and protected `main` with the successful
   validation contexts.
+- Separated release-candidate publication gates from final stable-promotion
+  gates without weakening unresolved runtime, recovery, or platform
+  requirements.
 
 ## Validation baseline
 
@@ -64,7 +67,7 @@ The last pre-commit run must be recorded in `MEMORY.md`. Source and fixture
 success does not prove live installation, client discovery, rollback, or
 uninstall.
 
-## Open release gates
+## Open final stable-promotion gates
 
 - Complete the focused immutable-backup recovery rerun.
 - Runtime-test Cursor with authenticated target-version skill discovery.
@@ -74,12 +77,13 @@ uninstall.
 - Exercise the public installation prompt end to end across all supported
   clients.
 - Review the complete contract's always-on token cost and priority wording.
-- Create an identified clean commit before building a release archive.
 
 ## Next recommended action
 
-Complete the outstanding live-client and recovery gates. Do not promote
-`3.0.0-rc.4` to final until every gate in `MERGE_CHECKLIST.md` passes.
+Publish `v3.0.0-rc.4` only after every prerelease integrity gate in
+`MERGE_CHECKLIST.md` passes, and disclose every open stable-promotion gate.
+Then collect the outstanding live-client, recovery, and platform evidence. Do
+not promote RC4 to final `3.0.0` until every final stable-promotion gate passes.
 
 ## Handoff discipline
 

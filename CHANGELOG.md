@@ -19,6 +19,9 @@ levels.
   inventory-driven archive validation, and staged-secret checks.
 - Published the canonical public repository and enabled validation, dependency,
   vulnerability-reporting, secret-scanning, and protected-branch controls.
+- Separated integrity and disclosure gates for public release candidates from
+  the live-client, recovery, platform, and contract-review gates required for
+  final stable promotion.
 
 ## 3.0.0-rc.3 - 2026-07-26
 

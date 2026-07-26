@@ -144,8 +144,11 @@ substitute runtime proof for an installed client version.
 
 The dependency-free helpers validate normalized contract bytes, package trees,
 schemas, lifecycle records, archives, and inventory. The portable test suite
-also exercises negative cases. Live client discovery remains a separate release
-gate.
+also exercises negative cases. A public release candidate may be published
+after its source, inventory, conformance, archive-safety, clean-commit, CI, and
+disclosure gates pass. Live client, recovery, and platform evidence remains a
+separate gate for final stable promotion and must never be inferred from
+prerelease publication.
 
 Package-level behavior changes increment the package version. Material skill
 changes increment that skill's version and content hash. A release is built only

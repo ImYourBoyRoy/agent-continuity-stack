@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/update-check.schema.json",
+  "title": "Portable project update sources",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "sources"],
+  "properties": {
+    "schema": {
+      "const": 1
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "policy": {
+      "$ref": "#/$defs/policy"
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "locator", "purpose"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "enum": [
+            "repository",
+            "registry",
+            "executable",
+            "version-file",
+            "git-pin",
+            "platform"
+          ]
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "channel": {
+          "enum": ["stable", "prerelease", "source"]
+        },
+        "include_enhancements": {
+          "type": "boolean"
+        },
+        "credential_source": {
+          "enum": ["none", "existing-environment", "existing-client"]
+        },
+        "current": {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "maxProperties": 1,
+          "properties": {
+            "version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "version_file": {
+              "$ref": "#/$defs/relativePath"
+            },
+            "git_ref": {
+              "type": "string",
+              "minLength": 1
+            },
+            "command": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "git-pin"
+              }
+            },
+            "required": ["kind"]
+          },
+          "then": {
+            "required": ["current"],
+            "properties": {
+              "current": {
+                "required": ["git_ref"]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "pattern": "^(?:/|[A-Za-z]:[\\\\/]|.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$))"
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "audit_tier": {
+          "enum": ["rapid", "standard", "exhaustive"]
+        },
+        "prereleases": {
+          "enum": ["exclude", "report-only", "include"]
+        },
+        "major_updates": {
+          "enum": ["exclude", "report-only", "include"]
+        },
+        "unreleased": {
+          "enum": ["exclude", "report-only", "include"]
+        },
+        "security": {
+          "enum": ["immediate", "scheduled"]
+        },
+        "cooldown_days": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 365
+        },
+        "include": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "exclude": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "schema": 4,
+  "package": "agent-continuity-stack",
+  "version": "3.0.0-rc.4",
+  "repository": "https://github.com/ImYourBoyRoy/agent-continuity-stack",
+  "license": "MIT",
+  "release_status": "release-candidate",
+  "release_integrity": {
+    "inventory": "release-files.json",
+    "inventory_excludes_itself": true,
+    "archive_checksum": "external-sha256-sidecar"
+  },
+  "global_contract": {
+    "source": "GLOBAL_CUSTOM_INSTRUCTIONS.md",
+    "metadata": "instruction-pack.json",
+    "required_for_global_install": false,
+    "install_by_default": false,
+    "preserve_existing_instructions_by_default": true
+  },
+  "skills": [
+    {
+      "name": "apply-project-updates",
+      "version": "1.0.0"
+    },
+    {
+      "name": "audit-project-updates",
+      "version": "1.0.0"
+    },
+    {
+      "name": "design-agent-capability",
+      "version": "1.0.1"
+    },
+    {
+      "name": "engineer-cli-tools",
+      "version": "1.0.0"
+    },
+    {
+      "name": "maintain-agent-instructions",
+      "version": "1.1.0"
+    },
+    {
+      "name": "maintain-project-docs",
+      "version": "1.1.0"
+    },
+    {
+      "name": "maintain-project-memory",
+      "version": "1.0.0"
+    },
+    {
+      "name": "maintain-web-design-system",
+      "version": "1.0.0"
+    },
+    {
+      "name": "prepare-web-assets",
+      "version": "1.0.0"
+    },
+    {
+      "name": "red-team-technical-plan",
+      "version": "1.0.0"
+    },
+    {
+      "name": "release-web-application",
+      "version": "1.0.0"
+    },
+    {
+      "name": "research-software-versions",
+      "version": "1.0.0"
+    },
+    {
+      "name": "verify-software-change",
+      "version": "1.0.0"
+    },
+    {
+      "name": "web-discovery-artifacts",
+      "version": "1.0.0"
+    }
+  ],
+  "optional_skills": [
+    {
+      "name": "build-astro-on-cloudflare",
+      "version": "1.0.0",
+      "status": "stable",
+      "install_by_default": false,
+      "path": "optional_skills/build-astro-on-cloudflare"
+    }
+  ],
+  "schemas": [
+    "schemas/install-status.schema.json",
+    "schemas/install-plan.schema.json",
+    "schemas/transaction-receipt.schema.json",
+    "schemas/client-status.schema.json",
+    "schemas/ownership-record.schema.json",
+    "schemas/rollback-receipt.schema.json",
+    "schemas/operation-journal.schema.json"
+  ],
+  "integrations": [
+    {
+      "id": "portable-web-toolkit",
+      "metadata": "integrations/portable-web-toolkit.json",
+      "required": false,
+      "install_automatically": false
+    }
+  ],
+  "runtime_evidence": [
+    "tests/evidence/codex-0.146.0-alpha.3-linux-project.json"
+  ],
+  "clients": {
+    "codex": {
+      "user_skills": "~/.agents/skills",
+      "project_skills": ".agents/skills"
+    },
+    "cursor": {
+      "user_skills": "~/.cursor/skills",
+      "project_skills": ".cursor/skills",
+      "runtime_verification_required": true
+    },
+    "claude": {
+      "user_skills": "~/.claude/skills",
+      "project_skills": ".claude/skills"
+    },
+    "antigravity": {
+      "user_skills": "~/.gemini/config/skills",
+      "project_skills": ".agents/skills"
+    },
+    "antigravity-cli": {
+      "user_skills": "~/.gemini/antigravity-cli/skills",
+      "project_skills": ".agents/skills",
+      "opt_in": true
+    }
+  }
+}

@@ -1,0 +1,34 @@
+name: Skill proposal
+description: Propose a portable skill or a material capability expansion.
+title: "skill: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: Concrete use cases
+      description: Provide positive prompts and meaningful near-miss prompts.
+    validations:
+      required: true
+  - type: textarea
+    id: ownership
+    attributes:
+      label: Ownership boundary
+      description: Explain why an existing skill, client feature, CI check, or specialist toolkit does not already own this.
+    validations:
+      required: true
+  - type: textarea
+    id: portability
+    attributes:
+      label: Portability and compatibility
+      description: Identify required tools, clients, platforms, and graceful fallbacks.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Proposed validation
+      description: Include positive, near-miss, collision, and runtime evidence.
+    validations:
+      required: true

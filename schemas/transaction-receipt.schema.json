@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-continuity-stack:schema:transaction-receipt:2",
+  "title": "Agent Continuity Stack transaction receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "transaction_id",
+    "started_at",
+    "completed_at",
+    "outcome",
+    "package",
+    "package_version",
+    "package_sha256",
+    "approved_plan_sha256",
+    "state_root",
+    "source_sha256",
+    "instruction_mode",
+    "rendered_sha256",
+    "client_versions",
+    "mutations",
+    "backups",
+    "client_status_records",
+    "rollback_instructions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "kind": {
+      "const": "transaction-receipt"
+    },
+    "transaction_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completed_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "outcome": {
+      "enum": [
+        "complete",
+        "partial",
+        "failed",
+        "rolled-back"
+      ]
+    },
+    "package": {
+      "const": "agent-continuity-stack"
+    },
+    "package_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "package_sha256": {
+      "$ref": "#/$defs/hash"
+    },
+    "approved_plan_sha256": {
+      "$ref": "#/$defs/hash"
+    },
+    "state_root": {
+      "$ref": "#/$defs/absolute-root"
+    },
+    "source_commit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_sha256": {
+      "$ref": "#/$defs/hash"
+    },
+    "instruction_mode": {
+      "enum": [
+        "preserve-existing",
+        "guided-additions",
+        "complete-contract"
+      ]
+    },
+    "rendered_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "client_versions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "mutations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/mutation"
+      }
+    },
+    "backups": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/backup"
+      }
+    },
+    "client_status_records": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rollback_instructions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "absolute-root": {
+      "type": "string",
+      "pattern": "^(?:/|[A-Za-z]:[\\\\/]).+"
+    },
+    "mutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "client",
+        "client_root",
+        "target_relative",
+        "action",
+        "pre_sha256",
+        "post_sha256",
+        "pre_mode",
+        "post_mode",
+        "ownership_record",
+        "result"
+      ],
+      "properties": {
+        "client": {
+          "enum": [
+            "codex",
+            "cursor",
+            "claude",
+            "antigravity",
+            "antigravity-cli"
+          ]
+        },
+        "client_root": {
+          "$ref": "#/$defs/absolute-root"
+        },
+        "target_relative": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "enum": [
+            "create",
+            "merge",
+            "replace-owned",
+            "adopt",
+            "restore"
+          ]
+        },
+        "pre_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "post_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "pre_mode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-7]{3,4}$"
+        },
+        "post_mode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-7]{3,4}$"
+        },
+        "ownership_record": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "result": {
+          "enum": [
+            "complete",
+            "skipped",
+            "failed",
+            "restored"
+          ]
+        }
+      }
+    },
+    "backup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "content_sha256",
+        "content_kind",
+        "retained"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_sha256": {
+          "$ref": "#/$defs/hash"
+        },
+        "content_kind": {
+          "enum": [
+            "file",
+            "tree"
+          ]
+        },
+        "retained": {
+          "const": true
+        }
+      }
+    }
+  }
+}

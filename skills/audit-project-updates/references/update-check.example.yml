@@ -1,0 +1,36 @@
+schema: 1
+
+sources:
+  - id: shared-web-toolkit
+    kind: repository
+    locator: https://code.example.org/example/shared-web-toolkit
+    purpose: Build and deployment tooling used by this project
+    channel: stable
+    include_enhancements: true
+    credential_source: none
+    current:
+      version_file: tools/shared-web-toolkit/VERSION
+
+  - id: python-version-manager
+    kind: executable
+    locator: python-version-manager
+    purpose: Project Python runtime management
+    channel: stable
+    include_enhancements: true
+    credential_source: none
+    current:
+      command:
+        - python-version-manager
+        - --version
+
+policy:
+  audit_tier: standard
+  prereleases: report-only
+  major_updates: report-only
+  unreleased: report-only
+  security: immediate
+  cooldown_days: 3
+  exclude:
+    - generated/**
+    - fixtures/**
+

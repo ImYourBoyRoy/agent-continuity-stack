@@ -1,0 +1,7 @@
+{
+  "schema": 2,
+  "name": "engineer-cli-tools",
+  "version": "1.0.0",
+  "content_hash_definition": "inspect_tree sha256 excluding skill-manifest.json",
+  "content_sha256": "f16854351670f6acba191180fe4fd358a140061c01994cde6a46663c8224a1dc"
+}

@@ -1,0 +1,7 @@
+{
+  "schema": 2,
+  "name": "research-software-versions",
+  "version": "1.0.0",
+  "content_hash_definition": "inspect_tree sha256 excluding skill-manifest.json",
+  "content_sha256": "804b404f1a19f8a1a5df49f3b9c29f757aeb6ee64326426915e19d5a9aa46016"
+}

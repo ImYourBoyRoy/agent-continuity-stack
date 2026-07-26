@@ -1,0 +1,9 @@
+{
+  "schema": 2,
+  "name": "build-astro-on-cloudflare",
+  "version": "1.0.0",
+  "tier": "optional",
+  "install_by_default": false,
+  "content_hash_definition": "inspect_tree sha256 excluding skill-manifest.json",
+  "content_sha256": "3190389a9f12424d02398a180de8cd60460af354098b569c6b322631fc9d4154"
+}

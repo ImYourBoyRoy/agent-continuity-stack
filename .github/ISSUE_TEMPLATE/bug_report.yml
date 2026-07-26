@@ -1,0 +1,51 @@
+name: Bug report
+description: Report incorrect package, validation, routing, or lifecycle behavior.
+title: "bug: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include credentials, private paths, or sensitive vulnerability
+        details. Use the private process in SECURITY.md when appropriate.
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      placeholder: 3.0.0-rc.4
+    validations:
+      required: true
+  - type: dropdown
+    id: client
+    attributes:
+      label: Client
+      options:
+        - Codex
+        - Cursor
+        - Claude Code
+        - Google Antigravity
+        - Client-independent
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and observed behavior
+      description: Include minimal disposable reproduction steps.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation evidence
+      description: State commands, smoke tests, and untested surfaces without secrets.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: I removed credentials, personal data, and private paths.
+          required: true
+        - label: I used systems and repositories I am authorized to test.
+          required: true

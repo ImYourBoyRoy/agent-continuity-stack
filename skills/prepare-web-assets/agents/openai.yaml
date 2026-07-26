@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prepare Web Assets"
+  short_description: "Prepare responsive, accessible production assets"
+  default_prompt: "Use $prepare-web-assets to prepare these visual assets for production web use."

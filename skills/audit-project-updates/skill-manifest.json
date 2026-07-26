@@ -1,0 +1,7 @@
+{
+  "schema": 2,
+  "name": "audit-project-updates",
+  "version": "1.0.0",
+  "content_hash_definition": "inspect_tree sha256 excluding skill-manifest.json",
+  "content_sha256": "5f4bf99eb1745ab725b484cef385c5b277e143b07e2229aa39a9783f83d52ab8"
+}

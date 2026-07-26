@@ -1,0 +1,7 @@
+{
+  "schema": 2,
+  "name": "prepare-web-assets",
+  "version": "1.0.0",
+  "content_hash_definition": "inspect_tree sha256 excluding skill-manifest.json",
+  "content_sha256": "29e2275d8ed785d166067b8dd4fa6682cc03486119afac20bb279066a9ef1849"
+}

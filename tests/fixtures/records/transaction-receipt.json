@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "kind": "transaction-receipt",
+  "transaction_id": "fixture-transaction-001",
+  "started_at": "2026-07-26T20:00:00Z",
+  "completed_at": "2026-07-26T20:01:00Z",
+  "outcome": "complete",
+  "package": "agent-continuity-stack",
+  "package_version": "3.0.0-rc.4",
+  "package_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "approved_plan_sha256": "0f4a2202291bd2b30cc10438d5214b72fd3608f59dfa7cc87e14902387f40ca3",
+  "state_root": "/disposable-state",
+  "source_commit": null,
+  "source_sha256": "f5c992564ccd9946b5f2dbfc8d933555085a393a0549f4b7d1fe52b062e7ca5d",
+  "instruction_mode": "preserve-existing",
+  "rendered_sha256": null,
+  "client_versions": {
+    "codex": "example-version"
+  },
+  "mutations": [
+    {
+      "client": "codex",
+      "client_root": "/disposable-home/skills",
+      "target_relative": "audit-project-updates",
+      "action": "create",
+      "pre_sha256": null,
+      "post_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "pre_mode": null,
+      "post_mode": "0755",
+      "ownership_record": "state/ownership/codex-audit-project-updates.json",
+      "result": "complete"
+    }
+  ],
+  "backups": [],
+  "client_status_records": [
+    "state/status/codex.json"
+  ],
+  "rollback_instructions": [
+    "verify ownership hash, then remove the originally absent target"
+  ],
+  "warnings": []
+}

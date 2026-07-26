@@ -1,0 +1,7 @@
+{
+  "schema": 2,
+  "name": "red-team-technical-plan",
+  "version": "1.0.0",
+  "content_hash_definition": "inspect_tree sha256 excluding skill-manifest.json",
+  "content_sha256": "d56cdb5d4990548804b4653e062962a974ac13aa31d3cb1f7b84cbcf9ad065e3"
+}

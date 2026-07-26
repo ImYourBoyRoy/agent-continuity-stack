@@ -1,0 +1,5 @@
+interface:
+  display_name: "Red-Team Technical Plan"
+  short_description: "Stress-test material technical proposals"
+  default_prompt: "Use $red-team-technical-plan to challenge this proposal and produce the smallest defensible next step."
+

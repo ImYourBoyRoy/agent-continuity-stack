@@ -1,0 +1,654 @@
+{
+  "schema": 1,
+  "hash_algorithm": "sha256",
+  "excluded": [
+    "release-files.json"
+  ],
+  "files": [
+    {
+      "path": ".editorconfig",
+      "sha256": "fbb87bedc2547f38f12c655e34a4b44f568aa0e5e40d77b14d75bb5a1079a347",
+      "bytes": 151
+    },
+    {
+      "path": ".env.example",
+      "sha256": "3187398c6ae86764292e11c84cadb864508e8d3b22bef6e31b919768b2f61c23",
+      "bytes": 147
+    },
+    {
+      "path": ".gitattributes",
+      "sha256": "b9de9775c613eab4c69b271347f033e1835c049cba1eff79ab83f990cd3ca5d7",
+      "bytes": 354
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+      "sha256": "33cd8d7e974907714bb95cf2087a0247c4d4541d04fc6cb59a7db1b503c9e2a1",
+      "bytes": 1392
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "sha256": "b69725604746bb3eb6d82a03d3a78db380162d79585cd4540924f552b4449822",
+      "bytes": 254
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/skill_proposal.yml",
+      "sha256": "726bf8715200083a3a358294f4d67c62fe7be2690f5557686e97ca8f0f5abc5c",
+      "bytes": 1021
+    },
+    {
+      "path": ".github/dependabot.yml",
+      "sha256": "064e52be9582d32d153712bb6462c4c7704472abeb612ffb87f2755ef3db313f",
+      "bytes": 200
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "sha256": "84c142131bec8b821fb695134fd47bf8a39827de7af33df5dcd06ffd59c2ac10",
+      "bytes": 862
+    },
+    {
+      "path": ".github/workflows/validate.yml",
+      "sha256": "b9dab2df56311e634bbab6a99060c29409e84f29919d8ebb4532a7ea1cddb5db",
+      "bytes": 1118
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "04d0d40b748d0294bf7df6ee7921f50dc1df9ae87a14359cab2c4b406350d254",
+      "bytes": 503
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "7103a7f7e6609ace3cc0fd51716ddfa544669bbc58dddf946657100739721b32",
+      "bytes": 3670
+    },
+    {
+      "path": "ARCHITECTURE.md",
+      "sha256": "1a04637cc909b2291f9a490c8e8e88ec6fbb8ef1b52b8ddc737c567fa4fba989",
+      "bytes": 6368
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "284facbe32b8d6c90e4849346d90936823a8f70512057124df5ee9b34659cf3b",
+      "bytes": 3990
+    },
+    {
+      "path": "CLIENT_COMPATIBILITY.md",
+      "sha256": "6078b018d619501b3997ceae2d1a8b5905ab351eb45f8856ef646bedb6dbd0f8",
+      "bytes": 5350
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "sha256": "97c00878f5a638d1d743f3c9c171f7ef23f20a3c4f5bd890fd793e2b53802ad9",
+      "bytes": 1475
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "f9876079b2108b89ae2ee991caccbe422ec7a16d10cc4a32df1067797178f8d2",
+      "bytes": 2030
+    },
+    {
+      "path": "GLOBAL_CUSTOM_INSTRUCTIONS.md",
+      "sha256": "f5c992564ccd9946b5f2dbfc8d933555085a393a0549f4b7d1fe52b062e7ca5d",
+      "bytes": 13898
+    },
+    {
+      "path": "HANDOFF.md",
+      "sha256": "262c419c5ff9f0beb2b076b20f7480adcf5a5b09f55b49bc3b6500e68de4d3c7",
+      "bytes": 3355
+    },
+    {
+      "path": "INSTALL_PROTOCOL.md",
+      "sha256": "43c2010cf6cd78497a0fed19f9ecea6ce3cc56a191d2ad82b80916721c49eec5",
+      "bytes": 13776
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "91a70ac9a782ad9628a67450d0799ef42d8e7a1ba0e0565605d929e11e5ef09a",
+      "bytes": 1093
+    },
+    {
+      "path": "MEMORY.md",
+      "sha256": "ad49b68cf01564328779392d9d1acecce0de2235213aaa1c21d55e2efffd8f45",
+      "bytes": 8851
+    },
+    {
+      "path": "MERGE_CHECKLIST.md",
+      "sha256": "117f08976b15703ada40b4761deab3a87f9072f945023836f95cdeffcb740802",
+      "bytes": 3639
+    },
+    {
+      "path": "README.md",
+      "sha256": "9ca6e09968b1852dbb69b703fe07064dac434fbf81c4c5e43a1e88b60c042130",
+      "bytes": 18187
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "8855c0c64f1580dc2bf3fa5ee166856265d1dc8ec33425f8ffc0d0fa6d51c778",
+      "bytes": 1694
+    },
+    {
+      "path": "SOURCE_MAP.md",
+      "sha256": "2a4b9617486c87e76a7bacfd4658c2c520f819d118de96c13ebe215d1b834204",
+      "bytes": 1422
+    },
+    {
+      "path": "VERSION",
+      "sha256": "349c8134f8444a63fa3c95b36b334a5f878e2ee1ad8b4f9ddbb296cf25969d06",
+      "bytes": 11
+    },
+    {
+      "path": "instruction-pack.json",
+      "sha256": "ff0bad885ce545f8eac0110481f8740a71a7ebeac62602e448523edaabf23dd5",
+      "bytes": 2229
+    },
+    {
+      "path": "integrations/portable-web-toolkit.json",
+      "sha256": "6cdc52f0a06aa4958e1a604e675424c08c0be63734b61805ea5898ce440b7f55",
+      "bytes": 1300
+    },
+    {
+      "path": "integrations/portable-web-toolkit.md",
+      "sha256": "e3fa3470128ef984045cfc1142942367847e5ec060bcc178844bd3107ade0b20",
+      "bytes": 2096
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "d0e29c42f51b1785e9db166e48bd50b07d871bc2582d5547acf28b9940c9960c",
+      "bytes": 3222
+    },
+    {
+      "path": "optional_skills/build-astro-on-cloudflare/SKILL.md",
+      "sha256": "320672adcbf74e1824add064121a079f8337840e01e104ff2e753cf27bf5f3a3",
+      "bytes": 3062
+    },
+    {
+      "path": "optional_skills/build-astro-on-cloudflare/agents/openai.yaml",
+      "sha256": "93a9e74c9f812b0c7564bca9e4af1d55f0f301b3078e3eac794d82916eea565d",
+      "bytes": 272
+    },
+    {
+      "path": "optional_skills/build-astro-on-cloudflare/references/architecture-decisions.md",
+      "sha256": "e2c05344e30d0b962a61459f37d314d43955ff351caf29ff23c96bf359eb89cf",
+      "bytes": 1272
+    },
+    {
+      "path": "optional_skills/build-astro-on-cloudflare/skill-manifest.json",
+      "sha256": "41b5aeb7dc964d862c473339de0a99eb77a9039eaff1efb48dd661617d2c425e",
+      "bytes": 302
+    },
+    {
+      "path": "schemas/client-status.schema.json",
+      "sha256": "eaf5dee08ed61920b284b6c7222a6e2d8e449d82cb2f2c035c75171e221f0492",
+      "bytes": 3020
+    },
+    {
+      "path": "schemas/install-plan.schema.json",
+      "sha256": "e7adfb3d124453d809c8cc08bb84c5dfe1cfa8701ff7cf211e85e91a14da9a5b",
+      "bytes": 4978
+    },
+    {
+      "path": "schemas/install-status.schema.json",
+      "sha256": "e223009a5cf03946a8d13ea367c39df13ebc3d4ca605cb4999e66e77da8fba4f",
+      "bytes": 3102
+    },
+    {
+      "path": "schemas/operation-journal.schema.json",
+      "sha256": "f84a780bd29423c0a6d1370516bef041a76808a09473ed75a799037c61fc5b6f",
+      "bytes": 3395
+    },
+    {
+      "path": "schemas/ownership-record.schema.json",
+      "sha256": "2a793872cb0a6978ff943c355ad3767762e570d02d99b08ff15c3a3130346162",
+      "bytes": 2193
+    },
+    {
+      "path": "schemas/rollback-receipt.schema.json",
+      "sha256": "bc39dc97bd26d7f1627578201cc646d2a41dee25d7856f2e3d2ced990e4bdd96",
+      "bytes": 2853
+    },
+    {
+      "path": "schemas/transaction-receipt.schema.json",
+      "sha256": "3b608206a494f8260cce5e3e95a63e901d5b17aec068ea27a2ce9746a8969421",
+      "bytes": 5109
+    },
+    {
+      "path": "scripts/inspect_contract.py",
+      "sha256": "3c71f93156a85a3d3127f8fb370250df0b6f1c6c91d13cad911065e8626d8aa6",
+      "bytes": 6168
+    },
+    {
+      "path": "scripts/inspect_tree.py",
+      "sha256": "2628b213203c163cf15aef0a30dbb3d40611603ac8f7349a417f5f75b3723ef6",
+      "bytes": 4246
+    },
+    {
+      "path": "scripts/validate_archive.py",
+      "sha256": "65848e9b88093bc357863fce2cd28741cfd72694f1c37d4bb0a46c708d4ec449",
+      "bytes": 6298
+    },
+    {
+      "path": "scripts/validate_bundle.py",
+      "sha256": "b5aa7ea8d91a27c49f92d303735e233c7d828fc45a1999d7d628c0c553423a30",
+      "bytes": 29147
+    },
+    {
+      "path": "scripts/validate_record.py",
+      "sha256": "7dcccfdaa5e06da3209069ed0928a839c7c9ea40fd4f78d9cd25bf6e34a5899b",
+      "bytes": 21732
+    },
+    {
+      "path": "skills/apply-project-updates/SKILL.md",
+      "sha256": "35f789c752fc6ca0d7fe313f753728d6af451d7ab2183f1d14f865a7d97ca3ca",
+      "bytes": 3389
+    },
+    {
+      "path": "skills/apply-project-updates/agents/openai.yaml",
+      "sha256": "bd18a8bc7bf6d648c3e18438e22d8c61c7bd7e76359e4236ed4598dc53f04692",
+      "bytes": 236
+    },
+    {
+      "path": "skills/apply-project-updates/references/batching-and-rollback.md",
+      "sha256": "c0275c231f01678bee525356f694098e232c9f4902ff9310f4143f5ea98af38b",
+      "bytes": 1169
+    },
+    {
+      "path": "skills/apply-project-updates/references/ecosystem-application.md",
+      "sha256": "acff9bc402655ac3b2b71e781b78052b6aef4e482c59b5dcf79e77145a9a1219",
+      "bytes": 1550
+    },
+    {
+      "path": "skills/apply-project-updates/skill-manifest.json",
+      "sha256": "ab9eefbd1ccc7a88060c0d24671c77041219e0c9c29f36eda9eef03c95d318c4",
+      "bytes": 245
+    },
+    {
+      "path": "skills/audit-project-updates/SKILL.md",
+      "sha256": "75d64582f3a6b373de9193016e1dc12fdaf141e39551a1f293a85d44ae3433a6",
+      "bytes": 5692
+    },
+    {
+      "path": "skills/audit-project-updates/agents/openai.yaml",
+      "sha256": "91fdb47c8f2e9162b8125f1a25aa62bea08c7560ed90824bf15f95dadfa36620",
+      "bytes": 222
+    },
+    {
+      "path": "skills/audit-project-updates/references/ecosystem-checks.md",
+      "sha256": "a637d5331101d39cd1277e5bda312359aa69870e8e64623447c83ea4938dbc19",
+      "bytes": 1939
+    },
+    {
+      "path": "skills/audit-project-updates/references/public-repositories.md",
+      "sha256": "f5608910b0bb5e2c3c72ea45bc1e08b71e429a014bdfd297eb5b47a8d940f7f8",
+      "bytes": 1600
+    },
+    {
+      "path": "skills/audit-project-updates/references/report-format.md",
+      "sha256": "54a3e7e9e7befdcae822bcba1fbd8982bcc8ff5a6f7c32b7bc4889bf96dab8b3",
+      "bytes": 1035
+    },
+    {
+      "path": "skills/audit-project-updates/references/update-check.example.yml",
+      "sha256": "ee99bc7a6a953f563624e45759f862a7fd5774228bee0e31e54eb97e08f4e2ab",
+      "bytes": 841
+    },
+    {
+      "path": "skills/audit-project-updates/references/update-check.schema.json",
+      "sha256": "9c7e0c60c94dbab8c8c1fc8d572a2774c6947d5ed4462e17eb6b5ca234678fc0",
+      "bytes": 3699
+    },
+    {
+      "path": "skills/audit-project-updates/scripts/inventory_update_sources.py",
+      "sha256": "af6659e5f90bf063ec45db77222326c61fb2f1bec6f91e11a1fc6af0e6aa9b30",
+      "bytes": 9582
+    },
+    {
+      "path": "skills/audit-project-updates/scripts/validate_update_check.py",
+      "sha256": "c952f7e47bb2e692a9a8937688bc1a4879fe8ff4685401c4a27f5f7aa2ecf49a",
+      "bytes": 8319
+    },
+    {
+      "path": "skills/audit-project-updates/skill-manifest.json",
+      "sha256": "c52c782f18dbb886d4e24f3d3c23d9c54c96c5fdcd759c6528c11154b79bf1d5",
+      "bytes": 245
+    },
+    {
+      "path": "skills/design-agent-capability/SKILL.md",
+      "sha256": "ad50dbbde0bb2581ea078cf8bae6c6031789b7d23ffb8933a62133d0e6c27523",
+      "bytes": 3342
+    },
+    {
+      "path": "skills/design-agent-capability/agents/openai.yaml",
+      "sha256": "c978d712ef8da6373c12ffee42bd43e8568feaf92cf7b0d83dec2c9cfbcf8d0b",
+      "bytes": 231
+    },
+    {
+      "path": "skills/design-agent-capability/references/client-surfaces.md",
+      "sha256": "e02289fadf63cad18fab62a2a8f2ac8a9eacb5662a965653311a893ec05df1c7",
+      "bytes": 1859
+    },
+    {
+      "path": "skills/design-agent-capability/skill-manifest.json",
+      "sha256": "e7b24369ae8f3f305f53228c9e6c99cae4e6280c86cbff1e675f83aa6d7912d8",
+      "bytes": 247
+    },
+    {
+      "path": "skills/engineer-cli-tools/SKILL.md",
+      "sha256": "23e518367b0fbf30da757df5f3e6923ea3c2e9ffc0bad9a669e25e2e0eac9ca9",
+      "bytes": 2907
+    },
+    {
+      "path": "skills/engineer-cli-tools/agents/openai.yaml",
+      "sha256": "03e9a046a9871b145c73495ee2228c540481001a77a86a5e2b25b26bf7db3fc5",
+      "bytes": 210
+    },
+    {
+      "path": "skills/engineer-cli-tools/references/node-typescript.md",
+      "sha256": "b541225667a638df1a9165921848a9c778f043d9047ba6ded683e122cfc44c57",
+      "bytes": 551
+    },
+    {
+      "path": "skills/engineer-cli-tools/references/powershell.md",
+      "sha256": "279d1d799a734a19673308566eec72dad54a2060391b9b2d3187a0498bb2f399",
+      "bytes": 580
+    },
+    {
+      "path": "skills/engineer-cli-tools/references/python.md",
+      "sha256": "544c564982425d0da3d0483f883c239532d900bec37ffbcfa96537cc7ccfe688",
+      "bytes": 541
+    },
+    {
+      "path": "skills/engineer-cli-tools/references/rust.md",
+      "sha256": "ce1a2a83db8adfb7d0493ef181ec7c87a63a3092dfa479e7d65bd195caebd690",
+      "bytes": 551
+    },
+    {
+      "path": "skills/engineer-cli-tools/skill-manifest.json",
+      "sha256": "f616026c01d1e30c19852abe2f732e5ea9517d2f5718852cb9480792fcb724d4",
+      "bytes": 242
+    },
+    {
+      "path": "skills/maintain-agent-instructions/SKILL.md",
+      "sha256": "250a091ca58076026ab18942fe732244966c8a20895743b20176ddbb6f02451f",
+      "bytes": 6817
+    },
+    {
+      "path": "skills/maintain-agent-instructions/agents/openai.yaml",
+      "sha256": "6405006bec6b729ed8f4a939b6ac5bf57d2855a2cfc1ae3c32818014a79b193d",
+      "bytes": 243
+    },
+    {
+      "path": "skills/maintain-agent-instructions/references/client-routing.md",
+      "sha256": "c0c7df399e2aaa4008581bed775b05e25e44bc213eb2269754836bd3f0bf74f5",
+      "bytes": 1074
+    },
+    {
+      "path": "skills/maintain-agent-instructions/references/instruction-review.md",
+      "sha256": "f32f0acf8e72ae5d497078127296eabf44a218697ec1a1f516c4bf2732844255",
+      "bytes": 1494
+    },
+    {
+      "path": "skills/maintain-agent-instructions/skill-manifest.json",
+      "sha256": "ea512fe489863c9bb6d52e2ac7dc37209cabb995c0587903a255c6be73a464fa",
+      "bytes": 251
+    },
+    {
+      "path": "skills/maintain-project-docs/SKILL.md",
+      "sha256": "0aa81dc9417ae332cbee0379157b073fbec972fb0db0a4a0c9354b565446faaa",
+      "bytes": 4295
+    },
+    {
+      "path": "skills/maintain-project-docs/agents/openai.yaml",
+      "sha256": "52be82a9defec61b5ad2aa074a6f5b7b183651c0ed1f7f62b267a9f29ccacb0f",
+      "bytes": 227
+    },
+    {
+      "path": "skills/maintain-project-docs/references/document-types.md",
+      "sha256": "83b3c7011aea2449742be71d66acf986dcf6e4193938ef15499eddd4a0d5ebe0",
+      "bytes": 648
+    },
+    {
+      "path": "skills/maintain-project-docs/skill-manifest.json",
+      "sha256": "db9dec6cabe382e27c5a3f958fd03dfc9f159ee0c96a1f2884eaa2cd8b011bab",
+      "bytes": 245
+    },
+    {
+      "path": "skills/maintain-project-memory/SKILL.md",
+      "sha256": "92223be75fadcbc47bd08d2d8871d08919361e4e90c4fab42480c26b645c8a10",
+      "bytes": 2991
+    },
+    {
+      "path": "skills/maintain-project-memory/agents/openai.yaml",
+      "sha256": "a9705c9ac9010e89c89fa6ab888b397ce511b29c4db78a5fb0fa49526bca97bd",
+      "bytes": 227
+    },
+    {
+      "path": "skills/maintain-project-memory/references/artifact-selection.md",
+      "sha256": "565688a2b307fe5a69046396a9156f4b1d9661efc8d0d71b8867f20d5a77563b",
+      "bytes": 816
+    },
+    {
+      "path": "skills/maintain-project-memory/skill-manifest.json",
+      "sha256": "213acb5a637eb875c1b94fc9a2c04e864e784aa515b94bf4a15983d483f5621f",
+      "bytes": 247
+    },
+    {
+      "path": "skills/maintain-web-design-system/SKILL.md",
+      "sha256": "3307c4af0bf34395524945693686ccb5f61a3f15211dc328168340a035f7be03",
+      "bytes": 2652
+    },
+    {
+      "path": "skills/maintain-web-design-system/agents/openai.yaml",
+      "sha256": "17d50e9b0416c8566ed5e1111e5debfa126507962ec62efaf14bb4bee26951fc",
+      "bytes": 248
+    },
+    {
+      "path": "skills/maintain-web-design-system/references/accessibility-and-responsive.md",
+      "sha256": "96e7b81bd2a400457d8ce756df53920c40289b45c0f658f492153ceec005f4a6",
+      "bytes": 1050
+    },
+    {
+      "path": "skills/maintain-web-design-system/skill-manifest.json",
+      "sha256": "1e069b637bb745841bb700f14638ca02633d800f4ec97e238e10470a329d35e2",
+      "bytes": 250
+    },
+    {
+      "path": "skills/prepare-web-assets/SKILL.md",
+      "sha256": "4560a11b8e198a126c02888fb9aaaa6ee8a0dbd7b28f230663b91b98e5941f7d",
+      "bytes": 2811
+    },
+    {
+      "path": "skills/prepare-web-assets/agents/openai.yaml",
+      "sha256": "c0f9fd9f39388a660f0b0c38c613c50d477f2da5d0325517179ea062b8644ea4",
+      "bytes": 219
+    },
+    {
+      "path": "skills/prepare-web-assets/references/asset-matrix.md",
+      "sha256": "8f577719cb48c8631527d27d7792d4ddc06325548d175e729cf611a36a627d73",
+      "bytes": 781
+    },
+    {
+      "path": "skills/prepare-web-assets/skill-manifest.json",
+      "sha256": "30c78aec55b2a1a2404fb9b8ee811c63f8a242aaed4b5658640bd7c718876bed",
+      "bytes": 242
+    },
+    {
+      "path": "skills/red-team-technical-plan/SKILL.md",
+      "sha256": "a74f878afea132a56dc3ef1c18ae0efba240b3ea6ca65f48314c84556debb8eb",
+      "bytes": 3969
+    },
+    {
+      "path": "skills/red-team-technical-plan/agents/openai.yaml",
+      "sha256": "1d3b1bd13ed13edaa031e1e04f5df9fe6856cd948521e62c38fe2a33ecf6abf9",
+      "bytes": 241
+    },
+    {
+      "path": "skills/red-team-technical-plan/skill-manifest.json",
+      "sha256": "a96dddc3936539e92d6e77b29e660b35e06979199ff3f309c8dd2867b354fcbd",
+      "bytes": 247
+    },
+    {
+      "path": "skills/release-web-application/SKILL.md",
+      "sha256": "e6234ab6eb29b0be9c1dd261cfa0b900d158f656a2ed4f7dd4f174bc151b8e34",
+      "bytes": 2797
+    },
+    {
+      "path": "skills/release-web-application/agents/openai.yaml",
+      "sha256": "58727a94c7e82afc1c93b2467f75a1b9395a123bf4830c7506876d9cc25f85c2",
+      "bytes": 215
+    },
+    {
+      "path": "skills/release-web-application/references/providers.md",
+      "sha256": "1f3cf4c1d8b0a963f485a0fb904ee1a711b2a4db24de81a892297844944bfe29",
+      "bytes": 907
+    },
+    {
+      "path": "skills/release-web-application/skill-manifest.json",
+      "sha256": "80c0976b94791df7ce8e39c2ed28a43b1c5961fce78b875a28d15ff811ba00e0",
+      "bytes": 247
+    },
+    {
+      "path": "skills/research-software-versions/SKILL.md",
+      "sha256": "30c8f4943eec207e298f4a5fa87ed998ba29bd0005e58fd73ca30c63111984f6",
+      "bytes": 2357
+    },
+    {
+      "path": "skills/research-software-versions/agents/openai.yaml",
+      "sha256": "f3e25f1c93582ac46116bf9df003975bdf5fb4df94dc93a6b6c90c37e5e03484",
+      "bytes": 242
+    },
+    {
+      "path": "skills/research-software-versions/references/source-policy.md",
+      "sha256": "98ee4f71fef3d612cbdbffd2129c347feb45aca818edf7ec8cf28c8de749d45f",
+      "bytes": 1125
+    },
+    {
+      "path": "skills/research-software-versions/skill-manifest.json",
+      "sha256": "9026cf7067991ab53cd4b5ed6bac1c297bb0859a0a069b0f5a40c065acfa34ef",
+      "bytes": 250
+    },
+    {
+      "path": "skills/verify-software-change/SKILL.md",
+      "sha256": "891ecdeb9e23d8b78f3f6fafdbe2219a3debed8329e13fddabdd3188a4e2dcab",
+      "bytes": 2344
+    },
+    {
+      "path": "skills/verify-software-change/agents/openai.yaml",
+      "sha256": "195ff23fd4c5f6321c4eacbdfd5848e5bb2792ab4e54ba6a63b901317606eb2e",
+      "bytes": 226
+    },
+    {
+      "path": "skills/verify-software-change/references/risk-matrix.md",
+      "sha256": "97ba391346e604cf7ca34344de3dd0c1749862560481a6a8491565954650b5db",
+      "bytes": 1165
+    },
+    {
+      "path": "skills/verify-software-change/skill-manifest.json",
+      "sha256": "f0e6a1bbf83046a4eb17e094ba71ce99fc4ce631f344720676afbcdb8bec708d",
+      "bytes": 246
+    },
+    {
+      "path": "skills/web-discovery-artifacts/SKILL.md",
+      "sha256": "25bfd635267b2687fce6bddc6cf99ea461e73ae63bab45086712be9103b195a6",
+      "bytes": 2867
+    },
+    {
+      "path": "skills/web-discovery-artifacts/agents/openai.yaml",
+      "sha256": "82f1a363ab560599cca32a47d5c0d3008b707d3e02c93c73eb5a58c714efbf88",
+      "bytes": 225
+    },
+    {
+      "path": "skills/web-discovery-artifacts/references/validation.md",
+      "sha256": "318fd8dde87c5519319fbc870a5bc08c839bb7daa8e4dc57abbd43cda9df823d",
+      "bytes": 1428
+    },
+    {
+      "path": "skills/web-discovery-artifacts/skill-manifest.json",
+      "sha256": "28a7230a0707ca94d084e7ef42e44d3c8ca136d7f59b807606c9d4de08eb7974",
+      "bytes": 247
+    },
+    {
+      "path": "tests/CLIENT_SMOKE_MATRIX.md",
+      "sha256": "df6e2d8bb4d310769cfc632f1794bb8d898a37247561b42e998ee65629691cef",
+      "bytes": 4938
+    },
+    {
+      "path": "tests/activation_cases.json",
+      "sha256": "5591c5520fd5c26939e228f3a922499c8dd2683653a425a025a24b994ecc486f",
+      "bytes": 5196
+    },
+    {
+      "path": "tests/evidence/codex-0.146.0-alpha.3-linux-project.json",
+      "sha256": "b0056bb0658983b8dc00c67f2dc9fbd4de3f853fa92afc3025972c908fcd7401",
+      "bytes": 1333
+    },
+    {
+      "path": "tests/fixtures/records/client-status.json",
+      "sha256": "896e27ce107ef54c04d6f990266d7244d524a36b5806765f20f251c174b9cde7",
+      "bytes": 917
+    },
+    {
+      "path": "tests/fixtures/records/install-plan.json",
+      "sha256": "2fd0597b0f0010b91218809d7400a8de8a282533c5979062e8cc3df60a6339da",
+      "bytes": 1202
+    },
+    {
+      "path": "tests/fixtures/records/install-status.json",
+      "sha256": "a5ff79656d78561c1aeb800a1a6336b52f18048d5edcc588b7aec33a24254882",
+      "bytes": 646
+    },
+    {
+      "path": "tests/fixtures/records/operation-journal.json",
+      "sha256": "13a281483280aa70a7f960fdfbd03daba08711fac52f534146ba34518543ec9e",
+      "bytes": 846
+    },
+    {
+      "path": "tests/fixtures/records/ownership-record.json",
+      "sha256": "3aceea006675d90a49dfaf0d28493045b399dd4884fab721119a885c9152f606",
+      "bytes": 831
+    },
+    {
+      "path": "tests/fixtures/records/rollback-receipt.json",
+      "sha256": "3ad5aef50ca85465acc371dd030cec5c92bb0a7381f30973e8ce3ff3fa7b39ac",
+      "bytes": 836
+    },
+    {
+      "path": "tests/fixtures/records/transaction-receipt.json",
+      "sha256": "c8f6e9019405328b421bcf7e2edcb31faae3425068528dad601bf9e7518045f0",
+      "bytes": 1404
+    },
+    {
+      "path": "tests/fixtures/update-audit/.github/workflows/ci.yml",
+      "sha256": "63ca0218e8f6fe3ab60d0b2243652d87c5c62ba6d5ae0c59365c5f93c61c0c9a",
+      "bytes": 108
+    },
+    {
+      "path": "tests/fixtures/update-audit/.update-check.json",
+      "sha256": "dcf205e959254af76ff0d783a9cad1b74c46398327116047d96beb07f26ce10e",
+      "bytes": 619
+    },
+    {
+      "path": "tests/fixtures/update-audit/Cargo.toml",
+      "sha256": "b11dd6cf29b4d0c0c3617482dba742591ebce3bca94ae99307a7c02394f9e504",
+      "bytes": 78
+    },
+    {
+      "path": "tests/fixtures/update-audit/Dockerfile",
+      "sha256": "cb5e3596f14d923e3f9c9dda921ecb7f42902ada51f49d0fca26cdfe504deedc",
+      "bytes": 25
+    },
+    {
+      "path": "tests/fixtures/update-audit/package.json",
+      "sha256": "e39ad33f053ba329b06f661b499e73546d1355995e07573c8eac82071d328195",
+      "bytes": 115
+    },
+    {
+      "path": "tests/fixtures/update-audit/tool-version.txt",
+      "sha256": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+      "bytes": 6
+    },
+    {
+      "path": "tests/run_portable_tests.py",
+      "sha256": "319d7f4f90f817f13333d9dec616d90eaf95902959f828709815979754b92313",
+      "bytes": 20010
+    }
+  ]
+}

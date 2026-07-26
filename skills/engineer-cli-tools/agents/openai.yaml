@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineer CLI Tools"
+  short_description: "Design reliable cross-platform command-line tools"
+  default_prompt: "Use $engineer-cli-tools to design or improve this command-line tool."

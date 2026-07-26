@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "kind": "install-plan",
+  "transaction_id": "fixture-transaction-001",
+  "generated_at": "2026-07-26T20:00:00Z",
+  "package_version": "3.0.0-rc.4",
+  "source_commit": null,
+  "source_sha256": "f5c992564ccd9946b5f2dbfc8d933555085a393a0549f4b7d1fe52b062e7ca5d",
+  "instruction_mode": "preserve-existing",
+  "rendered_sha256": null,
+  "plan_sha256": "0f4a2202291bd2b30cc10438d5214b72fd3608f59dfa7cc87e14902387f40ca3",
+  "authorization": {
+    "status": "pending",
+    "approved_plan_sha256": null,
+    "approved_at": null
+  },
+  "state_root": "/disposable-state",
+  "selected_clients": [
+    "codex"
+  ],
+  "selected_skills": [
+    "audit-project-updates"
+  ],
+  "operations": [
+    {
+      "client": "codex",
+      "scope": "user",
+      "client_root": "/disposable-home/skills",
+      "target_relative": "audit-project-updates",
+      "target_kind": "skill",
+      "action": "create",
+      "previous_state": "absent",
+      "previous_sha256": null,
+      "backup": null,
+      "staged_path": "staging/audit-project-updates",
+      "rollback": "remove target recorded as originally absent"
+    }
+  ],
+  "blockers": [],
+  "apply_authorized": false,
+  "files_modified": false
+}

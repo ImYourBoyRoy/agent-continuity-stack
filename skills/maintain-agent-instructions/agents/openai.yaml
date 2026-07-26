@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintain Agent Instructions"
+  short_description: "Maintain scoped cross-client agent guidance"
+  default_prompt: "Use $maintain-agent-instructions to audit and improve the durable agent guidance for this project."

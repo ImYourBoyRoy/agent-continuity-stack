@@ -14,11 +14,17 @@ Do not begin with a repository-wide scan. Do not read or print `.env`.
 ## Current state
 
 - Package version: `3.0.0-rc.4`
-- Status: release candidate; not globally runtime-verified
+- Status: public prerelease; not globally runtime-verified or stable
 - Branch: `main`
 - Canonical remote:
   `https://github.com/ImYourBoyRoy/agent-continuity-stack`
-- Publication target: GitHub prerelease `v3.0.0-rc.4`
+- Published prerelease:
+  `https://github.com/ImYourBoyRoy/agent-continuity-stack/releases/tag/v3.0.0-rc.4`
+- Release tag: `v3.0.0-rc.4`
+- Release commit: `0e24499b9455f1956d0e8390bbd49cf62f908e52`
+- Release date: `2026-07-26`
+- Release archive SHA-256:
+  `e159a83df32dacceb29ca93c118b2cf14b293e790ecd1b636fb33f166f059893`
 - Initial public commit:
   `a6b1b72059fbca5ebc8c2cd3e1308e2cb36eb118`
 - Initial validation: Python `3.10` and `3.14` GitHub jobs passed
@@ -52,6 +58,8 @@ excluded from release inventory, and never package content.
 - Separated release-candidate publication gates from final stable-promotion
   gates without weakening unresolved runtime, recovery, or platform
   requirements.
+- Published immutable annotated tag and GitHub prerelease `v3.0.0-rc.4` with
+  the validated ZIP and external checksum sidecar.
 
 ## Validation baseline
 
@@ -81,10 +89,9 @@ uninstall.
 
 ## Next recommended action
 
-Publish `v3.0.0-rc.4` only after every prerelease integrity gate in
-`MERGE_CHECKLIST.md` passes, and disclose every open stable-promotion gate.
-Then collect the outstanding live-client, recovery, and platform evidence. Do
-not promote RC4 to final `3.0.0` until every final stable-promotion gate passes.
+Collect the outstanding live-client, recovery, platform, and contract-review
+evidence. Do not promote RC4 to final `3.0.0` until every final
+stable-promotion gate in `MERGE_CHECKLIST.md` passes.
 
 ## Handoff discipline
 

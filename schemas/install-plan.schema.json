@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-continuity-stack:schema:install-plan:2",
+  "title": "Agent Continuity Stack install plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "transaction_id",
+    "generated_at",
+    "package_version",
+    "source_sha256",
+    "instruction_mode",
+    "rendered_sha256",
+    "plan_sha256",
+    "authorization",
+    "state_root",
+    "selected_clients",
+    "selected_skills",
+    "operations",
+    "blockers",
+    "apply_authorized",
+    "files_modified"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "kind": {
+      "const": "install-plan"
+    },
+    "transaction_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "package_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_commit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_sha256": {
+      "$ref": "#/$defs/hash"
+    },
+    "instruction_mode": {
+      "enum": [
+        "preserve-existing",
+        "guided-additions",
+        "complete-contract"
+      ]
+    },
+    "rendered_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "plan_sha256": {
+      "$ref": "#/$defs/hash"
+    },
+    "authorization": {
+      "$ref": "#/$defs/authorization"
+    },
+    "state_root": {
+      "$ref": "#/$defs/absolute-root"
+    },
+    "selected_clients": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "codex",
+          "cursor",
+          "claude",
+          "antigravity",
+          "antigravity-cli"
+        ]
+      }
+    },
+    "selected_skills": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/operation"
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "apply_authorized": {
+      "type": "boolean"
+    },
+    "files_modified": {
+      "const": false
+    }
+  },
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "absolute-root": {
+      "type": "string",
+      "pattern": "^(?:/|[A-Za-z]:[\\\\/]).+"
+    },
+    "relative-path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "approved_plan_sha256",
+        "approved_at"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "pending",
+            "approved"
+          ]
+        },
+        "approved_plan_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "approved_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "client",
+        "scope",
+        "client_root",
+        "target_relative",
+        "target_kind",
+        "action",
+        "previous_state",
+        "backup",
+        "staged_path",
+        "rollback"
+      ],
+      "properties": {
+        "client": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "enum": [
+            "user",
+            "project"
+          ]
+        },
+        "client_root": {
+          "$ref": "#/$defs/absolute-root"
+        },
+        "target_relative": {
+          "$ref": "#/$defs/relative-path"
+        },
+        "target_kind": {
+          "enum": [
+            "instruction",
+            "contract-fragment",
+            "contract-loader",
+            "skill"
+          ]
+        },
+        "action": {
+          "enum": [
+            "create",
+            "merge",
+            "replace-owned",
+            "adopt",
+            "skip",
+            "blocked"
+          ]
+        },
+        "previous_state": {
+          "enum": [
+            "absent",
+            "current-owned",
+            "modified-owned",
+            "unowned",
+            "unsafe-tree",
+            "conflict"
+          ]
+        },
+        "previous_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "backup": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "staged_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rollback": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

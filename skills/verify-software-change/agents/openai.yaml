@@ -1,0 +1,4 @@
+interface:
+  display_name: "Verify Software Change"
+  short_description: "Build defensible evidence for software changes"
+  default_prompt: "Use $verify-software-change to validate this change with project-approved evidence."

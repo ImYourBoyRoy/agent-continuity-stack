@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-continuity-stack:schema:install-status:1",
+  "title": "Agent Continuity Stack install status",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "generated_at",
+    "package",
+    "clients",
+    "files_modified"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "install-status"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "package": {
+      "$ref": "#/$defs/package"
+    },
+    "clients": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/client"
+      }
+    },
+    "files_modified": {
+      "const": false
+    }
+  },
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version",
+        "source_sha256"
+      ],
+      "properties": {
+        "name": {
+          "const": "agent-continuity-stack"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_commit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/hash"
+        }
+      }
+    },
+    "client": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "client",
+        "scope",
+        "status",
+        "instruction_status",
+        "skills"
+      ],
+      "properties": {
+        "client": {
+          "enum": [
+            "codex",
+            "cursor",
+            "claude",
+            "antigravity",
+            "antigravity-cli"
+          ]
+        },
+        "client_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "user",
+            "project"
+          ]
+        },
+        "status": {
+          "enum": [
+            "absent",
+            "current",
+            "modified",
+            "outdated",
+            "partial",
+            "conflict",
+            "unsafe-tree",
+            "unverified"
+          ]
+        },
+        "instruction_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "status"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "enum": [
+                  "absent",
+                  "current",
+                  "modified",
+                  "outdated",
+                  "conflict",
+                  "unsafe-tree",
+                  "unverified"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

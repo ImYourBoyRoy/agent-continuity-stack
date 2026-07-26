@@ -1,0 +1,7 @@
+{
+  "schema": 2,
+  "name": "design-agent-capability",
+  "version": "1.0.1",
+  "content_hash_definition": "inspect_tree sha256 excluding skill-manifest.json",
+  "content_sha256": "6e99472597199ad2c82dca0763b88d1779090da9b1aa23f6f25b6f6543e5ad39"
+}

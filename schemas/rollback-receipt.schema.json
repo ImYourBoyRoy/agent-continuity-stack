@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-continuity-stack:schema:rollback-receipt:1",
+  "title": "Agent Continuity Stack rollback receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "package",
+    "package_version",
+    "rollback_id",
+    "original_transaction_id",
+    "approved_plan_sha256",
+    "state_root",
+    "started_at",
+    "completed_at",
+    "outcome",
+    "restored",
+    "removed",
+    "post_install_modifications_preserved",
+    "warnings"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "rollback-receipt"
+    },
+    "package": {
+      "const": "agent-continuity-stack"
+    },
+    "package_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rollback_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "original_transaction_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "approved_plan_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "state_root": {
+      "type": "string",
+      "pattern": "^(?:/|[A-Za-z]:[\\\\/]).+"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completed_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "outcome": {
+      "enum": [
+        "complete",
+        "partial",
+        "failed"
+      ]
+    },
+    "restored": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/action"
+      }
+    },
+    "removed": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/action"
+      }
+    },
+    "post_install_modifications_preserved": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "client_root",
+        "target_relative",
+        "expected_current_sha256",
+        "restored_sha256",
+        "result"
+      ],
+      "properties": {
+        "client_root": {
+          "type": "string",
+          "pattern": "^(?:/|[A-Za-z]:[\\\\/]).+"
+        },
+        "target_relative": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expected_current_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "restored_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "result": {
+          "enum": [
+            "complete",
+            "skipped",
+            "failed"
+          ]
+        }
+      }
+    }
+  }
+}

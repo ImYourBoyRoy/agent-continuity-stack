@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Agent Capability"
+  short_description: "Choose and design durable agent capabilities"
+  default_prompt: "Use $design-agent-capability to design the smallest durable capability for this workflow."

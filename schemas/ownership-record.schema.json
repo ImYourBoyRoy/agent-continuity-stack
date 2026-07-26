@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-continuity-stack:schema:ownership-record:1",
+  "title": "Agent Continuity Stack ownership record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "package",
+    "package_version",
+    "package_sha256",
+    "approved_plan_sha256",
+    "transaction_id",
+    "client",
+    "scope",
+    "client_root",
+    "target_relative",
+    "content_kind",
+    "installed_sha256",
+    "source_sha256",
+    "rendered_sha256",
+    "installed_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "ownership-record"
+    },
+    "package": {
+      "const": "agent-continuity-stack"
+    },
+    "package_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "package_sha256": {
+      "$ref": "#/$defs/hash"
+    },
+    "approved_plan_sha256": {
+      "$ref": "#/$defs/hash"
+    },
+    "transaction_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "client": {
+      "enum": [
+        "codex",
+        "cursor",
+        "claude",
+        "antigravity",
+        "antigravity-cli"
+      ]
+    },
+    "scope": {
+      "enum": [
+        "user",
+        "project"
+      ]
+    },
+    "client_root": {
+      "type": "string",
+      "pattern": "^(?:/|[A-Za-z]:[\\\\/]).+"
+    },
+    "target_relative": {
+      "type": "string",
+      "minLength": 1
+    },
+    "content_kind": {
+      "enum": [
+        "global-contract",
+        "contract-loader",
+        "contract-fragment",
+        "skill"
+      ]
+    },
+    "skill_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "skill_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "installed_sha256": {
+      "$ref": "#/$defs/hash"
+    },
+    "source_sha256": {
+      "$ref": "#/$defs/hash"
+    },
+    "rendered_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "installed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

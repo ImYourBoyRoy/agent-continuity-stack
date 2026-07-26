@@ -1,0 +1,7 @@
+{
+  "name": "portable-update-fixture",
+  "private": true,
+  "dependencies": {
+    "example-library": "1.2.3"
+  }
+}

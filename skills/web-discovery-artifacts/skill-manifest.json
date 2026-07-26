@@ -1,0 +1,7 @@
+{
+  "schema": 2,
+  "name": "web-discovery-artifacts",
+  "version": "1.0.0",
+  "content_hash_definition": "inspect_tree sha256 excluding skill-manifest.json",
+  "content_sha256": "5fc7de9acbd82b0228b556447bf79ae3d5c645dccb38ab55e56c938284626505"
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Software Versions"
+  short_description: "Research current compatible software versions"
+  default_prompt: "Use $research-software-versions to determine the latest appropriate version and migration scope."

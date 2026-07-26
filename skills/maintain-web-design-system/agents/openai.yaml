@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintain Web Design System"
+  short_description: "Maintain coherent tokens, CSS, and accessibility"
+  default_prompt: "Use $maintain-web-design-system to improve this interface without creating a parallel style system."

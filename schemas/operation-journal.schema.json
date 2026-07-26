@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-continuity-stack:schema:operation-journal:1",
+  "title": "Agent Continuity Stack per-client operation journal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "operation_id",
+    "package",
+    "package_version",
+    "package_sha256",
+    "approved_plan_sha256",
+    "client",
+    "state_root",
+    "client_root",
+    "phase",
+    "updated_at",
+    "targets"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "operation-journal"
+    },
+    "operation_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "package": {
+      "const": "agent-continuity-stack"
+    },
+    "package_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "package_sha256": {
+      "$ref": "#/$defs/hash"
+    },
+    "approved_plan_sha256": {
+      "$ref": "#/$defs/hash"
+    },
+    "client": {
+      "enum": [
+        "codex",
+        "cursor",
+        "claude",
+        "antigravity",
+        "antigravity-cli"
+      ]
+    },
+    "state_root": {
+      "$ref": "#/$defs/absolute-root"
+    },
+    "client_root": {
+      "$ref": "#/$defs/absolute-root"
+    },
+    "phase": {
+      "enum": [
+        "planned",
+        "backed-up",
+        "staged",
+        "committing",
+        "validating",
+        "complete",
+        "recovering",
+        "restored",
+        "failed"
+      ]
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/target"
+      }
+    }
+  },
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "absolute-root": {
+      "type": "string",
+      "pattern": "^(?:/|[A-Za-z]:[\\\\/]).+"
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_relative",
+        "action",
+        "phase",
+        "pre_sha256",
+        "staged_sha256",
+        "post_sha256",
+        "backup",
+        "backup_sha256"
+      ],
+      "properties": {
+        "target_relative": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "enum": [
+            "create",
+            "merge",
+            "replace-owned",
+            "adopt",
+            "restore"
+          ]
+        },
+        "phase": {
+          "enum": [
+            "planned",
+            "backed-up",
+            "staged",
+            "committed",
+            "validated",
+            "restored",
+            "failed"
+          ]
+        },
+        "pre_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "staged_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "post_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "backup": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "backup_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}

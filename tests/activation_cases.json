@@ -1,0 +1,141 @@
+{
+  "schema": 2,
+  "cases": {
+    "apply-project-updates": {
+      "should_trigger": [
+        "Apply only the approved framework and adapter update batch, inspect the lockfile delta, and verify it."
+      ],
+      "should_not_trigger": [
+        "Audit every dependency in this repository and tell me what may be outdated.",
+        "Choose the best supported SDK version and migration path, but do not edit files."
+      ]
+    },
+    "audit-project-updates": {
+      "should_trigger": [
+        "Audit this repository for important dependency, runtime, and upstream tool updates using the standard tier."
+      ],
+      "should_not_trigger": [
+        "Add a keyboard shortcut to this existing feature.",
+        "Apply the already approved patch-version dependency batch."
+      ]
+    },
+    "design-agent-capability": {
+      "should_trigger": [
+        "Should this repeated workflow be a skill, script, hook, or MCP tool?"
+      ],
+      "should_not_trigger": [
+        "Run the existing project test command.",
+        "Merge these already chosen repository rules into AGENTS.md."
+      ]
+    },
+    "engineer-cli-tools": {
+      "should_trigger": [
+        "Design stable JSON output and exit codes for this cross-platform CLI."
+      ],
+      "should_not_trigger": [
+        "Show me a shell command that lists this directory."
+      ]
+    },
+    "maintain-agent-instructions": {
+      "should_trigger": [
+        "Consolidate the AGENTS.md, CLAUDE.md, Cursor Rules, and Antigravity guidance without duplicating procedures.",
+        "This maintained repository has no agent instruction file; establish the required portable foundation."
+      ],
+      "should_not_trigger": [
+        "For this conversation only, keep the answer under three paragraphs.",
+        "Decide whether this repeated enforcement belongs in a skill, hook, or CI check.",
+        "Update the public installation guide without touching agent control files."
+      ]
+    },
+    "maintain-project-docs": {
+      "should_trigger": [
+        "Update the README and migration guide for these renamed configuration keys.",
+        "This maintained package has no README; create a publish-ready one and verify its examples."
+      ],
+      "should_not_trigger": [
+        "Fix this internal function without changing user-visible behavior.",
+        "Consolidate AGENTS.md and CLAUDE.md precedence rules."
+      ]
+    },
+    "maintain-project-memory": {
+      "should_trigger": [
+        "Create a concise handoff so another model can safely resume this interrupted migration."
+      ],
+      "should_not_trigger": [
+        "Summarize this short chat response."
+      ]
+    },
+    "maintain-web-design-system": {
+      "should_trigger": [
+        "Consolidate these duplicated color and spacing values into the existing design system."
+      ],
+      "should_not_trigger": [
+        "Convert this logo from SVG to PNG."
+      ]
+    },
+    "prepare-web-assets": {
+      "should_trigger": [
+        "Prepare this approved logo master as responsive web, favicon, and social assets."
+      ],
+      "should_not_trigger": [
+        "Redesign the site's component token system."
+      ]
+    },
+    "red-team-technical-plan": {
+      "should_trigger": [
+        "Red-team this proposed cross-client installer before we implement it, including failure modes and rollback."
+      ],
+      "should_not_trigger": [
+        "Rename this local variable and run the focused formatter.",
+        "Verify the already implemented change with the repository-approved checks."
+      ]
+    },
+    "release-web-application": {
+      "should_trigger": [
+        "Stage, validate, and deploy this web release with a rollback plan."
+      ],
+      "should_not_trigger": [
+        "Make a local code edit with no deployment."
+      ]
+    },
+    "research-software-versions": {
+      "should_trigger": [
+        "Which stable version of this SDK is appropriate for our pinned runtime?"
+      ],
+      "should_not_trigger": [
+        "Audit every dependency and external tool in this repository.",
+        "Apply the already approved runtime and adapter update."
+      ]
+    },
+    "verify-software-change": {
+      "should_trigger": [
+        "Verify that this refactor is fixed and ready using project-approved checks."
+      ],
+      "should_not_trigger": [
+        "Explain what this unchanged function does."
+      ]
+    },
+    "web-discovery-artifacts": {
+      "should_trigger": [
+        "Audit the production sitemap, robots policy, canonicals, and JSON-LD."
+      ],
+      "should_not_trigger": [
+        "Add an authenticated internal admin route."
+      ]
+    }
+  },
+  "optional_cases": {
+    "build-astro-on-cloudflare": {
+      "should_trigger": [
+        "This unmanaged Astro SSR project deploys to Cloudflare Workers; review its adapter, bindings, and compatibility date."
+      ],
+      "should_not_trigger": [
+        "Adjust the spacing in this Astro component.",
+        "Portable Web Toolkit manages this site; run its site-readiness workflow."
+      ],
+      "collision": [
+        "When Portable Web Toolkit management is established, defer immediately without creating parallel Cloudflare workflows."
+      ]
+    }
+  }
+}

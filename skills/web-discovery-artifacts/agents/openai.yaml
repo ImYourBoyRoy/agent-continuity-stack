@@ -1,0 +1,5 @@
+interface:
+  display_name: "Web Discovery Artifacts"
+  short_description: "Build and validate public-web discovery outputs"
+  default_prompt: "Use $web-discovery-artifacts to audit and repair this site's discovery outputs."
+

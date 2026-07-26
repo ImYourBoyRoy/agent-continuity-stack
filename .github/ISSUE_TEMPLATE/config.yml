@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Private security report
+    url: https://github.com/ImYourBoyRoy/agent-continuity-stack/security/advisories/new
+    about: Report vulnerabilities, credentials, and sensitive exploit details privately.

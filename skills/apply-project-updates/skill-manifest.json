@@ -1,0 +1,7 @@
+{
+  "schema": 2,
+  "name": "apply-project-updates",
+  "version": "1.0.0",
+  "content_hash_definition": "inspect_tree sha256 excluding skill-manifest.json",
+  "content_sha256": "291a0e067517036b9e853fe6f57868d325eaaee3e6926a57f5115e4e75d28646"
+}

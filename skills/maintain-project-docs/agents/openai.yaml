@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintain Project Docs"
+  short_description: "Keep project documentation accurate and useful"
+  default_prompt: "Use $maintain-project-docs to update the authoritative documentation for this change."

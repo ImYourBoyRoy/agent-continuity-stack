@@ -1,0 +1,10 @@
+*.md text eol=lf whitespace=-blank-at-eof
+*.json text eol=lf whitespace=-blank-at-eof
+*.yaml text eol=lf whitespace=-blank-at-eof
+*.yml text eol=lf whitespace=-blank-at-eof
+*.py text eol=lf whitespace=-blank-at-eof
+.env.example text eol=lf
+.editorconfig text eol=lf
+.gitignore text eol=lf
+VERSION text eol=lf
+LICENSE text eol=lf whitespace=-blank-at-eof

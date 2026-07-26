@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "package": "agent-continuity-stack",
-  "package_version": "3.0.0-rc.4",
+  "package_version": "3.0.0-rc.5",
   "source": "GLOBAL_CUSTOM_INSTRUCTIONS.md",
   "source_sha256": "f5c992564ccd9946b5f2dbfc8d933555085a393a0549f4b7d1fe52b062e7ca5d",
   "source_hash_definition": "sha256 of canonical UTF-8 bytes with LF line endings and no BOM",

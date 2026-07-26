@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "id": "portable-web-toolkit",
+  "repository": "https://github.com/ImYourBoyRoy/Portable_Web_toolkit",
+  "compatibility": "exact-tested",
+  "tested_on": "2026-07-26",
+  "tested_version": "0.3.1",
+  "release_commit": "cdbc33ff40bedab48fc86bfb7e1ea06a5d81f6f3",
+  "skill_content_base_commit": "86dddd9efb64c5b4219afe986699135a51e63f83",
+  "manifest_path": "skill-pack.json",
+  "manifest_sha256": "ad676cc0fbc59cc81a1167e777250a426d2beea0c3e55f59d32f679f8b46765e",
+  "skill_pack_version": "1.0.0",
+  "revalidate_newer_versions": true,
+  "install_automatically": false,
+  "management_signals": [
+    "repository instructions establish Portable Web Toolkit",
+    "package scripts invoke Web_Toolkit commands",
+    "a toolkit site profile governs the project",
+    "a Web_Toolkit link is corroborated by configuration or documentation",
+    "the user explicitly selects Portable Web Toolkit"
+  ],
+  "toolkit_owned_skills": [
+    "portable-web-toolkit",
+    "site-readiness",
+    "site-starter",
+    "toolkit-update",
+    "instagram-clone",
+    "vectorize-pipeline"
+  ],
+  "deferring_generic_skills": [
+    "release-web-application",
+    "web-discovery-artifacts",
+    "maintain-web-design-system",
+    "prepare-web-assets"
+  ],
+  "optional_fallback_skill": "build-astro-on-cloudflare"
+}
+

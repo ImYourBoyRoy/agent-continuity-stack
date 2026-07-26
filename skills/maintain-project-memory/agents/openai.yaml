@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintain Project Memory"
+  short_description: "Keep required project memory concise and current"
+  default_prompt: "Use $maintain-project-memory to audit and synchronize MEMORY.md for this project."

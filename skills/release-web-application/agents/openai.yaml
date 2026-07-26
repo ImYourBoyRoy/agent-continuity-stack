@@ -1,0 +1,4 @@
+interface:
+  display_name: "Release Web Application"
+  short_description: "Plan and execute gated, reversible web releases"
+  default_prompt: "Use $release-web-application to prepare and validate this web release."

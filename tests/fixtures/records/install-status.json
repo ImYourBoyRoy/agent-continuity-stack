@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "install-status",
+  "generated_at": "2026-07-26T20:00:00Z",
+  "package": {
+    "name": "agent-continuity-stack",
+    "version": "3.0.0-rc.4",
+    "source_commit": null,
+    "source_sha256": "f5c992564ccd9946b5f2dbfc8d933555085a393a0549f4b7d1fe52b062e7ca5d"
+  },
+  "clients": [
+    {
+      "client": "codex",
+      "client_version": "example-version",
+      "scope": "user",
+      "status": "unverified",
+      "instruction_status": "current-unverified",
+      "skills": [
+        {
+          "name": "audit-project-updates",
+          "status": "absent"
+        }
+      ]
+    }
+  ],
+  "files_modified": false
+}

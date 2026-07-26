@@ -1,0 +1,33 @@
+{
+  "schema_version": 2,
+  "kind": "client-status",
+  "package": "agent-continuity-stack",
+  "package_version": "3.0.0-rc.4",
+  "source_sha256": "f5c992564ccd9946b5f2dbfc8d933555085a393a0549f4b7d1fe52b062e7ca5d",
+  "client": "codex",
+  "client_version": "example-version",
+  "operating_system": "fixture-os",
+  "scope": "user",
+  "status": "installed-unverified",
+  "instruction_mode": "preserve-existing",
+  "instruction_location": null,
+  "skill_locations": [
+    "client-home/skills"
+  ],
+  "verified_skills": [
+    {
+      "name": "audit-project-updates",
+      "version": "1.0.0",
+      "content_sha256": "5f4bf99eb1745ab725b484cef385c5b277e143b07e2229aa39a9783f83d52ab8"
+    }
+  ],
+  "rendered_sha256": null,
+  "copied": true,
+  "loaded": false,
+  "smoke_passed": false,
+  "duplicate_loading": "unverified",
+  "evidence": [
+    "fixture only; no runtime evidence"
+  ],
+  "verified_at": "2026-07-26T20:01:00Z"
+}

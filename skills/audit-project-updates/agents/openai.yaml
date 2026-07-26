@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audit Project Updates"
+  short_description: "Audit project and upstream update opportunities"
+  default_prompt: "Use $audit-project-updates to perform a read-only update audit of this project."

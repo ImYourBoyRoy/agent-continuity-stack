@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "kind": "rollback-receipt",
+  "package": "agent-continuity-stack",
+  "package_version": "3.0.0-rc.4",
+  "rollback_id": "fixture-rollback-001",
+  "original_transaction_id": "fixture-transaction-001",
+  "approved_plan_sha256": "61574933c78f6745c67ea5dd7762bc9d0865f13b31202621280aaed3b00eda22",
+  "state_root": "/disposable-state",
+  "started_at": "2026-07-26T20:02:00Z",
+  "completed_at": "2026-07-26T20:03:00Z",
+  "outcome": "complete",
+  "restored": [],
+  "removed": [
+    {
+      "client_root": "/disposable-home/skills",
+      "target_relative": "audit-project-updates",
+      "expected_current_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "restored_sha256": null,
+      "result": "complete"
+    }
+  ],
+  "post_install_modifications_preserved": [],
+  "warnings": []
+}

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Build Astro on Cloudflare"
+  short_description: "Guide optional Astro and Cloudflare integration"
+  default_prompt: "Use $build-astro-on-cloudflare to review this Astro and Cloudflare boundary after checking for specialist toolkit ownership."
+

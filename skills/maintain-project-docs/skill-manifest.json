@@ -1,0 +1,7 @@
+{
+  "schema": 2,
+  "name": "maintain-project-docs",
+  "version": "1.1.0",
+  "content_hash_definition": "inspect_tree sha256 excluding skill-manifest.json",
+  "content_sha256": "80e55a4ccfc5f55588287fffdb11f7e8b3bc61e74b6e56b56780d0b2ef26443a"
+}

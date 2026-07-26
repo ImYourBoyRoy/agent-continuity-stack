@@ -1,0 +1,36 @@
+{
+  "schema_version": 2,
+  "kind": "client-status",
+  "package": "agent-continuity-stack",
+  "package_version": "3.0.0-rc.4",
+  "source_sha256": "f5c992564ccd9946b5f2dbfc8d933555085a393a0549f4b7d1fe52b062e7ca5d",
+  "client": "codex",
+  "client_version": "0.146.0-alpha.3",
+  "operating_system": "Linux x86_64",
+  "scope": "project",
+  "status": "verified",
+  "instruction_mode": "complete-contract",
+  "instruction_location": "AGENTS.md",
+  "skill_locations": [
+    ".agents/skills"
+  ],
+  "verified_skills": [
+    {
+      "name": "red-team-technical-plan",
+      "version": "1.0.0",
+      "content_sha256": "d56cdb5d4990548804b4653e062962a974ac13aa31d3cb1f7b84cbcf9ad065e3"
+    }
+  ],
+  "rendered_sha256": "f5c992564ccd9946b5f2dbfc8d933555085a393a0549f4b7d1fe52b062e7ca5d",
+  "copied": true,
+  "loaded": true,
+  "smoke_passed": true,
+  "duplicate_loading": "none",
+  "evidence": [
+    "Fresh read-only session named the Expert Agent Operating Contract.",
+    "Explicit red-team request loaded the project skill and reported its exact SKILL.md path.",
+    "A fresh trivial-rename near-miss produced no tool or skill-loading event.",
+    "RC4 changes package identity and repository metadata only; the recorded contract and skill content hashes are unchanged from the runtime exercise."
+  ],
+  "verified_at": "2026-07-26T21:22:54Z"
+}

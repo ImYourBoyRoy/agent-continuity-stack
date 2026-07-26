@@ -1,0 +1,7 @@
+{
+  "schema": 2,
+  "name": "verify-software-change",
+  "version": "1.0.0",
+  "content_hash_definition": "inspect_tree sha256 excluding skill-manifest.json",
+  "content_sha256": "c51f49d4621e27053765800e46042e83adb5f2d67e3dfe5722cb915d5254f439"
+}

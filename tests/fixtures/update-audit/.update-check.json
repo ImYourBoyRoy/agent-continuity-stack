@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "sources": [
+    {
+      "id": "companion-tool",
+      "kind": "repository",
+      "locator": "https://code.example.org/public/companion-tool.git",
+      "purpose": "Optional companion used by the release workflow",
+      "channel": "stable",
+      "include_enhancements": true,
+      "credential_source": "none",
+      "current": {
+        "version_file": "tool-version.txt"
+      }
+    }
+  ],
+  "policy": {
+    "audit_tier": "standard",
+    "prereleases": "report-only",
+    "major_updates": "report-only",
+    "unreleased": "report-only",
+    "security": "immediate",
+    "cooldown_days": 7
+  }
+}

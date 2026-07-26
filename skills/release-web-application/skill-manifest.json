@@ -1,0 +1,7 @@
+{
+  "schema": 2,
+  "name": "release-web-application",
+  "version": "1.0.0",
+  "content_hash_definition": "inspect_tree sha256 excluding skill-manifest.json",
+  "content_sha256": "cdf47aa8751acd3de059426c6372d0edd7be36238df9594526ba8d28b68bfdc0"
+}

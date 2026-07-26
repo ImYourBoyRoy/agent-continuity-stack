@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apply Project Updates"
+  short_description: "Apply selected updates in safe verified batches"
+  default_prompt: "Use $apply-project-updates to apply the selected update batch with verification and rollback."

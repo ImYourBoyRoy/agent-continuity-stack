@@ -61,6 +61,11 @@
   `86dddd9efb64c5b4219afe986699135a51e63f83`.
 - `red-team-technical-plan` owns explicit deep adversarial review; the global
   contract retains proportional review for ordinary material work.
+- Public release candidates and final stable promotion use separate gates.
+  Prereleases require clean-commit, source, inventory, conformance,
+  archive-safety, CI, checksum, and disclosure evidence. Unresolved
+  live-client, recovery, platform, and contract-policy evidence continues to
+  block final `3.0.0`.
 
 ## Recent material changes
 
@@ -89,6 +94,8 @@
 - Added architecture, model handoff, contribution, conduct, security, issue,
   pull request, Dependabot, CI, editor, environment-example, and Git-ignore
   foundations for public repository development.
+- Separated prerelease publication requirements from final stable-promotion
+  requirements while preserving every unresolved final gate.
 
 ## Validation
 
@@ -147,6 +154,11 @@ On 2026-07-26:
 - Protected `main` with strict required Python `3.10` and `3.14` checks, linear
   history, conversation resolution, and force-push/deletion prevention;
   administrator enforcement remains disabled for maintainer recovery
+- RC4 prerelease-policy pre-commit validation: bundle validation passed with 14
+  core skills, 1 optional skill, 0 errors, and 0 warnings; canonical-contract,
+  safe-tree, and portable conformance validation passed; `.env` remained
+  ignored, untracked, and mode `0600`; package version authorities agreed on
+  `3.0.0-rc.4`.
 
 These are source and conformance results, not live installation or rollback
 evidence.
@@ -166,7 +178,10 @@ evidence.
 - The RC4 copy-paste GitHub installation prompt has source/conformance coverage
   but not a complete four-client live installation exercise.
 - Windows reparse-point behavior needs a Windows validation run.
-- The public repository has no final release commit or GitHub Release.
+- RC4 may be published as an explicitly labeled prerelease after all
+  prerelease integrity gates pass. Its publication must not be represented as
+  completion of any open stable-promotion gate.
 
-Next: complete the remaining live-client and recovery gates before promoting
+Next: publish the validated RC4 prerelease, then complete the remaining
+live-client, recovery, platform, and contract-review gates before promoting
 final `3.0.0`.

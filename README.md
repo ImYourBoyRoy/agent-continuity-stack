@@ -369,18 +369,36 @@ installation, rollback, or uninstall.
   remain explicit review items before final promotion.
 - The public GitHub installation prompt has source and negative conformance
   coverage but has not completed a four-client live installation exercise.
-- A final release commit is not yet declared.
 - Windows reparse-point behavior requires a Windows validation run.
 
 ## Release and checksum process
 
-1. Pass all source, fixture, archive, lifecycle-conformance, integration, and
-   four-client runtime gates.
-2. Create an identified clean release commit.
-3. Build the archive from that commit.
-4. Publish a separate `.sha256` sidecar.
-5. Verify the archive by extracting it and rerunning the source tests.
-6. Promote package identity from the latest release candidate to final `3.0.0`.
+### Prerelease publication
+
+A release candidate may be published for controlled review when:
+
+1. its prerelease identity is consistent across package authorities and
+   documentation;
+2. source, fixture, integration, inventory, tree-safety, archive, and
+   conformance validation passes;
+3. known runtime and platform limitations are disclosed without implying they
+   passed;
+4. the archive is built from an identified clean commit, validated, extracted,
+   and retested;
+5. a separate `.sha256` sidecar is generated and independently verified; and
+6. the immutable tag and GitHub Release are explicitly marked as a prerelease.
+
+Release notes record the tag, commit, publication date, archive filename,
+SHA-256, verified scope, and unresolved final-promotion gates.
+
+### Final stable promotion
+
+Do not promote a release candidate to final `3.0.0` until all source, fixture,
+archive, lifecycle-conformance, integration, recovery, platform, and
+four-client runtime gates pass. Final promotion also requires review of the
+complete contract's always-on cost and instruction-priority wording, a clean
+identified final release commit, a newly built and verified archive, and a
+separate checksum sidecar.
 
 An archive cannot contain its own final checksum.
 

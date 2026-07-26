@@ -577,7 +577,7 @@ def test_boundaries_and_integration() -> None:
     assert not (ROOT / "scripts" / "install_skills.py").exists()
     manifest = json.loads((ROOT / "manifest.json").read_text("utf-8"))
     assert manifest["package"] == "agent-continuity-stack"
-    assert manifest["version"] == "3.0.0-rc.4"
+    assert manifest["version"] == "3.0.0-rc.5"
     optional = {item["name"]: item for item in manifest["optional_skills"]}
     assert optional["build-astro-on-cloudflare"]["install_by_default"] is False
 

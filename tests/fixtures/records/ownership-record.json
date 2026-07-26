@@ -2,7 +2,7 @@
   "schema_version": 1,
   "kind": "ownership-record",
   "package": "agent-continuity-stack",
-  "package_version": "3.0.0-rc.4",
+  "package_version": "3.0.0-rc.5",
   "package_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
   "approved_plan_sha256": "61574933c78f6745c67ea5dd7762bc9d0865f13b31202621280aaed3b00eda22",
   "transaction_id": "fixture-transaction-001",

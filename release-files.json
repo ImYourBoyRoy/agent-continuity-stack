@@ -67,8 +67,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "284facbe32b8d6c90e4849346d90936823a8f70512057124df5ee9b34659cf3b",
-      "bytes": 3990
+      "sha256": "dc5303e0df5616300991475647b9f4d1af233ba2c08d9b27fafc40944c7c09db",
+      "bytes": 4145
     },
     {
       "path": "CLIENT_COMPATIBILITY.md",
@@ -92,8 +92,8 @@
     },
     {
       "path": "HANDOFF.md",
-      "sha256": "262c419c5ff9f0beb2b076b20f7480adcf5a5b09f55b49bc3b6500e68de4d3c7",
-      "bytes": 3355
+      "sha256": "5ddab6e38fc6bde42db2d4c544583fd855c87439e3d209ece8079326e1c3a4d9",
+      "bytes": 3543
     },
     {
       "path": "INSTALL_PROTOCOL.md",
@@ -107,8 +107,8 @@
     },
     {
       "path": "MEMORY.md",
-      "sha256": "ad49b68cf01564328779392d9d1acecce0de2235213aaa1c21d55e2efffd8f45",
-      "bytes": 8851
+      "sha256": "b93b4c36bf3c55f5679041150a8b332b74145fc2a8615d538f9fe1edadd933b0",
+      "bytes": 9433
     },
     {
       "path": "MERGE_CHECKLIST.md",
@@ -117,8 +117,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "9ca6e09968b1852dbb69b703fe07064dac434fbf81c4c5e43a1e88b60c042130",
-      "bytes": 18187
+      "sha256": "5133020ce547be70c3d3067bf7d00924e0afb73bf441faccb22128bdc86aa7d3",
+      "bytes": 18464
     },
     {
       "path": "SECURITY.md",

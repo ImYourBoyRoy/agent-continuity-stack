@@ -18,6 +18,9 @@ Do not begin with a repository-wide scan. Do not read or print `.env`.
 - Canonical remote:
   `https://github.com/ImYourBoyRoy/agent-continuity-stack`
 - Publication: initial public repository
+- Initial public commit:
+  `a6b1b72059fbca5ebc8c2cd3e1308e2cb36eb118`
+- Initial validation: Python `3.10` and `3.14` GitHub jobs passed
 - Inventory: 14 core skills and 1 optional, default-uninstalled skill
 - Installation: model-operated, status-first, and explicit-approval-only
 - Public default: install selected skills while preserving all custom
@@ -43,6 +46,8 @@ excluded from release inventory, and never package content.
   hygiene files for public development.
 - Renamed the complete package identity to Agent Continuity Stack
   (`agent-continuity-stack`) and bound validators to the canonical repository.
+- Enabled repository security controls and protected `main` with the successful
+  validation contexts.
 
 ## Validation baseline
 
@@ -73,9 +78,8 @@ uninstall.
 
 ## Next recommended action
 
-Confirm the initial public workflow succeeds, then complete the outstanding
-live-client and recovery gates. Do not promote `3.0.0-rc.4` to final until
-every gate in `MERGE_CHECKLIST.md` passes.
+Complete the outstanding live-client and recovery gates. Do not promote
+`3.0.0-rc.4` to final until every gate in `MERGE_CHECKLIST.md` passes.
 
 ## Handoff discipline
 

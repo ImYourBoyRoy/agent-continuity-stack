@@ -1,5 +1,8 @@
 # Agent Continuity Stack
 
+[![Validate](https://github.com/ImYourBoyRoy/agent-continuity-stack/actions/workflows/validate.yml/badge.svg)](https://github.com/ImYourBoyRoy/agent-continuity-stack/actions/workflows/validate.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 > Keep project rules and context consistent across coding agents.
 
 Version `3.0.0-rc.4` is a release candidate for repository-centered

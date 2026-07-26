@@ -17,6 +17,8 @@ levels.
   conduct, issue/PR templates, editor defaults, and local-environment hygiene.
 - Prepared the initial public Git repository with pinned GitHub Actions,
   inventory-driven archive validation, and staged-secret checks.
+- Published the canonical public repository and enabled validation, dependency,
+  vulnerability-reporting, secret-scanning, and protected-branch controls.
 
 ## 3.0.0-rc.3 - 2026-07-26
 

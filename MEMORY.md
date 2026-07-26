@@ -112,6 +112,13 @@
   `ead0ffdb73303d2f06f8320f16d443f5ab43a81d`.
 - Added live `agent-instructions` and `context-engineering` repository topics;
   the existing About description already matched the README authority.
+- Reworked Quick Start so the coding agent runs validation, client inspection,
+  approved installation, backups, smoke tests, evidence recording, and rollback
+  preparation. The user reviews decisions and authorizes mutations rather than
+  running implementation commands.
+- Configured the authenticated GitHub profile with six ordered pins: ACS,
+  Portable Web Toolkit, pyenv-native, OllamaToolkit, WebScraperToolkit, and
+  Portfolio Sidekick. GitHub's API verified the order.
 
 ## Validation
 
@@ -183,11 +190,11 @@ On 2026-07-26:
 - Post-publication record pre-commit validation: bundle, canonical-contract,
   safe-tree, and portable conformance checks passed with 0 errors and 0
   warnings.
-- RC5 authorship and discovery pre-commit validation: bundle validation passed
-  with 14 core skills, 1 optional skill, 0 errors, and 0 warnings;
-  canonical-contract, safe-tree, and portable conformance checks passed.
-  Verified maintainer identity remains outside `skills/` and
-  `optional_skills/`.
+- RC5 authorship, discovery, and agent-operated Quick Start pre-commit
+  validation: bundle validation passed with 14 core skills, 1 optional skill, 0
+  errors, and 0 warnings; canonical-contract, safe-tree, and portable
+  conformance checks passed. Verified maintainer identity remains outside
+  `skills/` and `optional_skills/`.
 
 These are source and conformance results, not live installation or rollback
 evidence.

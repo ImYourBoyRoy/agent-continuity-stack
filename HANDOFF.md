@@ -12,8 +12,8 @@ Do not begin with a repository-wide scan. Do not read or print `.env`.
 
 ## Current state
 
-- Package version: `3.0.0-rc.4`
-- Status: public prerelease; not globally runtime-verified or stable
+- Package version: `3.0.0-rc.5`
+- Status: unreleased RC5 development; not globally runtime-verified or stable
 - Branch: `main`
 - Canonical remote:
   `https://github.com/ImYourBoyRoy/agent-continuity-stack`
@@ -59,6 +59,13 @@ excluded from release inventory, and never package content.
   requirements.
 - Published immutable annotated tag and GitHub prerelease `v3.0.0-rc.4` with
   the validated ZIP and external checksum sidecar.
+- Began RC5 development for verified project authorship, maintainer links,
+  release visibility, and focused discovery topics without moving or replacing
+  RC4.
+- Added the reciprocal ACS link to Portable Web Toolkit and featured ACS first
+  in the GitHub profile README.
+- Added live `agent-instructions` and `context-engineering` repository topics;
+  the About description already matched the documented authority.
 
 ## Validation baseline
 
@@ -89,8 +96,9 @@ uninstall.
 ## Next recommended action
 
 Collect the outstanding live-client, recovery, platform, and contract-review
-evidence. Do not promote RC4 to final `3.0.0` until every final
-stable-promotion gate in `MERGE_CHECKLIST.md` passes.
+evidence. Do not promote any candidate to final `3.0.0` until every final
+stable-promotion gate in `MERGE_CHECKLIST.md` passes. Validate RC5 as a
+separate candidate before any publication decision.
 
 ## Handoff discipline
 

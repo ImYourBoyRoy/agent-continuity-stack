@@ -3,8 +3,8 @@
 ## Project snapshot
 
 - Package: Agent Continuity Stack
-- Current package version: `3.0.0-rc.4`
-- Release status: public prerelease; not promoted to stable
+- Current package version: `3.0.0-rc.5`
+- Release status: unreleased RC5 development; latest public prerelease is RC4
 - Canonical repository:
   `https://github.com/ImYourBoyRoy/agent-continuity-stack`
 - Published prerelease:
@@ -103,6 +103,15 @@
   foundations for public repository development.
 - Separated prerelease publication requirements from final stable-promotion
   requirements while preserving every unresolved final gate.
+- Began RC5 development for verified authorship, maintainer links, a
+  prerelease-aware badge, and focused GitHub discovery metadata. Published RC4
+  remains immutable.
+- Added a reciprocal ACS link to Portable Web Toolkit on `main` at
+  `c356e7e7b9277eae4f00ed22297f65f56867e958`.
+- Featured ACS first in the GitHub profile README at
+  `ead0ffdb73303d2f06f8320f16d443f5ab43a81d`.
+- Added live `agent-instructions` and `context-engineering` repository topics;
+  the existing About description already matched the README authority.
 
 ## Validation
 
@@ -174,6 +183,11 @@ On 2026-07-26:
 - Post-publication record pre-commit validation: bundle, canonical-contract,
   safe-tree, and portable conformance checks passed with 0 errors and 0
   warnings.
+- RC5 authorship and discovery pre-commit validation: bundle validation passed
+  with 14 core skills, 1 optional skill, 0 errors, and 0 warnings;
+  canonical-contract, safe-tree, and portable conformance checks passed.
+  Verified maintainer identity remains outside `skills/` and
+  `optional_skills/`.
 
 These are source and conformance results, not live installation or rollback
 evidence.

@@ -3,6 +3,17 @@
 All notable changes use Semantic Versioning at the package and individual-skill
 levels.
 
+## 3.0.0-rc.5 - Unreleased
+
+### Changed
+
+- Aligned MIT attribution with verified project authorship while retaining
+  future-contributor attribution.
+- Added verified maintainer links, a prerelease-aware release badge, and focused
+  `agent-instructions` and `context-engineering` discovery topics.
+- Kept the published `v3.0.0-rc.4` tag and release artifacts immutable while
+  preparing these package-content changes for the next candidate.
+
 ## 3.0.0-rc.4 - 2026-07-26
 
 ### Changed

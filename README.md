@@ -2,14 +2,18 @@
 
 [![Validate](https://github.com/ImYourBoyRoy/agent-continuity-stack/actions/workflows/validate.yml/badge.svg)](https://github.com/ImYourBoyRoy/agent-continuity-stack/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/ImYourBoyRoy/agent-continuity-stack?include_prereleases&label=release)](https://github.com/ImYourBoyRoy/agent-continuity-stack/releases)
 
 > Keep project rules and context consistent across coding agents.
 
-Version `3.0.0-rc.4` is a release candidate for repository-centered
-instructions, skills, memory conventions, client adapters, and lifecycle
-safeguards across Codex, Cursor, Claude Code, and Google Antigravity. It is not
-a runtime memory service, agent orchestrator, or globally runtime-verified final
-release.
+Version `3.0.0-rc.5` is the next release candidate under development for
+repository-centered instructions, skills, memory conventions, client adapters,
+and lifecycle safeguards across Codex, Cursor, Claude Code, and Google
+Antigravity. It is not a runtime memory service, agent orchestrator, or globally
+runtime-verified final release.
+
+Latest published prerelease:
+[v3.0.0-rc.4](https://github.com/ImYourBoyRoy/agent-continuity-stack/releases/tag/v3.0.0-rc.4).
 
 ## Repository identity
 
@@ -26,7 +30,7 @@ GitHub description:
 
 Topics: `agent-skills`, `agent-memory`, `ai-agents`, `coding-agents`, `codex`,
 `cursor`, `claude-code`, `antigravity`, `developer-tools`, and
-`workflow-automation`.
+`workflow-automation`, `agent-instructions`, and `context-engineering`.
 
 ## Synopsis
 
@@ -407,5 +411,13 @@ An archive cannot contain its own final checksum.
 The package is available under the [MIT License](LICENSE). The canonical
 repository is
 [ImYourBoyRoy/agent-continuity-stack](https://github.com/ImYourBoyRoy/agent-continuity-stack).
-Maintainer links are declared only from verified publication metadata and never
-inferred from workstation paths or unrelated repositories.
+
+Maintained by **Roy Dawson IV**:
+
+- GitHub: [@ImYourBoyRoy](https://github.com/ImYourBoyRoy)
+- Website: [ImYourBoyRoy.com](https://imyourboyroy.com)
+- PyPI: [ImYourBoyRoy](https://pypi.org/user/ImYourBoyRoy/)
+
+Maintainer links are verified project metadata. Operator-profile values remain
+optional installation inputs and are never inferred from workstation paths or
+unrelated repositories.

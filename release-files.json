@@ -67,8 +67,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "daa4095a54533daa0ffaff5b803d4fff4e6b9b0f9519f4ad9e675046c8e463d8",
-      "bytes": 4327
+      "sha256": "85d05f5f93512d70f62a2a4e040d92b38e2a946176f83e40ba4e4e72764ce571",
+      "bytes": 4769
     },
     {
       "path": "CLIENT_COMPATIBILITY.md",
@@ -92,8 +92,8 @@
     },
     {
       "path": "HANDOFF.md",
-      "sha256": "a5999c98da237c9decc6c9ab8844561a48754a760e3dfe55cf76388679fba388",
-      "bytes": 4119
+      "sha256": "b567c57e4aa2202c8997b916eb4c181f59b3037be104397a188eb7aabb0b7302",
+      "bytes": 4625
     },
     {
       "path": "INSTALL_PROTOCOL.md",
@@ -102,13 +102,13 @@
     },
     {
       "path": "LICENSE",
-      "sha256": "91a70ac9a782ad9628a67450d0799ef42d8e7a1ba0e0565605d929e11e5ef09a",
-      "bytes": 1093
+      "sha256": "1a9fee70f55acc33f8649df797e88f42ba1139abebe554b5d115484cea109776",
+      "bytes": 1110
     },
     {
       "path": "MEMORY.md",
-      "sha256": "4a1daf27cee153704156aaff0a006162c36bbbe72def2d88c15c4abcc96b3c3c",
-      "bytes": 11154
+      "sha256": "8072c386d09c79b7a8f82f35436f2e63112efd690542ea3b83e6b458064b3e66",
+      "bytes": 12005
     },
     {
       "path": "MERGE_CHECKLIST.md",
@@ -117,8 +117,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "ae0930b333aae993987155c8c1ab1b116d562a5f85d62d06dee14be8a88b3f98",
-      "bytes": 19232
+      "sha256": "6a6554a9c0f5f81101388ca568b229d704fb08c8176606cf2857cc95ddecf9c3",
+      "bytes": 19874
     },
     {
       "path": "SECURITY.md",
@@ -132,12 +132,12 @@
     },
     {
       "path": "VERSION",
-      "sha256": "349c8134f8444a63fa3c95b36b334a5f878e2ee1ad8b4f9ddbb296cf25969d06",
+      "sha256": "bdcd9a7699ee9c9aa0aea7ed31d12bf8195ec6b745308454271874c94cd14140",
       "bytes": 11
     },
     {
       "path": "instruction-pack.json",
-      "sha256": "ff0bad885ce545f8eac0110481f8740a71a7ebeac62602e448523edaabf23dd5",
+      "sha256": "ce009d5912c4d3e470a0f7e175c1d8b903d96bd7ff275ef61e506ea9db4e95c1",
       "bytes": 2229
     },
     {
@@ -152,7 +152,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "d0e29c42f51b1785e9db166e48bd50b07d871bc2582d5547acf28b9940c9960c",
+      "sha256": "9a7f5eb5f275f076cb8cfe0af38a261401cd1f3f021e580e868675ea78aa405f",
       "bytes": 3222
     },
     {
@@ -577,42 +577,42 @@
     },
     {
       "path": "tests/evidence/codex-0.146.0-alpha.3-linux-project.json",
-      "sha256": "b0056bb0658983b8dc00c67f2dc9fbd4de3f853fa92afc3025972c908fcd7401",
-      "bytes": 1333
+      "sha256": "0ebf5b5fb9cc4840df4afc01caf47d26c5fe3b42fe4fc957214fe92aa9b5cf4c",
+      "bytes": 1344
     },
     {
       "path": "tests/fixtures/records/client-status.json",
-      "sha256": "896e27ce107ef54c04d6f990266d7244d524a36b5806765f20f251c174b9cde7",
+      "sha256": "3ad2724a2865dfbbebcd8d7de8066ce979cc74e2a244d0340c0eb065ad12cb87",
       "bytes": 917
     },
     {
       "path": "tests/fixtures/records/install-plan.json",
-      "sha256": "2fd0597b0f0010b91218809d7400a8de8a282533c5979062e8cc3df60a6339da",
+      "sha256": "234a85dcf8c336eb8d182ef65c93fb9b2d6705243dbbfdcde86e550fd39cff88",
       "bytes": 1202
     },
     {
       "path": "tests/fixtures/records/install-status.json",
-      "sha256": "a5ff79656d78561c1aeb800a1a6336b52f18048d5edcc588b7aec33a24254882",
+      "sha256": "a5a66f30addfef491e1790d411b894bcbb100d587808e599b1ab26234c604a82",
       "bytes": 646
     },
     {
       "path": "tests/fixtures/records/operation-journal.json",
-      "sha256": "13a281483280aa70a7f960fdfbd03daba08711fac52f534146ba34518543ec9e",
+      "sha256": "0cf664ad17bd14a19b27ce43f0645f1a0d5509428b884884983594cfdbf0b9a5",
       "bytes": 846
     },
     {
       "path": "tests/fixtures/records/ownership-record.json",
-      "sha256": "3aceea006675d90a49dfaf0d28493045b399dd4884fab721119a885c9152f606",
+      "sha256": "37483bfa866515305aaaf844edb3ccbf34e62fc2757f103d4af29f93cb54888c",
       "bytes": 831
     },
     {
       "path": "tests/fixtures/records/rollback-receipt.json",
-      "sha256": "3ad5aef50ca85465acc371dd030cec5c92bb0a7381f30973e8ce3ff3fa7b39ac",
+      "sha256": "968b5da9cdc41920097f0784dc03bf595c5b7ec205d6f4f89d5b9ca3b9ea958a",
       "bytes": 836
     },
     {
       "path": "tests/fixtures/records/transaction-receipt.json",
-      "sha256": "c8f6e9019405328b421bcf7e2edcb31faae3425068528dad601bf9e7518045f0",
+      "sha256": "3e39590bb5ebabcfa888e9be18ac0db1ae2aa5d4ab86f6ebc6589a723304ed90",
       "bytes": 1404
     },
     {
@@ -647,7 +647,7 @@
     },
     {
       "path": "tests/run_portable_tests.py",
-      "sha256": "319d7f4f90f817f13333d9dec616d90eaf95902959f828709815979754b92313",
+      "sha256": "eb79e6597567c89287e59c7926aaad145883d5fba1521611bcfef6663092d7f1",
       "bytes": 20010
     }
   ]

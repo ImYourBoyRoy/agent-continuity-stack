@@ -2,9 +2,8 @@
 
 ## Supported versions
 
-Security fixes target the latest published stable release and, while this
-project remains pre-release, the newest release candidate. Older release
-candidates may receive fixes only when a safe upgrade path requires them.
+Security fixes target the latest published stable release. Older stable
+releases may receive fixes only when a safe upgrade path requires them.
 
 ## Reporting a vulnerability
 

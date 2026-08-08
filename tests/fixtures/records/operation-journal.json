@@ -3,7 +3,7 @@
   "kind": "operation-journal",
   "operation_id": "fixture-operation-001",
   "package": "agent-continuity-stack",
-  "package_version": "3.0.0-rc.5",
+  "package_version": "3.1.0",
   "package_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
   "approved_plan_sha256": "61574933c78f6745c67ea5dd7762bc9d0865f13b31202621280aaed3b00eda22",
   "client": "codex",

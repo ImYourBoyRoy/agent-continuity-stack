@@ -14,10 +14,16 @@ Do not read or print `.env`.
 ## Current state
 
 - Package version: `3.1.0`
-- Status: stable release preparation
-- Branch: `agent/stable-v3.1.0`
+- Status: stable `v3.1.0` published
+- Branch: `main`
 - Canonical remote:
   `https://github.com/ImYourBoyRoy/agent-continuity-stack`
+- Published release:
+  `https://github.com/ImYourBoyRoy/agent-continuity-stack/releases/tag/v3.1.0`
+- Release commit: `aea50869de75e3036e250cb9551218687520acbc`
+- Release archive: `agent-continuity-stack-3.1.0.zip`
+- Release archive SHA-256:
+  `af03d6704aedebbab126875666ebccadefdaf293f11f614dba59ff52b01626f5`
 - Installation: model-operated, status-first, and explicit-approval-only
 - Public default: install selected skills while preserving custom instructions
 - Inventory: 14 core skills and 1 optional, default-uninstalled skill
@@ -34,6 +40,9 @@ Do not read or print `.env`.
 - Preserved the Antigravity two-fragment loader adapter as a functional client
   requirement.
 - Updated fixtures, contract hashes, release inventory, and project memory.
+- Published the stable annotated tag and GitHub Release with the validated ZIP
+  and checksum sidecar.
+- Closed the obsolete Dependabot pull request and deleted its remote branch.
 
 ## Validation baseline
 
@@ -50,18 +59,14 @@ The 2026-08-08 run passed with zero errors and zero warnings. This proves
 source, metadata, tree safety, schemas, and portable conformance; it does not
 prove every installed client's live discovery.
 
-## Remaining release actions
+## Remaining maintenance actions
 
-- Build and validate the stable archive from the clean release commit.
-- Generate and independently verify the external SHA-256 sidecar.
-- Commit, push, and publish the stable `v3.1.0` GitHub Release.
-- Close and remove the obsolete Dependabot branch after its fix is incorporated.
 - Treat deletion of any legacy remote release/tag as a separate explicitly
   identified destructive operation.
 
 ## Handoff discipline
 
-- Update `MEMORY.md` and this file with the release commit, archive name,
-  checksum, and GitHub URL after publication.
+- Update `MEMORY.md` and this file when stable package behavior or verified
+  compatibility evidence changes.
 - Keep credentials, private paths, logs, and transient reasoning out of both
   files.

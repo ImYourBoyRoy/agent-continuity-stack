@@ -148,6 +148,15 @@ def test_contract_integrity() -> None:
     metadata = json.loads((ROOT / "instruction-pack.json").read_text("utf-8"))
     contract = (ROOT / metadata["source"]).read_bytes()
     assert hashlib.sha256(contract).hexdigest() == metadata["source_sha256"]
+    contract_text = contract.decode("utf-8")
+    normalized_contract_text = " ".join(contract_text.split())
+    for required in (
+        "## First-run personalization",
+        "Ask which clients are in scope",
+        "Ask separately for each relevant operator-profile field",
+        "Accept “leave unset” for every field",
+    ):
+        assert required in normalized_contract_text
     source = json.loads(run("scripts/inspect_contract.py", "source").stdout)
     assert source["matches_manifest"] is True
     assert source["already_normalized"] is True
@@ -513,7 +522,7 @@ def test_boundaries_and_integration() -> None:
     assert not (ROOT / "scripts" / "install_skills.py").exists()
     manifest = json.loads((ROOT / "manifest.json").read_text("utf-8"))
     assert manifest["package"] == "agent-continuity-stack"
-    assert manifest["version"] == "3.0.0-rc.5"
+    assert manifest["version"] == "3.1.0"
     optional = {item["name"]: item for item in manifest["optional_skills"]}
     assert optional["build-astro-on-cloudflare"]["install_by_default"] is False
 

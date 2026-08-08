@@ -2,8 +2,8 @@
   "schema_version": 2,
   "kind": "client-status",
   "package": "agent-continuity-stack",
-  "package_version": "3.0.0-rc.5",
-  "source_sha256": "f5c992564ccd9946b5f2dbfc8d933555085a393a0549f4b7d1fe52b062e7ca5d",
+  "package_version": "3.1.0",
+  "source_sha256": "7d51bfc6bb0bc4440137acdb95e61eb732a2881e058f5a2f9301629bb5e959d5",
   "client": "codex",
   "client_version": "0.146.0-alpha.3",
   "operating_system": "Linux x86_64",
@@ -21,7 +21,7 @@
       "content_sha256": "d56cdb5d4990548804b4653e062962a974ac13aa31d3cb1f7b84cbcf9ad065e3"
     }
   ],
-  "rendered_sha256": "f5c992564ccd9946b5f2dbfc8d933555085a393a0549f4b7d1fe52b062e7ca5d",
+  "rendered_sha256": "7d51bfc6bb0bc4440137acdb95e61eb732a2881e058f5a2f9301629bb5e959d5",
   "copied": true,
   "loaded": true,
   "smoke_passed": true,
@@ -30,7 +30,7 @@
     "Fresh read-only session named the Expert Agent Operating Contract.",
     "Explicit red-team request loaded the project skill and reported its exact SKILL.md path.",
     "A fresh trivial-rename near-miss produced no tool or skill-loading event.",
-    "RC5 changes documentation, attribution, and repository metadata only; the recorded contract and skill content hashes are unchanged from the runtime exercise."
+    "3.1.0 changes documentation, onboarding, release metadata, and CI metadata; the recorded contract and skill content hashes are unchanged from the runtime exercise."
   ],
   "verified_at": "2026-07-26T21:22:54Z"
 }

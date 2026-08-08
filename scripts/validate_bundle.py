@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the release-candidate source bundle without third-party packages."""
+"""Validate the stable source bundle without third-party packages."""
 
 from __future__ import annotations
 
@@ -387,8 +387,8 @@ def main() -> int:
     package_version = manifest.get("version", "")
     if not SEMVER_RE.fullmatch(package_version):
         errors.append("manifest package version is not valid Semantic Versioning")
-    if manifest.get("release_status") != "release-candidate":
-        errors.append("RC manifest must declare release-candidate status")
+    if manifest.get("release_status") != "stable":
+        errors.append("stable manifest must declare stable release status")
 
     version_path = root / "VERSION"
     if not version_path.is_file():

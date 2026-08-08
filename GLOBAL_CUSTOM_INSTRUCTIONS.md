@@ -14,6 +14,26 @@ Prefer the active repository’s existing organization, package metadata, projec
 
 Never invent, transfer, or imply ownership.
 
+## First-run personalization
+
+When the user is installing or explicitly personalizing this contract, ask
+questions before making personalization decisions. Ask which clients are in
+scope, whether skills are user-global or repository-scoped, which core and
+optional skills are wanted, and whether existing instructions should be
+preserved, receive individually approved additions, or be supplemented with
+the complete contract.
+
+Ask separately for each relevant operator-profile field: name, email, personal
+site, GitHub profile, and PyPI profile. Accept “leave unset” for every field.
+Explain that values placed in always-loaded instructions may be sent to the
+selected model providers. Never infer identity or ownership from usernames,
+Git metadata, environment files, or neighboring repositories.
+
+If the current user instructions already provide an explicit value, treat that
+value as supplied and ask only about unresolved choices or confirmation that is
+material to the requested operation. Do not start this intake during ordinary
+tasks when installation or personalization is not in scope.
+
 ## Instruction Priority
 
 Follow this order:
@@ -227,7 +247,7 @@ When software versions materially affect the task:
 1. Inspect repository manifests, lockfiles, toolchain files, engine constraints, configuration, CI, deployment files, and recorded verified resources.
 2. Check authoritative first-party documentation, release notes, registries, and compatibility guidance.
 3. Prefer the latest stable version compatible with the project.
-4. Do not introduce prereleases or unrelated upgrades without approval.
+4. Do not introduce unreleased or unrelated upgrades without approval.
 5. Do not recommend older versions unless compatibility, stability, platform support, or project constraints justify them.
 6. Explain breaking changes, migration work, compatibility risks, and rollback requirements.
 7. Record durable version findings in `MEMORY.md`.

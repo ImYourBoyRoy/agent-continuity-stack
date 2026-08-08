@@ -1,10 +1,10 @@
 {
   "schema": 4,
   "package": "agent-continuity-stack",
-  "version": "3.0.0-rc.5",
+  "version": "3.1.0",
   "repository": "https://github.com/ImYourBoyRoy/agent-continuity-stack",
   "license": "MIT",
-  "release_status": "release-candidate",
+  "release_status": "stable",
   "release_integrity": {
     "inventory": "release-files.json",
     "inventory_excludes_itself": true,

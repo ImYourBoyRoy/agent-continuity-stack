@@ -1,8 +1,8 @@
 # Client compatibility
 
-Release-candidate assumptions checked against first-party documentation on
+Compatibility assumptions checked against first-party documentation on
 2026-07-26. Reverify discovery and precedence against the installed client
-before final release or installation.
+before installation or a future package release.
 
 ## Shared skill format
 

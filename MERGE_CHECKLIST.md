@@ -1,14 +1,12 @@
-# Package and skill release checklist
+# Stable package release checklist
 
-Use separate gates for public release candidates and final stable promotion.
-Publishing a prerelease does not waive, satisfy, or conceal a stable gate.
+This project publishes stable releases only. Do not create parallel release
+tracks.
 
-## Prerelease publication gate
-
-Before publishing a release candidate:
+Before publishing a stable release:
 
 1. Confirm `VERSION`, package manifest version, instruction-pack version,
-   release-candidate status, README, memory, and changelog agree.
+   stable status, README, memory, and changelog agree.
 2. Confirm `.env` and other local credentials are ignored, absent from the
    release inventory, absent from staged/tracked content, and mode-restricted
    when present.
@@ -56,32 +54,18 @@ Before publishing a release candidate:
     ```
 
 20. Confirm required GitHub branch protection, Actions permissions, and CI.
-21. Create the candidate archive from an identified clean commit.
+21. Create the release archive from an identified clean commit.
 22. Validate it with `scripts/validate_archive.py`, extract it,
     and rerun the suite.
 23. Confirm `LICENSE` is included, generate and independently verify the
     external SHA-256 sidecar, and record the tag, commit, date, archive name,
     and hash in release notes.
 24. Stop if the intended remote tag or release already exists. Otherwise create
-    an immutable annotated prerelease tag and mark the GitHub Release
-    explicitly as a prerelease.
+    an immutable annotated stable tag and publish a stable GitHub Release with
+    the archive and external checksum sidecar.
 
-## Final stable promotion gate
-
-Before promoting to final `3.0.0`:
-
-1. Complete the focused immutable-backup recovery rerun.
-2. Runtime-test Cursor with authenticated target-version skill discovery.
-3. Install and runtime-test Claude Code in a disposable environment.
-4. Prove both Antigravity fragments load in a fresh client session.
-5. Validate Windows reparse-point and metadata behavior.
-6. Exercise the public installation prompt end to end across all supported
-   clients.
-7. Review the complete contract's always-on token cost and instruction-priority
-   wording.
-8. Re-run every prerelease integrity gate against the final package identity,
-   create an identified clean final release commit, build and verify new
-   artifacts, and publish a non-prerelease release.
+25. Report each client as verified, installed-unverified, or unavailable.
+    Never convert source validation into a claim of live client discovery.
 
 Likely overlap areas:
 

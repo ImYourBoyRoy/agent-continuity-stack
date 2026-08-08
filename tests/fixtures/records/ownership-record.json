@@ -2,7 +2,7 @@
   "schema_version": 1,
   "kind": "ownership-record",
   "package": "agent-continuity-stack",
-  "package_version": "3.0.0-rc.5",
+  "package_version": "3.1.0",
   "package_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
   "approved_plan_sha256": "61574933c78f6745c67ea5dd7762bc9d0865f13b31202621280aaed3b00eda22",
   "transaction_id": "fixture-transaction-001",
@@ -14,7 +14,7 @@
   "skill_name": "audit-project-updates",
   "skill_version": "1.0.0",
   "installed_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-  "source_sha256": "f5c992564ccd9946b5f2dbfc8d933555085a393a0549f4b7d1fe52b062e7ca5d",
+  "source_sha256": "7d51bfc6bb0bc4440137acdb95e61eb732a2881e058f5a2f9301629bb5e959d5",
   "rendered_sha256": null,
   "installed_at": "2026-07-26T20:01:00Z"
 }

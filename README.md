@@ -2,18 +2,18 @@
 
 [![Validate](https://github.com/ImYourBoyRoy/agent-continuity-stack/actions/workflows/validate.yml/badge.svg)](https://github.com/ImYourBoyRoy/agent-continuity-stack/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/ImYourBoyRoy/agent-continuity-stack?include_prereleases&label=release)](https://github.com/ImYourBoyRoy/agent-continuity-stack/releases)
+[![Release](https://img.shields.io/github/v/release/ImYourBoyRoy/agent-continuity-stack?label=release)](https://github.com/ImYourBoyRoy/agent-continuity-stack/releases)
 
 > Keep project rules and context consistent across coding agents.
 
-Version `3.0.0-rc.5` is the next release candidate under development for
-repository-centered instructions, skills, memory conventions, client adapters,
-and lifecycle safeguards across Codex, Cursor, Claude Code, and Google
-Antigravity. It is not a runtime memory service, agent orchestrator, or globally
-runtime-verified final release.
+Version `3.1.0` is the current stable release for repository-centered
+instructions, skills, memory conventions, client adapters, and lifecycle
+safeguards across Codex, Cursor, Claude Code, and Google Antigravity. It is not a
+runtime memory service, agent orchestrator, or guarantee of identical behavior
+across every client installation.
 
-Latest published prerelease:
-[v3.0.0-rc.4](https://github.com/ImYourBoyRoy/agent-continuity-stack/releases/tag/v3.0.0-rc.4).
+Current release:
+[v3.1.0](https://github.com/ImYourBoyRoy/agent-continuity-stack/releases/tag/v3.1.0).
 
 ## Repository identity
 
@@ -55,17 +55,17 @@ or authority withheld by the host or repository. Continuity is
 repository-centered: the package does not synchronize live conversations or
 provide a shared runtime memory database.
 
-## Release-candidate status
+## Current compatibility status
 
 | Surface | Source/structure | Live runtime |
 |---|---|---|
-| Codex 0.146.0-alpha.3 | Validated | Project contract and positive/near-miss skill smoke passed |
-| Cursor 3.13.10 | Validated, version-sensitive | CLI 2026.07.23 is unauthenticated; pending |
+| Codex | Validated | Project contract and positive/near-miss skill smoke passed |
+| Cursor | Validated, version-sensitive | Authentication and live discovery must be verified in the target environment |
 | Claude Code | Validated from current documentation | Client not locally installed; pending |
-| Antigravity IDE 1.107.0 | Two-fragment adapter validated | No proven headless agent surface; pending |
+| Antigravity IDE | Two-fragment adapter validated | No proven headless agent surface; pending |
 | Model-operated lifecycle | Schemas and conformance fixtures | Best-effort disposable exercise; never crash-atomic across clients |
 
-Final `3.0.0` requires the gates in `MERGE_CHECKLIST.md`.
+Stable publication requires the gates in `MERGE_CHECKLIST.md`.
 
 ## Requirements
 
@@ -338,8 +338,9 @@ A copied file is not proof that the client loaded it.
 
 ## Portable Web Toolkit integration
 
-The exact-tested optional integration targets Portable Web Toolkit `0.3.1`.
-See `integrations/portable-web-toolkit.json` and its human-readable companion.
+The exact-tested optional integration targets the version recorded in
+`integrations/portable-web-toolkit.json`. See that metadata and its human-readable
+companion for compatibility details.
 Newer toolkit releases require revalidation. The toolkit is never installed
 automatically by this package.
 
@@ -387,39 +388,25 @@ installation, rollback, or uninstall.
 - The canonical 13,898-byte contract consumes a meaningful share of each
   client's always-on context and Codex's aggregate instruction budget.
 - The canonical instruction-priority wording and always-on operator profile
-  remain explicit review items before final promotion.
+  remain explicit review items for future release maintenance.
 - The public GitHub installation prompt has source and negative conformance
   coverage but has not completed a four-client live installation exercise.
 - Windows reparse-point behavior requires a Windows validation run.
 
 ## Release and checksum process
 
-### Prerelease publication
+### Stable publication
 
-A release candidate may be published for controlled review when:
-
-1. its prerelease identity is consistent across package authorities and
-   documentation;
-2. source, fixture, integration, inventory, tree-safety, archive, and
-   conformance validation passes;
-3. known runtime and platform limitations are disclosed without implying they
-   passed;
-4. the archive is built from an identified clean commit, validated, extracted,
-   and retested;
-5. a separate `.sha256` sidecar is generated and independently verified; and
-6. the immutable tag and GitHub Release are explicitly marked as a prerelease.
+A stable release requires consistent package authorities, source and fixture
+validation, integration and archive-safety checks, disclosed client-runtime
+coverage, a clean identified release commit, and a newly built archive with an
+independently verified SHA-256 sidecar. Runtime evidence is reported per client;
+an unavailable client must remain clearly marked unverified rather than being
+represented as tested.
 
 Release notes record the tag, commit, publication date, archive filename,
-SHA-256, verified scope, and unresolved final-promotion gates.
-
-### Final stable promotion
-
-Do not promote a release candidate to final `3.0.0` until all source, fixture,
-archive, lifecycle-conformance, integration, recovery, platform, and
-four-client runtime gates pass. Final promotion also requires review of the
-complete contract's always-on cost and instruction-priority wording, a clean
-identified final release commit, a newly built and verified archive, and a
-separate checksum sidecar.
+SHA-256, verified scope, and unresolved compatibility limitations. Publish an
+annotated tag and a stable GitHub Release with the archive and sidecar.
 
 An archive cannot contain its own final checksum.
 

@@ -25,7 +25,8 @@ workstation, private project, account, or repository owner.
   behavior.
 - `CLIENT_COMPATIBILITY.md` records version-sensitive discovery assumptions.
 - `ARCHITECTURE.md` records durable component, lifecycle, and trust boundaries.
-- `MEMORY.md` records verified durable project state.
+- `MEMORY.md` is private local continuity; keep it Git-ignored. Never stage,
+  commit, release, or upload it without explicit user authorization.
 - `HANDOFF.md` records the concise current continuation point for another model.
 
 Repository policy and current host safety instructions retain their actual

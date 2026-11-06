@@ -8,6 +8,7 @@ import json
 import os
 import re
 import stat
+import subprocess
 import sys
 from pathlib import Path
 
@@ -165,7 +166,7 @@ def inspect_package_types(root: Path, errors: list[str]) -> None:
             elif stat.S_ISREG(metadata.st_mode) and (
                 path.suffix in text_suffixes
                 or path.name in {"VERSION", "LICENSE", ".gitattributes"}
-            ):
+            ) and relative.name.casefold() != "memory.md":
                 content = path.read_bytes()
                 if content.startswith(b"\xef\xbb\xbf"):
                     errors.append(f"{relative}: UTF-8 BOM is forbidden")
@@ -234,6 +235,10 @@ def validate_release_inventory(root: Path, errors: list[str]) -> None:
             or Path(relative).suffix.lower() in forbidden_suffixes
         ):
             errors.append(f"release inventory contains forbidden file {relative!r}")
+        if Path(relative).name.casefold() == "memory.md":
+            errors.append(
+                f"release inventory contains prohibited private memory file {relative!r}"
+            )
         declared[relative] = entry
 
     actual: dict[str, dict] = {}
@@ -242,7 +247,10 @@ def validate_release_inventory(root: Path, errors: list[str]) -> None:
             continue
         relative_path = path.relative_to(root)
         relative = relative_path.as_posix()
-        if relative == "release-files.json":
+        if (
+            relative == "release-files.json"
+            or relative_path.name.casefold() == "memory.md"
+        ):
             continue
         if any(
             part == ".env" or (part.startswith(".env.") and part != ".env.example")
@@ -267,6 +275,27 @@ def validate_release_inventory(root: Path, errors: list[str]) -> None:
             "release inventory mismatch: "
             f"missing={missing} extra={extra} changed={changed}"
         )
+
+
+def validate_git_index(root: Path, errors: list[str]) -> None:
+    if not (root / ".git").exists():
+        return
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(root), "ls-files", "-z"],
+            check=True,
+            capture_output=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        errors.append("could not verify Git index for local-only memory files")
+        return
+    tracked = result.stdout.split(b"\0")
+    if any(
+        name
+        and Path(os.fsdecode(name).replace("\\", "/")).name.casefold() == "memory.md"
+        for name in tracked
+    ):
+        errors.append("Git index tracks a prohibited local-only MEMORY.md file")
 
 
 def validate_skill(
@@ -372,6 +401,7 @@ def main() -> int:
     warnings: list[str] = []
     inspect_package_types(root, errors)
     validate_release_inventory(root, errors)
+    validate_git_index(root, errors)
 
     manifest_data = read_json(root / "manifest.json", errors)
     manifest = manifest_data if isinstance(manifest_data, dict) else {}
@@ -410,7 +440,6 @@ def main() -> int:
         "AGENTS.md",
         "HANDOFF.md",
         "README.md",
-        "MEMORY.md",
         "SECURITY.md",
         ".github/workflows/validate.yml",
     ):
@@ -422,6 +451,8 @@ def main() -> int:
         ignore_text = ignore_path.read_text(encoding="utf-8")
         if ".env" not in ignore_text or "!.env.example" not in ignore_text:
             errors.append(".gitignore must ignore local environments except example")
+        if "[Mm][Ee][Mm][Oo][Rr][Yy].[Mm][Dd]" not in ignore_text.splitlines():
+            errors.append(".gitignore must exclude private MEMORY.md files")
 
     local_environment = root / ".env"
     if local_environment.exists():
@@ -661,7 +692,6 @@ def main() -> int:
         root / "HANDOFF.md",
         root / "CONTRIBUTING.md",
         root / "SECURITY.md",
-        root / "MEMORY.md",
         root / "INSTALL_PROTOCOL.md",
         root / "CLIENT_COMPATIBILITY.md",
         root / "MERGE_CHECKLIST.md",

@@ -222,7 +222,7 @@ instruction-pack.json           source integrity and client adapters
 manifest.json                   package, skill, schema, and integration inventory
 release-files.json              complete file-and-hash inventory (excluding itself)
 ARCHITECTURE.md                 durable package, lifecycle, and trust design
-MEMORY.md                       verified durable project state
+MEMORY.md                       private local state; Git-ignored and excluded from releases
 HANDOFF.md                      concise continuation point for another model
 skills/                         default core skills
 optional_skills/                default-uninstalled skills
@@ -244,7 +244,9 @@ private security-reporting guidance.
 A local `.env` is optional maintainer state, never package content. It is
 ignored by Git, excluded from release inventory, and must remain readable only
 by its owner. `.env.example` documents the optional variable name without a
-credential. Installed skills and validation do not require a GitHub token.
+credential. A local `MEMORY.md` is private continuity state; it is Git-ignored
+and never included in a release archive. Installed skills and validation do not
+require a GitHub token.
 
 See `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `ARCHITECTURE.md`,
 and `HANDOFF.md` before making a public release change.

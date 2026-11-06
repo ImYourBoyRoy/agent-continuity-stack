@@ -4,7 +4,8 @@
 
 1. `AGENTS.md`
 2. Relevant sections of `README.md`
-3. `MEMORY.md`
+3. `MEMORY.md` when present; private local state, Git-ignored and excluded
+   from release archives
 4. `ARCHITECTURE.md`
 5. The authority file for the requested task
 

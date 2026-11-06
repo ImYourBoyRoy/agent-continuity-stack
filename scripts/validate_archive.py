@@ -35,6 +35,9 @@ def validate(path: Path) -> dict:
             normalized_name = name.replace("\\", "/")
             pure = PurePosixPath(normalized_name)
 
+            if pure.name.casefold() == "memory.md":
+                errors.append(f"archive contains prohibited private memory file: {name}")
+
             if name in exact:
                 errors.append(f"duplicate entry: {name}")
             exact.add(name)
@@ -110,6 +113,14 @@ def validate(path: Path) -> dict:
                     errors.append("release inventory contains malformed entry")
                     continue
                 relative = item.get("path", "")
+                if (
+                    isinstance(relative, str)
+                    and PurePosixPath(relative).name.casefold() == "memory.md"
+                ):
+                    errors.append(
+                        "release inventory includes prohibited private memory file: "
+                        f"{relative}"
+                    )
                 archived_name = f"{release_root}/{relative}"
                 expected_names.add(archived_name)
                 entry = regular_entries.get(archived_name)

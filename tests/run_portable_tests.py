@@ -58,6 +58,11 @@ def test_bundle_and_inventory() -> None:
     assert summary["core_skills"] == 14
     assert summary["optional_skills"] == 1
     assert summary["errors"] == 0
+    release_inventory = json.loads((ROOT / "release-files.json").read_text("utf-8"))
+    assert not any(
+        Path(item["path"]).name.casefold() == "memory.md"
+        for item in release_inventory["files"]
+    )
 
     fixture = ROOT / "tests" / "fixtures" / "update-audit"
     run(
@@ -85,6 +90,43 @@ def test_bundle_and_inventory() -> None:
     assert inventory["absolute_root_disclosed"] is False
     assert str(fixture) not in result.stdout
     assert inventory["explicit_sources"][0]["id"] == "companion-tool"
+
+
+def test_local_memory_is_ignored_and_unpublishable() -> None:
+    sys.dont_write_bytecode = True
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from validate_bundle import validate_git_index
+
+    with tempfile.TemporaryDirectory(prefix="portable-memory-index-") as temporary:
+        repository = Path(temporary)
+        subprocess.run(
+            ["git", "init", "--quiet", str(repository)], check=True
+        )
+        (repository / ".gitignore").write_text(
+            "[Mm][Ee][Mm][Oo][Rr][Yy].[Mm][Dd]\n", encoding="utf-8"
+        )
+        ignored = ("MEMORY.md", "nested/mEmOrY.Md")
+        for relative in ignored:
+            path = repository / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("local-only fixture\n", encoding="utf-8")
+        result = subprocess.run(
+            ["git", "-C", str(repository), "check-ignore", "--no-index", "--stdin"],
+            input="\n".join(ignored) + "\n",
+            text=True,
+            capture_output=True,
+            check=True,
+        )
+        assert set(result.stdout.splitlines()) == set(ignored)
+        subprocess.run(
+            ["git", "-C", str(repository), "add", "--force", ignored[1]],
+            check=True,
+        )
+        errors: list[str] = []
+        validate_git_index(repository, errors)
+        assert errors == [
+            "Git index tracks a prohibited local-only MEMORY.md file"
+        ]
 
 
 def test_update_audit_boundaries() -> None:
@@ -478,6 +520,28 @@ def test_archive_validation() -> None:
         )
         assert result["safe"] is True
 
+        private_payloads = {**payloads, "nested/mEmOrY.Md": b"local-only\n"}
+        private_inventory = {
+            **inventory,
+            "files": [
+                {
+                    "path": name,
+                    "sha256": hashlib.sha256(content).hexdigest(),
+                    "bytes": len(content),
+                }
+                for name, content in sorted(private_payloads.items())
+            ],
+        }
+        private_archive = area / "private-memory.zip"
+        with zipfile.ZipFile(private_archive, "w") as archive:
+            for name, content in private_payloads.items():
+                archive.writestr(f"package/{name}", content)
+            archive.writestr(
+                "package/release-files.json",
+                json.dumps(private_inventory, sort_keys=True).encode("utf-8"),
+            )
+        run("scripts/validate_archive.py", str(private_archive), expected=1)
+
         undeclared = area / "undeclared.zip"
         with zipfile.ZipFile(undeclared, "w") as archive:
             for name, content in payloads.items():
@@ -535,6 +599,7 @@ def test_boundaries_and_integration() -> None:
 
 def main() -> int:
     test_bundle_and_inventory()
+    test_local_memory_is_ignored_and_unpublishable()
     test_update_audit_boundaries()
     test_contract_integrity()
     test_record_schemas()

@@ -52,13 +52,13 @@
     },
     {
       "path": ".gitignore",
-      "sha256": "04d0d40b748d0294bf7df6ee7921f50dc1df9ae87a14359cab2c4b406350d254",
-      "bytes": 503
+      "sha256": "e04190bf0564e6522fdd72d1a37a17792f198751b6a6ab9ef4cff10fc7abb57c",
+      "bytes": 620
     },
     {
       "path": "AGENTS.md",
-      "sha256": "7103a7f7e6609ace3cc0fd51716ddfa544669bbc58dddf946657100739721b32",
-      "bytes": 3670
+      "sha256": "39653a656d2ba344dddd3e3de8050635ee1535e68903fa1a6f3870e46917ce6d",
+      "bytes": 3762
     },
     {
       "path": "ARCHITECTURE.md",
@@ -92,8 +92,8 @@
     },
     {
       "path": "HANDOFF.md",
-      "sha256": "bad4390ef49dc3205a645334fe7f574ed704167f7841824dd44fe67bfa296376",
-      "bytes": 3820
+      "sha256": "83daa9d04716c13e0cfc9d74471e4d2b9efcef0089592e3fbc7d95820c15f0aa",
+      "bytes": 3905
     },
     {
       "path": "INSTALL_PROTOCOL.md",
@@ -106,19 +106,14 @@
       "bytes": 1093
     },
     {
-      "path": "MEMORY.md",
-      "sha256": "f966b0e886005c8b8436c38c1b93ec0e869680fd28a8178068951d99a9cbbf7e",
-      "bytes": 10401
-    },
-    {
       "path": "MERGE_CHECKLIST.md",
       "sha256": "a5fa3387f21574549d61ff9b2301ce26c7a7cdf34b62031326691a144ac69d26",
       "bytes": 4749
     },
     {
       "path": "README.md",
-      "sha256": "ae0930b333aae993987155c8c1ab1b116d562a5f85d62d06dee14be8a88b3f98",
-      "bytes": 19232
+      "sha256": "9b1a57252ab074c2efc22aa6652c673155ea99818172db60ad2dc71b058dc88a",
+      "bytes": 19369
     },
     {
       "path": "SECURITY.md",
@@ -222,13 +217,13 @@
     },
     {
       "path": "scripts/validate_archive.py",
-      "sha256": "65848e9b88093bc357863fce2cd28741cfd72694f1c37d4bb0a46c708d4ec449",
-      "bytes": 6298
+      "sha256": "83af1ce5d2f57369550a6ec94e36bf51f644e8532b06bede2ff3386b31eafbde",
+      "bytes": 6787
     },
     {
       "path": "scripts/validate_bundle.py",
-      "sha256": "b5aa7ea8d91a27c49f92d303735e233c7d828fc45a1999d7d628c0c553423a30",
-      "bytes": 29147
+      "sha256": "185540797f70c13ee1cfa9a0c12c7084abcfc2ac48442bf9960785d4d00144f8",
+      "bytes": 30325
     },
     {
       "path": "scripts/validate_record.py",
@@ -647,8 +642,8 @@
     },
     {
       "path": "tests/run_portable_tests.py",
-      "sha256": "319d7f4f90f817f13333d9dec616d90eaf95902959f828709815979754b92313",
-      "bytes": 20010
+      "sha256": "659de1470e72d2a421c473d51c0f8d36f055cc85256063149907ac651945411f",
+      "bytes": 22627
     }
   ]
 }

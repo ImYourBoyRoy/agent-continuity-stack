@@ -47,7 +47,7 @@
     },
     {
       "path": ".github/workflows/validate.yml",
-      "sha256": "b9dab2df56311e634bbab6a99060c29409e84f29919d8ebb4532a7ea1cddb5db",
+      "sha256": "c7fb833710982b900f4836091543e2c2d2a2bf1ec14ddd39a61bbfecaa6b616b",
       "bytes": 1118
     },
     {
@@ -62,18 +62,18 @@
     },
     {
       "path": "ARCHITECTURE.md",
-      "sha256": "ce6282b0d261443528e10b110bcdf8609f01f00714c01726a1cc40f65f26a7c5",
-      "bytes": 6612
+      "sha256": "90caad566b6b4587a5a71e5f3b4c330895b69161a740b13a184fcba4093d99f7",
+      "bytes": 6570
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "daa4095a54533daa0ffaff5b803d4fff4e6b9b0f9519f4ad9e675046c8e463d8",
-      "bytes": 4327
+      "sha256": "bd1c40467740cd92cc90c83409a9c3ad87b82d3caa8fe4b7e1c9253354630f5c",
+      "bytes": 1258
     },
     {
       "path": "CLIENT_COMPATIBILITY.md",
-      "sha256": "6078b018d619501b3997ceae2d1a8b5905ab351eb45f8856ef646bedb6dbd0f8",
-      "bytes": 5350
+      "sha256": "4e176e1d48d430d3f1e63c1f4f5092ed0b4e960bc616ff830ff2a757545f3f19",
+      "bytes": 5357
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -87,13 +87,13 @@
     },
     {
       "path": "GLOBAL_CUSTOM_INSTRUCTIONS.md",
-      "sha256": "f5c992564ccd9946b5f2dbfc8d933555085a393a0549f4b7d1fe52b062e7ca5d",
-      "bytes": 13898
+      "sha256": "7d51bfc6bb0bc4440137acdb95e61eb732a2881e058f5a2f9301629bb5e959d5",
+      "bytes": 14999
     },
     {
       "path": "HANDOFF.md",
-      "sha256": "83daa9d04716c13e0cfc9d74471e4d2b9efcef0089592e3fbc7d95820c15f0aa",
-      "bytes": 3905
+      "sha256": "b9d7db701d6446fbe60f9da02e42528c2f0763d1adc20609e1c9ebc6bc4571dc",
+      "bytes": 2614
     },
     {
       "path": "INSTALL_PROTOCOL.md",
@@ -102,23 +102,23 @@
     },
     {
       "path": "LICENSE",
-      "sha256": "91a70ac9a782ad9628a67450d0799ef42d8e7a1ba0e0565605d929e11e5ef09a",
-      "bytes": 1093
+      "sha256": "1a9fee70f55acc33f8649df797e88f42ba1139abebe554b5d115484cea109776",
+      "bytes": 1110
     },
     {
       "path": "MERGE_CHECKLIST.md",
-      "sha256": "a5fa3387f21574549d61ff9b2301ce26c7a7cdf34b62031326691a144ac69d26",
-      "bytes": 4749
+      "sha256": "da28ad516f9b17ed108352d9cf0fcda62496f6eabcf5c32195e6a5bf48f76979",
+      "bytes": 4028
     },
     {
       "path": "README.md",
-      "sha256": "9b1a57252ab074c2efc22aa6652c673155ea99818172db60ad2dc71b058dc88a",
-      "bytes": 19369
+      "sha256": "34ec2f521d93634dacbb1589de1a189fff444718b6afa66c4756f2db493ec35e",
+      "bytes": 20473
     },
     {
       "path": "SECURITY.md",
-      "sha256": "8855c0c64f1580dc2bf3fa5ee166856265d1dc8ec33425f8ffc0d0fa6d51c778",
-      "bytes": 1694
+      "sha256": "c189e0b5f2f8220d1c72500fee16e4c8d0930519f3294c18b14ada86e1ce67b5",
+      "bytes": 1617
     },
     {
       "path": "SOURCE_MAP.md",
@@ -127,13 +127,13 @@
     },
     {
       "path": "VERSION",
-      "sha256": "349c8134f8444a63fa3c95b36b334a5f878e2ee1ad8b4f9ddbb296cf25969d06",
-      "bytes": 11
+      "sha256": "b2f44d3b6e29f8b1b73ea4735f006affc4d198e1fd9c7d50e736159b1ef636c6",
+      "bytes": 6
     },
     {
       "path": "instruction-pack.json",
-      "sha256": "ff0bad885ce545f8eac0110481f8740a71a7ebeac62602e448523edaabf23dd5",
-      "bytes": 2229
+      "sha256": "cede48a0f83c1f92a9451369b41960f8fad784276063976b5f8df8c2fb8e206a",
+      "bytes": 2224
     },
     {
       "path": "integrations/portable-web-toolkit.json",
@@ -147,8 +147,8 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "d0e29c42f51b1785e9db166e48bd50b07d871bc2582d5547acf28b9940c9960c",
-      "bytes": 3222
+      "sha256": "7b78720d72bcaaecc4d48191f17bd9ae37ec685f158d8b0bbe61465b2ec3f918",
+      "bytes": 3206
     },
     {
       "path": "optional_skills/build-astro-on-cloudflare/SKILL.md",
@@ -222,8 +222,8 @@
     },
     {
       "path": "scripts/validate_bundle.py",
-      "sha256": "185540797f70c13ee1cfa9a0c12c7084abcfc2ac48442bf9960785d4d00144f8",
-      "bytes": 30325
+      "sha256": "0cfce64efd053b793703286c0ee53cfa61639432ddb88760d960f3584d0dd543",
+      "bytes": 30304
     },
     {
       "path": "scripts/validate_record.py",
@@ -572,43 +572,43 @@
     },
     {
       "path": "tests/evidence/codex-0.146.0-alpha.3-linux-project.json",
-      "sha256": "b0056bb0658983b8dc00c67f2dc9fbd4de3f853fa92afc3025972c908fcd7401",
-      "bytes": 1333
+      "sha256": "2625c8dc95b3e3f87c180c17c97e7daaeb4c7c7c5c02480cdb4f3f92e8e8adac",
+      "bytes": 1345
     },
     {
       "path": "tests/fixtures/records/client-status.json",
-      "sha256": "896e27ce107ef54c04d6f990266d7244d524a36b5806765f20f251c174b9cde7",
-      "bytes": 917
+      "sha256": "0932609be57b52237f0c5c4436ce8c04db5df5c0edb2667bf221b855c21fa425",
+      "bytes": 912
     },
     {
       "path": "tests/fixtures/records/install-plan.json",
-      "sha256": "2fd0597b0f0010b91218809d7400a8de8a282533c5979062e8cc3df60a6339da",
-      "bytes": 1202
+      "sha256": "d5c1a4411e78d79be7cf7d1c87d8e7bca7d13f19646b74400229cae77f21a9b8",
+      "bytes": 1197
     },
     {
       "path": "tests/fixtures/records/install-status.json",
-      "sha256": "a5ff79656d78561c1aeb800a1a6336b52f18048d5edcc588b7aec33a24254882",
-      "bytes": 646
+      "sha256": "66942c5d9de5ac8dc67ea9c27fe167485e2ce7699b65e00dba4fc413cf4f5086",
+      "bytes": 641
     },
     {
       "path": "tests/fixtures/records/operation-journal.json",
-      "sha256": "13a281483280aa70a7f960fdfbd03daba08711fac52f534146ba34518543ec9e",
-      "bytes": 846
+      "sha256": "ab885d134c26063b68ebf55b63ec34593c4ccbac0b7b7facd08213a2a7114e3d",
+      "bytes": 841
     },
     {
       "path": "tests/fixtures/records/ownership-record.json",
-      "sha256": "3aceea006675d90a49dfaf0d28493045b399dd4884fab721119a885c9152f606",
-      "bytes": 831
+      "sha256": "417682b83e1dc11c7c38f009b76a5b051dad69ac02946019d190066ec085ee53",
+      "bytes": 826
     },
     {
       "path": "tests/fixtures/records/rollback-receipt.json",
-      "sha256": "3ad5aef50ca85465acc371dd030cec5c92bb0a7381f30973e8ce3ff3fa7b39ac",
-      "bytes": 836
+      "sha256": "2d36cee2a311807969a3c4f5eab22193e98d27ebe2ecad5d40feeedb646506b6",
+      "bytes": 831
     },
     {
       "path": "tests/fixtures/records/transaction-receipt.json",
-      "sha256": "c8f6e9019405328b421bcf7e2edcb31faae3425068528dad601bf9e7518045f0",
-      "bytes": 1404
+      "sha256": "201db889d1937c86c769de341b55304d330b9ee60a768b29fc1c6f4c226d4e5e",
+      "bytes": 1399
     },
     {
       "path": "tests/fixtures/update-audit/.github/workflows/ci.yml",
@@ -642,8 +642,8 @@
     },
     {
       "path": "tests/run_portable_tests.py",
-      "sha256": "659de1470e72d2a421c473d51c0f8d36f055cc85256063149907ac651945411f",
-      "bytes": 22627
+      "sha256": "e5a8cdaa31145373baf1a1c6a4a8fa31e92e6c0749da1219cc6ffcc966a9333e",
+      "bytes": 23012
     }
   ]
 }

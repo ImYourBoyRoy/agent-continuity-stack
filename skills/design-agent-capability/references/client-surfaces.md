@@ -21,9 +21,11 @@ target clients have verified support for another common field.
 ## Persistent instructions
 
 - Codex: user-global and project `AGENTS.md`, with documented nested overrides
-- Claude Code: user rules or `CLAUDE.md`, plus project instruction locations
+- Claude Code: user rules or `CLAUDE.md`; current releases also read project
+  `AGENTS.md` by default only when no project `CLAUDE.md` is present. A root
+  `CLAUDE.md` can import the canonical file with `@AGENTS.md`.
 - Cursor: supported User Rules and project Rules
-- Antigravity: documented global rules, imports, and workspace rules
+- Antigravity: documented global rules, modular rule files, and workspace rules
 
 Do not claim one filename has identical discovery or precedence in every host.
 Publish one canonical content template separately from versioned adapter and

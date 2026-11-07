@@ -9,9 +9,9 @@ Record the instruction mode and result using
 | Client | Skill discovery | Complete-contract discovery, when selected | Version-sensitive concern |
 |---|---|---|---|
 | Codex | Selected names appear from the intended skill root | Identifies the effective `CODEX_HOME` override or `AGENTS.md` and the contract | Aggregate instruction-size configuration |
-| Cursor | Selected Agent Skills appear | Identifies client-managed User Rules; project MDC is test-only | Skill roots require target-version verification |
-| Claude Code | `/audit-project-updates` is available | Identifies the dedicated user rule | User and project memory precedence |
-| Antigravity | Selected skills appear from the intended product root | Resolves the `GEMINI.md` import and complete contract | 12,000-character loader limit and separate CLI root |
+| Cursor | Selected Agent Skills appear | Identifies account-synced User Rules or, when selected, the machine-local user rule file surface | File-backed format and skill roots require target-version verification |
+| Claude Code | `/audit-project-updates` is available | Identifies the dedicated user rule and loads project guidance through `CLAUDE.md` → `@AGENTS.md` | Project-instructions setting, version, and import discovery |
+| Antigravity | Selected skills appear from the intended product root | Identifies the dedicated `always_on` global rule and complete contract | 24,000-byte per-rule limit, 20,000-token aggregate budget, and separate CLI skill root |
 
 ## Complete-contract checks
 
@@ -23,6 +23,11 @@ the answers:
 3. How should material plans be critically reviewed?
 4. When must software-version claims be researched?
 5. What must be updated before substantial work is declared complete?
+6. For Claude Code, does the project adapter import the canonical `AGENTS.md`
+   or duplicate its contents?
+7. Give the model a synthetic profile with only a name and GitHub profile.
+   Confirm it fills those values, omits the unanswered email, website, and PyPI
+   bullets, asks no repeated questions, and leaves no template markers.
 
 The answers must reflect all relevant contract sections, not a truncated
 summary. Then place a stronger repository-local test instruction in the
@@ -45,7 +50,8 @@ For every client:
 6. No personal identity, home path, private host, token, or machine identifier
    appears in loaded skill content.
 7. Toolkit-managed Astro + Cloudflare work delegates to Portable Web Toolkit
-   without creating parallel commands or configuration.
+   without creating parallel commands or configuration, including the v0.4.0
+   discovery and accessibility owners.
 8. When the optional Astro fallback is selected in an unmanaged project, it
    activates for the integration boundary; it does not activate for generic UI.
 
@@ -61,8 +67,8 @@ Use these boundary prompts:
   `red-team-technical-plan`
 - “Decide whether this recurring rule should be instructions, a skill, or CI.”
   → `design-agent-capability`
-- “Merge the approved rule into AGENTS.md and CLAUDE.md with rollback.” →
-  `maintain-agent-instructions`
+- “Merge the approved rule into the canonical AGENTS.md and keep CLAUDE.md as
+  its import router, with rollback.” → `maintain-agent-instructions`
 - “Update the public contributor guide; do not touch agent control files.” →
   `maintain-project-docs`
 - “This unmanaged Astro SSR project targets Cloudflare Workers; review the

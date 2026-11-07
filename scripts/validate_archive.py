@@ -20,6 +20,19 @@ WINDOWS_DEVICE_RE = re.compile(
 MAX_FILE_BYTES = 10 * 1024 * 1024
 MAX_TOTAL_BYTES = 50 * 1024 * 1024
 MAX_COMPRESSION_RATIO = 1000
+LOCAL_ONLY_AGENT_FILES = {"memory.md", "agents.override.md", "claude.local.md"}
+
+
+def is_local_only_agent_state(path: PurePosixPath) -> bool:
+    parts = tuple(part.casefold() for part in path.parts)
+    if path.name.casefold() in LOCAL_ONLY_AGENT_FILES:
+        return True
+    return any(
+        part == ".claude"
+        and index + 1 < len(parts)
+        and parts[index + 1] == "settings.local.json"
+        for index, part in enumerate(parts)
+    )
 
 
 def validate(path: Path) -> dict:
@@ -35,8 +48,10 @@ def validate(path: Path) -> dict:
             normalized_name = name.replace("\\", "/")
             pure = PurePosixPath(normalized_name)
 
-            if pure.name.casefold() == "memory.md":
-                errors.append(f"archive contains prohibited private memory file: {name}")
+            if is_local_only_agent_state(pure):
+                errors.append(
+                    f"archive contains prohibited private local agent state: {name}"
+                )
 
             if name in exact:
                 errors.append(f"duplicate entry: {name}")
@@ -113,12 +128,11 @@ def validate(path: Path) -> dict:
                     errors.append("release inventory contains malformed entry")
                     continue
                 relative = item.get("path", "")
-                if (
-                    isinstance(relative, str)
-                    and PurePosixPath(relative).name.casefold() == "memory.md"
+                if isinstance(relative, str) and is_local_only_agent_state(
+                    PurePosixPath(relative.replace("\\", "/"))
                 ):
                     errors.append(
-                        "release inventory includes prohibited private memory file: "
+                        "release inventory includes prohibited private local agent state: "
                         f"{relative}"
                     )
                 archived_name = f"{release_root}/{relative}"

@@ -3,6 +3,12 @@
 .env.*
 !.env.example
 
+# Private local continuity and user-specific client overrides
+[Mm][Ee][Mm][Oo][Rr][Yy].[Mm][Dd]
+AGENTS.override.md
+CLAUDE.local.md
+**/.claude/settings.local.json
+
 # Python
 __pycache__/
 *.py[cod]
@@ -38,6 +44,3 @@ tmp/
 # Model-operated lifecycle state must remain outside discovery and source roots
 .agent-continuity-stack/
 agent-continuity-stack-state/
-
-# Private local continuity; never track or publish without explicit authorization
-[Mm][Ee][Mm][Oo][Rr][Yy].[Mm][Dd]

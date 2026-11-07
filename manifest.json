@@ -1,7 +1,7 @@
 {
   "schema": 4,
   "package": "agent-continuity-stack",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "repository": "https://github.com/ImYourBoyRoy/agent-continuity-stack",
   "license": "MIT",
   "release_status": "stable",
@@ -28,7 +28,7 @@
     },
     {
       "name": "design-agent-capability",
-      "version": "1.0.1"
+      "version": "1.0.2"
     },
     {
       "name": "engineer-cli-tools",
@@ -36,7 +36,7 @@
     },
     {
       "name": "maintain-agent-instructions",
-      "version": "1.1.0"
+      "version": "1.3.0"
     },
     {
       "name": "maintain-project-docs",
@@ -44,7 +44,7 @@
     },
     {
       "name": "maintain-project-memory",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     {
       "name": "maintain-web-design-system",
@@ -101,9 +101,7 @@
       "install_automatically": false
     }
   ],
-  "runtime_evidence": [
-    "tests/evidence/codex-0.146.0-alpha.3-linux-project.json"
-  ],
+  "runtime_evidence": [],
   "clients": {
     "codex": {
       "user_skills": "~/.agents/skills",

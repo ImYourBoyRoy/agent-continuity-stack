@@ -7,7 +7,9 @@ Participation is governed by `CODE_OF_CONDUCT.md`.
 
 ## Before changing anything
 
-1. Read `AGENTS.md`, `README.md`, `MEMORY.md`, and `ARCHITECTURE.md`.
+1. Read `AGENTS.md`, `README.md`, and `ARCHITECTURE.md`. Read local `MEMORY.md`
+   only when it exists; it is private, Git-ignored project state and must not be
+   committed or included in a release unless the user explicitly authorizes it.
 2. Inspect the relevant skill manifest, activation cases, integration boundary,
    or lifecycle schema.
 3. Check for an existing skill or specialist owner before adding capability.
@@ -29,6 +31,15 @@ Participation is governed by `CODE_OF_CONDUCT.md`.
 - Update documentation, fixtures, smoke cases, and manifests in the same change
   as their owned behavior.
 
+## Commit attribution
+
+Other contributors should use their own GitHub-linked identity. For
+maintainer-authored commits and annotated tags in this repository, use
+`@imyourboyroy` and the GitHub account-linked no-reply email. GitHub associates
+command-line commits through the commit email; use an email attached to the
+account, preferably its no-reply address, rather than a public contact email.
+See GitHub's [commit email guidance](https://docs.github.com/en/account-and-profile/how-tos/email-preferences/setting-your-commit-email-address).
+
 ## Validation
 
 Run from the repository root:
@@ -36,7 +47,9 @@ Run from the repository root:
 ```bash
 python3 scripts/validate_bundle.py
 python3 scripts/inspect_contract.py source
-python3 scripts/inspect_tree.py . --exclude .git --exclude .env
+python3 scripts/inspect_tree.py . --exclude .git --exclude .env \
+  --exclude MEMORY.md --exclude AGENTS.override.md \
+  --exclude CLAUDE.local.md --exclude .claude/settings.local.json
 python3 tests/run_portable_tests.py
 ```
 

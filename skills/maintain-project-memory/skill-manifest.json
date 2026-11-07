@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "name": "maintain-project-memory",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "content_hash_definition": "inspect_tree sha256 excluding skill-manifest.json",
-  "content_sha256": "d9711ef70bf4b8c78ad9601152edffa7dee3d0b7bcc3757acb078681c80cb2cf"
+  "content_sha256": "cdb282e7cbded741be050dd99eb52bb83f5904e3bb44b33ac7149413f4d34e83"
 }

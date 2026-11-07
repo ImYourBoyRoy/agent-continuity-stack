@@ -1,9 +1,9 @@
 {
-  "schema": 2,
+  "schema": 3,
   "package": "agent-continuity-stack",
-  "package_version": "3.1.0",
+  "package_version": "3.2.0",
   "source": "GLOBAL_CUSTOM_INSTRUCTIONS.md",
-  "source_sha256": "7d51bfc6bb0bc4440137acdb95e61eb732a2881e058f5a2f9301629bb5e959d5",
+  "source_sha256": "d388423f4371d781e02948d109c352ba9b4a605aa4b08005eb2a1f34501dd471",
   "source_hash_definition": "sha256 of canonical UTF-8 bytes with LF line endings and no BOM",
   "encoding": "utf-8",
   "line_endings": "lf",
@@ -22,7 +22,8 @@
   "rendered_integrity": {
     "hash_algorithm": "sha256",
     "hash_record_location": "install plan, transaction receipt, ownership record, and client status",
-    "package_contains_fixed_rendered_hash": false
+    "package_contains_fixed_rendered_hash": false,
+    "unresolved_placeholders": "forbidden"
   },
   "clients": {
     "codex": {
@@ -32,30 +33,35 @@
       "end_marker": "<!-- agent-continuity-stack:end -->"
     },
     "cursor": {
-      "target": "Cursor Settings > Rules > User Rules",
+      "target": "Cursor Customize > Rules > User Rules",
       "mode": "client-managed-plain-text-user-rule",
       "project_test_adapter": ".cursor/rules/expert-agent-operating-contract.mdc",
       "runtime_verification_required": true
     },
     "claude": {
       "target": "~/.claude/rules/expert-agent-operating-contract.md",
-      "mode": "dedicated-user-rule"
+      "mode": "dedicated-user-rule",
+      "project_adapter": {
+        "target": "CLAUDE.md",
+        "mode": "import-canonical-agents",
+        "import": "@AGENTS.md"
+      }
     },
     "antigravity": {
-      "loader_target": "~/.gemini/GEMINI.md",
-      "mode": "ordered-global-imports",
-      "split_before_heading": "## Critical Reasoning and Red Teaming",
-      "segments": [
-        {
-          "target": "~/.gemini/expert-agent-operating-contract.part-1.md",
-          "loader_directive": "@expert-agent-operating-contract.part-1.md"
-        },
-        {
-          "target": "~/.gemini/expert-agent-operating-contract.part-2.md",
-          "loader_directive": "@expert-agent-operating-contract.part-2.md"
-        }
-      ],
-      "maximum_segment_characters": 12000
+      "target": "~/.gemini/config/rules/expert-agent-operating-contract.md",
+      "mode": "dedicated-global-always-on-rule",
+      "frontmatter": {
+        "trigger": "always_on",
+        "description": "Complete Expert Agent Operating Contract; always apply."
+      },
+      "maximum_file_bytes": 24000,
+      "maximum_aggregate_tokens": 20000
     }
+  },
+  "rendering_policy": {
+    "profile_value_source": "explicit-user-provided-or-user-designated-profile",
+    "missing_profile_fields": "remove-field",
+    "empty_operator_profile_section": "remove-section",
+    "infer_profile_from_git_or_repository": false
   }
 }

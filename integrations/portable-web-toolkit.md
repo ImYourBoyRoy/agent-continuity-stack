@@ -1,9 +1,13 @@
 # Portable Web Toolkit integration
 
-This optional integration was tested against Portable Web Toolkit `0.3.1` at
-release commit `cdbc33ff40bedab48fc86bfb7e1ea06a5d81f6f3`. Its `skill-pack.json`
-records skill content from base commit
-`86dddd9efb64c5b4219afe986699135a51e63f83`.
+This optional integration was reviewed and statically validated against
+Portable Web Toolkit `0.4.0` at release commit
+`1675019d3eec9dbdb81bcff93e3e918b3e29fc34`. Its `skill-pack.json` declares
+skill pack `1.4.0`, source base commit
+`fffa17c8f95e3613b0b1530107e06e010fe16675`, and SHA-256
+`76b9f37dee5d96bcb80cbf666dcbef8c1dda4629a05a4ded5142de0882bb2fa7`.
+This review checks the release manifest and ownership boundaries; it does not
+claim live toolkit command execution.
 
 Compatibility is exact-tested, not an unrestricted version range. Reinspect the
 upstream manifest, release notes, and affected skills before claiming
@@ -26,8 +30,10 @@ A directory name alone is insufficient.
 ## Ownership
 
 When management is established, consume the toolkit's root `skill-pack.json`
-and per-skill `skill.json` files. Let its declared skills and deterministic
-tools own:
+and per-skill `skill.json` files. For the reviewed `0.4.0` release, toolkit
+ownership includes `discovery-doctor`, `wcag-auditor`, `site-onboarding`, and
+`site-maintenance` alongside its other declared skills. Let its declared
+skills and deterministic tools own:
 
 - site readiness and scaffolding;
 - toolkit updates;
@@ -36,6 +42,10 @@ tools own:
 - brand and stylesheet validation;
 - image and media processing;
 - toolkit diagnostics, publication, and maintenance.
+
+Treat this ownership map as specific to the pinned release above. A newer
+toolkit version requires a fresh manifest and overlap review before updating
+the compatibility record.
 
 The generic `release-web-application`, `web-discovery-artifacts`,
 `maintain-web-design-system`, and `prepare-web-assets` skills must defer. They

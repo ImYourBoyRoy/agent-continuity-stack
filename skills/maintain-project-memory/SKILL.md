@@ -5,16 +5,19 @@ description: Create, audit, compact, or synchronize the required MEMORY.md and r
 
 # Maintain Project Memory
 
-Maintain a concise, current `MEMORY.md` for every maintained project. Use it to
-route future work without treating it as stronger evidence than source, Git,
-manifests, tests, builds, or verified runtime behavior.
+Maintain a concise, current local `MEMORY.md` for every maintained project.
+Keep it Git-ignored and out of commits, releases, and other uploads unless the
+user explicitly authorizes sharing it. Use it to route future work without
+treating it as stronger evidence than source, Git, manifests, tests, builds, or
+verified runtime behavior.
 
 ## Establish the foundation
 
 Resolve the repository root, read project instructions and relevant README
 sections, inspect Git status, and locate `MEMORY.md`. If it is absent, create it
 unless the current request is strictly read-only or the repository forbids the
-change; in those cases, report the missing required foundation.
+change; in those cases, report the missing required foundation. Ensure
+`MEMORY.md` is ignored by Git before writing private continuity state.
 
 Keep `MEMORY.md` as the continuity index. Delegate deep or specialized content:
 
@@ -56,7 +59,9 @@ action. Do not update memory merely to restate a trivial conversation.
   dumps.
 - Do not claim a model's private memory or chat history is an authoritative
   project source.
-- Keep durable guidance in version-controlled, human-reviewable artifacts.
+- Keep shared durable guidance in version-controlled, human-reviewable
+  artifacts. Keep private project memory untracked unless sharing is explicitly
+  authorized.
 - Let current source, Git state, tests, and runtime evidence override old notes.
 
 ## Handoff check

@@ -52,6 +52,19 @@ TOP_LEVEL_PRIVACY_PATTERNS = {
     key: value for key, value in PORTABILITY_PATTERNS.items() if key != "template marker"
 }
 REPARSE_ATTRIBUTE = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
+LOCAL_ONLY_AGENT_FILES = {"memory.md", "agents.override.md", "claude.local.md"}
+
+
+def is_local_only_agent_state(path: Path) -> bool:
+    parts = tuple(part.casefold() for part in path.parts)
+    if path.name.casefold() in LOCAL_ONLY_AGENT_FILES:
+        return True
+    return any(
+        part == ".claude"
+        and index + 1 < len(parts)
+        and parts[index + 1] == "settings.local.json"
+        for index, part in enumerate(parts)
+    )
 
 
 def parse_frontmatter(text: str, path: Path) -> tuple[dict[str, str], str]:
@@ -166,7 +179,7 @@ def inspect_package_types(root: Path, errors: list[str]) -> None:
             elif stat.S_ISREG(metadata.st_mode) and (
                 path.suffix in text_suffixes
                 or path.name in {"VERSION", "LICENSE", ".gitattributes"}
-            ) and relative.name.casefold() != "memory.md":
+            ) and not is_local_only_agent_state(relative):
                 content = path.read_bytes()
                 if content.startswith(b"\xef\xbb\xbf"):
                     errors.append(f"{relative}: UTF-8 BOM is forbidden")
@@ -235,9 +248,9 @@ def validate_release_inventory(root: Path, errors: list[str]) -> None:
             or Path(relative).suffix.lower() in forbidden_suffixes
         ):
             errors.append(f"release inventory contains forbidden file {relative!r}")
-        if Path(relative).name.casefold() == "memory.md":
+        if is_local_only_agent_state(Path(relative)):
             errors.append(
-                f"release inventory contains prohibited private memory file {relative!r}"
+                f"release inventory contains prohibited private local agent state {relative!r}"
             )
         declared[relative] = entry
 
@@ -249,7 +262,7 @@ def validate_release_inventory(root: Path, errors: list[str]) -> None:
         relative = relative_path.as_posix()
         if (
             relative == "release-files.json"
-            or relative_path.name.casefold() == "memory.md"
+            or is_local_only_agent_state(relative_path)
         ):
             continue
         if any(
@@ -287,15 +300,17 @@ def validate_git_index(root: Path, errors: list[str]) -> None:
             capture_output=True,
         )
     except (OSError, subprocess.CalledProcessError):
-        errors.append("could not verify Git index for local-only memory files")
+        errors.append("could not verify Git index for local-only agent state")
         return
     tracked = result.stdout.split(b"\0")
     if any(
         name
-        and Path(os.fsdecode(name).replace("\\", "/")).name.casefold() == "memory.md"
+        and is_local_only_agent_state(
+            Path(os.fsdecode(name).replace("\\", "/"))
+        )
         for name in tracked
     ):
-        errors.append("Git index tracks a prohibited local-only MEMORY.md file")
+        errors.append("Git index tracks prohibited local-only agent state")
 
 
 def validate_skill(
@@ -438,6 +453,7 @@ def main() -> int:
         "CODE_OF_CONDUCT.md",
         "CONTRIBUTING.md",
         "AGENTS.md",
+        "CLAUDE.md",
         "HANDOFF.md",
         "README.md",
         "SECURITY.md",
@@ -449,10 +465,30 @@ def main() -> int:
     ignore_path = root / ".gitignore"
     if ignore_path.is_file():
         ignore_text = ignore_path.read_text(encoding="utf-8")
+        required_ignored = {
+            "[Mm][Ee][Mm][Oo][Rr][Yy].[Mm][Dd]",
+            "AGENTS.override.md",
+            "CLAUDE.local.md",
+            "**/.claude/settings.local.json",
+        }
         if ".env" not in ignore_text or "!.env.example" not in ignore_text:
             errors.append(".gitignore must ignore local environments except example")
-        if "[Mm][Ee][Mm][Oo][Rr][Yy].[Mm][Dd]" not in ignore_text.splitlines():
-            errors.append(".gitignore must exclude private MEMORY.md files")
+        if not required_ignored <= set(ignore_text.splitlines()):
+            errors.append(
+                ".gitignore must exclude local memory and user-specific agent settings"
+            )
+
+    claude_router_path = root / "CLAUDE.md"
+    if claude_router_path.is_file():
+        try:
+            claude_router = claude_router_path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError) as error:
+            errors.append(f"CLAUDE.md is unreadable: {error}")
+        else:
+            if claude_router != "@AGENTS.md\n":
+                errors.append(
+                    "CLAUDE.md must import canonical AGENTS.md without duplication"
+                )
 
     local_environment = root / ".env"
     if local_environment.exists():
@@ -511,8 +547,8 @@ def main() -> int:
     if "\r" in contract_text:
         errors.append("canonical operating contract is not LF-normalized")
     actual_hash = hashlib.sha256(raw_contract).hexdigest()
-    if instruction.get("schema") != 2:
-        errors.append("instruction-pack schema must be 2")
+    if instruction.get("schema") != 3:
+        errors.append("instruction-pack schema must be 3")
     if instruction.get("package_version") != package_version:
         errors.append("instruction-pack package version does not match manifest")
     if instruction.get("package") != manifest.get("package"):
@@ -545,6 +581,18 @@ def main() -> int:
         "package_contains_fixed_rendered_hash"
     ) is not False:
         errors.append("package must not contain a fixed rendered contract hash")
+    if instruction.get("rendered_integrity", {}).get(
+        "unresolved_placeholders"
+    ) != "forbidden":
+        errors.append("rendered contract metadata must forbid unresolved placeholders")
+    expected_rendering_policy = {
+        "profile_value_source": "explicit-user-provided-or-user-designated-profile",
+        "missing_profile_fields": "remove-field",
+        "empty_operator_profile_section": "remove-section",
+        "infer_profile_from_git_or_repository": False,
+    }
+    if instruction.get("rendering_policy") != expected_rendering_policy:
+        errors.append("instruction-pack rendering policy is missing or unsafe")
     actual_placeholders = set(PLACEHOLDER_RE.findall(contract_text))
     declared_placeholders = set(instruction.get("renderable_placeholders", []))
     if actual_placeholders != declared_placeholders:
@@ -559,20 +607,37 @@ def main() -> int:
     if instruction_clients != manifest_clients - {"antigravity-cli"}:
         errors.append("manifest and instruction-pack client declarations conflict")
 
+    claude_adapter = instruction.get("clients", {}).get("claude", {}).get(
+        "project_adapter", {}
+    )
+    if claude_adapter != {
+        "target": "CLAUDE.md",
+        "mode": "import-canonical-agents",
+        "import": "@AGENTS.md",
+    }:
+        errors.append("Claude project adapter must import canonical AGENTS.md")
+
     antigravity = instruction.get("clients", {}).get("antigravity", {})
-    split_marker = antigravity.get("split_before_heading", "")
-    if not split_marker or contract_text.count(split_marker) != 1:
-        errors.append("Antigravity split heading must occur exactly once")
+    antigravity_frontmatter = antigravity.get("frontmatter", {})
+    if (
+        antigravity.get("target")
+        != "~/.gemini/config/rules/expert-agent-operating-contract.md"
+        or antigravity.get("mode") != "dedicated-global-always-on-rule"
+        or antigravity_frontmatter.get("trigger") != "always_on"
+        or not antigravity_frontmatter.get("description")
+        or antigravity.get("maximum_file_bytes") != 24000
+        or antigravity.get("maximum_aggregate_tokens") != 20000
+    ):
+        errors.append("Antigravity adapter does not match current modular rule policy")
     else:
-        split_at = contract_text.index(split_marker)
-        segments = (contract_text[:split_at], contract_text[split_at:])
-        maximum = antigravity.get("maximum_segment_characters", 0)
-        if maximum != 12000 or any(len(segment) >= maximum for segment in segments):
-            errors.append("Antigravity source segment exceeds safe limit")
-        if "".join(segments).encode("utf-8") != raw_contract:
-            errors.append("Antigravity source segments do not reconstruct contract")
-        if len(antigravity.get("segments", [])) != 2:
-            errors.append("Antigravity adapter must declare two segments")
+        prefix = (
+            "---\n"
+            f"trigger: {antigravity_frontmatter['trigger']}\n"
+            f"description: {antigravity_frontmatter['description']}\n"
+            "---\n"
+        ).encode("utf-8")
+        if len(prefix) + len(raw_contract) >= antigravity["maximum_file_bytes"]:
+            errors.append("Antigravity source rule exceeds its declared byte limit")
 
     activation_data = read_json(root / "tests" / "activation_cases.json", errors)
     activation = activation_data if isinstance(activation_data, dict) else {}

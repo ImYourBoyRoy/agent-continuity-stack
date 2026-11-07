@@ -6,14 +6,14 @@
 
 > Keep project rules and context consistent across coding agents.
 
-Version `3.1.0` is the current stable release for repository-centered
+Version `3.2.0` is the current stable release for repository-centered
 instructions, skills, memory conventions, client adapters, and lifecycle
-safeguards across Codex, Cursor, Claude Code, and Google Antigravity. It is not a
+safeguards across Codex, Cursor, Claude Code, and Google Antigravity. This is not a
 runtime memory service, agent orchestrator, or guarantee of identical behavior
 across every client installation.
 
 Current release:
-[v3.1.0](https://github.com/ImYourBoyRoy/agent-continuity-stack/releases/tag/v3.1.0).
+[v3.2.0](https://github.com/ImYourBoyRoy/agent-continuity-stack/releases/tag/v3.2.0).
 
 ## Repository identity
 
@@ -59,10 +59,10 @@ provide a shared runtime memory database.
 
 | Surface | Source/structure | Live runtime |
 |---|---|---|
-| Codex | Validated | Project contract and positive/near-miss skill smoke passed |
-| Cursor | Validated, version-sensitive | Authentication and live discovery must be verified in the target environment |
-| Claude Code | Validated from current documentation | Client not locally installed; pending |
-| Antigravity IDE | Two-fragment adapter validated | No proven headless agent surface; pending |
+| Codex | Current package checks validate source and adapters | Existing smoke evidence is for v3.1.0 / Codex 0.146.0-alpha.3 only; no v3.2.0 runtime proof yet |
+| Cursor | Current docs and source structure reviewed; skill roots remain version-sensitive | Live discovery must be verified in the target environment |
+| Claude Code | Root `CLAUDE.md` imports canonical `AGENTS.md`; current discovery rules reviewed | Claude Code is not installed in this environment; pending |
+| Antigravity | Dedicated global always-on rule adapter reviewed against current docs | No live discovery proof for this package version; pending |
 | Model-operated lifecycle | Schemas and conformance fixtures | Best-effort disposable exercise; never crash-atomic across clients |
 
 Stable publication requires the gates in `MERGE_CHECKLIST.md`.
@@ -72,7 +72,7 @@ Stable publication requires the gates in `MERGE_CHECKLIST.md`.
 - A reviewed local checkout or immutable release archive.
 - A coding agent with filesystem access explicitly authorized for the selected
   clients and scope.
-- Python 3.10 or newer only for the dependency-free validation helpers.
+- Python 3.11 or newer only for the dependency-free validation helpers.
 - The target coding client for runtime discovery and smoke testing.
 
 The skills themselves are Markdown and do not require Python. Do not execute a
@@ -94,7 +94,9 @@ Perform the package inspection yourself without changing client state:
 
 python3 scripts/validate_bundle.py
 python3 scripts/inspect_contract.py source
-python3 scripts/inspect_tree.py . --exclude .git --exclude .env
+python3 scripts/inspect_tree.py . --exclude .git --exclude .env \
+  --exclude MEMORY.md --exclude AGENTS.override.md \
+  --exclude CLAUDE.local.md --exclude .claude/settings.local.json
 python3 tests/run_portable_tests.py
 
 Then inspect my installed coding-client versions, resolve their actual
@@ -115,9 +117,12 @@ the approved work itself, creates and verifies backups, performs fresh-session
 smoke tests, records lifecycle evidence, and reports the completed result and
 rollback path.
 
-## Choose the installation policy
+## Resolve installation choices
 
-The model must ask rather than infer these decisions:
+Resolve choices from the user's request and explicitly designated preferences
+before asking questions. Do not ask the user to repeat supplied choices. Ask
+only when a materially important choice remains unresolved and has no safe
+documented default.
 
 | Decision | Safe choices |
 |---|---|
@@ -125,16 +130,19 @@ The model must ask rather than infer these decisions:
 | Skill scope | User-global, one or more named repositories, or both |
 | Skill set | All core skills, a named subset, and separately named optional skills |
 | Existing instructions | Preserve unchanged; guided additions; or explicitly install the complete contract |
-| Operator profile | Leave placeholders unresolved, or provide selected fields after the privacy warning |
+| Operator profile | Use explicit values already available from the user or a user-designated profile; omit unanswered optional fields |
 
-`preserve unchanged` is the public default. `guided additions` means the model
+`preserve unchanged` is the public default. Treat the operator profile as
+optional personalization: reuse explicit values already available, omit
+unanswered fields, and do not prompt for missing optional values by default.
+`guided additions` means the model
 proposes individually reviewable provisions for the user's existing
 instructions; it is not the canonical complete contract and must not be
 recorded or smoke-tested as one. `install the complete contract` installs the
 entire verified template through the client adapter and requires explicit
 approval.
 
-The operator-profile fields are optional:
+Operator-profile fields are optional:
 
 - name;
 - email;
@@ -142,10 +150,32 @@ The operator-profile fields are optional:
 - GitHub profile;
 - PyPI profile.
 
-The model must ask for each relevant field and accept “leave unset.” It must
-never infer identity or ownership from a username, Git metadata, environment
-file, or neighboring repository. Values placed in always-loaded instructions
-may be sent to the selected model providers.
+Use explicit values already present in the user's instructions or a
+user-designated profile source; do not ask the user to repeat them. Do not
+prompt for missing optional values by default. Remove every unanswered field
+from the rendered instructions, and remove the entire Operator Profile section
+when no values remain. An installed contract must contain no `{{...}}` template
+markers. Never infer identity or ownership from a username, Git metadata,
+environment file, or neighboring repository. Explain that included values in
+always-loaded instructions may be sent to selected model providers.
+
+Do not copy the raw template into a client. Create the profile JSON and rendered
+contract in transaction staging outside the package and every client discovery
+root, then use the deterministic renderer and inspector:
+
+```bash
+python3 scripts/render_contract.py \
+  --profile-json <transaction-root>/operator-profile.json \
+  --output <transaction-root>/rendered-contract.md
+python3 scripts/inspect_contract.py rendered \
+  <transaction-root>/rendered-contract.md
+```
+
+Use `{}` for a profile with no supplied fields. The renderer never prompts or
+infers values, rejects unexpected fields, omits unanswered profile bullets,
+and refuses to write personalized output inside the package. Show the inspected
+result for review before installing it. Remove temporary profile and rendered
+files after installation or rollback unless the user asks to keep them.
 
 ## Copy-paste installation prompt
 
@@ -180,26 +210,37 @@ Phase 1 is read-only:
 3. Inventory existing user-global and project-local instructions, skills,
    duplicates, ownership markers, local modifications, precedence, instruction
    budgets, and unsafe trees. Do not expose secrets in the report.
-4. Ask me which clients to select, whether skills should be user-global or
-   limited to named repositories, which core and optional skills to install,
-   and whether Antigravity CLI support is separately wanted.
-5. Ask me to choose exactly one instruction mode:
+4. Resolve client selection, skill scope and set, and Antigravity CLI support
+   from my request and user-designated preferences. Do not ask me to repeat
+   choices I have already supplied. Ask only about an unresolved choice that
+   materially changes the plan and has no safe documented default.
+5. Use `preserve-existing` as the default instruction mode. Do not ask me to
+   choose a different mode unless my request calls for changing existing
+   instructions; `guided-additions` and `complete-contract` require explicit
+   selection. The available modes are:
    A. Preserve all existing custom instructions and install skills only
       (default).
    B. Preserve existing instructions and propose specific, line-by-line
       compatible additions for my approval. Do not call this the complete
       package contract.
-   C. Install the complete, unshortened Expert Agent Operating Contract using
+   C. Install the complete Expert Agent Operating Contract using
       the documented preserving adapter. Never replace an unrelated instruction
       file wholesale.
-6. If I choose B or C, show the current effective instruction sources and
+6. For B or C, show the current effective instruction sources and
    conflicts first. For B, ask which behavior categories I actually want,
    propose exact additions, and default unselected categories to no change. For
-   C, require my acceptance of the complete template, then ask separately
-   whether to leave each operator-profile placeholder unresolved or set name,
-   email, personal site, GitHub profile, and PyPI profile. Explain that
-   always-loaded values may be transmitted to the selected model providers.
-   Never infer these values or ownership.
+   C, require my acceptance of the complete template. Reuse explicit operator
+   values already available in my instructions or user-designated profile; do
+   not ask me to repeat them. Ask only for a missing value I specifically want
+   included or that the selected task requires. Remove unanswered fields, omit
+   the whole profile section when empty, and reject any rendered file that still
+   contains a template marker. Build a temporary JSON profile from only those
+   explicit values, run `scripts/render_contract.py` and
+   `scripts/inspect_contract.py rendered`, and show the rendered result for
+   review. Keep those files outside the package and client discovery roots;
+   remove them after installation or rollback. Explain provider exposure
+   before installing personal values. Never infer values or ownership from Git
+   or repository data.
 7. Produce a client-by-client plan with exact targets, operations, independently
    resolved allowed roots, package and skill versions, hashes, immutable backup
    location outside discovery roots, recovery/rollback steps, and smoke tests.
@@ -237,17 +278,18 @@ as success.
 
 ```text
 GLOBAL_CUSTOM_INSTRUCTIONS.md   canonical public contract template
+CLAUDE.md                       Claude Code import of canonical AGENTS.md
 instruction-pack.json           source integrity and client adapters
 manifest.json                   package, skill, schema, and integration inventory
 release-files.json              complete file-and-hash inventory (excluding itself)
 ARCHITECTURE.md                 durable package, lifecycle, and trust design
-MEMORY.md                       private local state; Git-ignored and excluded from releases
+MEMORY.md                       private local project state; Git-ignored and excluded from releases
 HANDOFF.md                      concise continuation point for another model
 skills/                         default core skills
 optional_skills/                default-uninstalled skills
 schemas/                        model-operated lifecycle record contracts
 integrations/                   exact-tested specialist-toolkit boundaries
-scripts/                        read-only validation helpers
+scripts/                        validation and isolated contract-rendering helpers
 tests/                          fixtures, activation cases, and smoke matrix
 INSTALL_PROTOCOL.md             authorization, transaction, and rollback protocol
 CLIENT_COMPATIBILITY.md         version-sensitive client surfaces
@@ -262,10 +304,12 @@ private security-reporting guidance.
 
 A local `.env` is optional maintainer state, never package content. It is
 ignored by Git, excluded from release inventory, and must remain readable only
-by its owner. `.env.example` documents the optional variable name without a
-credential. A local `MEMORY.md` is private continuity state; it is Git-ignored
-and never included in a release archive. Installed skills and validation do not
-require a GitHub token.
+by its owner. `MEMORY.md` is private local continuity state and is also
+Git-ignored and excluded from releases. User-specific `AGENTS.override.md`,
+`CLAUDE.local.md`, and `.claude/settings.local.json` are ignored by Git and
+rejected by release validation. `.env.example` documents the optional variable
+name without a credential.
+Installed skills and validation do not require a GitHub token.
 
 See `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `ARCHITECTURE.md`,
 and `HANDOFF.md` before making a public release change.
@@ -281,13 +325,34 @@ and `HANDOFF.md` before making a public release change.
 | `engineer-cli-tools` | Cross-platform CLI contracts, architecture, packaging, and tests |
 | `maintain-agent-instructions` | Required project instructions and scoped client guidance |
 | `maintain-project-docs` | Required README and authoritative project documentation |
-| `maintain-project-memory` | Required `MEMORY.md` continuity and handoff hygiene |
+| `maintain-project-memory` | Private local `MEMORY.md` continuity and handoff hygiene |
 | `design-agent-capability` | Instructions, skills, scripts, integrations, hooks, and workflow selection |
 | `web-discovery-artifacts` | Provider-neutral public-web discovery |
 | `maintain-web-design-system` | Provider-neutral design systems and accessibility |
 | `prepare-web-assets` | Provider-neutral asset preparation and integration |
 | `red-team-technical-plan` | Proportional adversarial review of material technical plans |
 | `release-web-application` | Provider-neutral staged and reversible web releases |
+
+## Python runtime recommendation
+
+When a Python project needs a runtime manager and neither the user nor the
+repository has selected one, this project recommends
+[pyenv-native](https://github.com/ImYourBoyRoy/pyenv-native) for installing and
+selecting Python runtimes and managing project virtual environments. The
+recommendation was reviewed against upstream `v0.6.0` on 2026-11-05; check the
+[current stable release](https://github.com/ImYourBoyRoy/pyenv-native/releases/latest)
+before acting. Upstream `v0.6.0` lists Windows, Linux, and macOS as supported;
+Android/Termux is experimental.
+
+This is a preference, not a required dependency or automatic installation.
+Respect an existing project runtime manager, interpreter pin, package manager,
+and lockfile. If `pyenv` is already on `PATH`, identify its implementation and
+managed root before proposing a change; do not overwrite or reinterpret an
+existing pyenv installation. Do not install pyenv-native, enable its MCP
+server, or change a runtime without the user's authorization. Its runtime and
+environment tools can change the host or project; inspect the current
+[MCP guide](https://github.com/ImYourBoyRoy/pyenv-native/blob/v0.6.0/docs/MCP.md)
+and obtain authorization for each requested mutation.
 
 ## Optional skills
 
@@ -309,10 +374,12 @@ UTF-8/LF template. When complete-contract mode is explicitly authorized:
    client status.
 
 The package never contains a fixed rendered hash or rendered personal profile.
-Leaving the published placeholders unresolved is the privacy-preserving
-default. Personalizing the always-loaded contract sends those values to each
-selected model provider whenever the contract is loaded; disclose that
-consequence before accepting profile values.
+Use explicit values already provided by the user or a user-designated profile.
+Unanswered optional fields are removed from rendered instructions, and the
+Operator Profile section is omitted when empty. The installed output must
+contain no placeholder markers. Personalizing an always-loaded contract sends
+included values to each selected model provider whenever the contract is
+loaded; disclose that consequence before installation.
 
 ## Model-operated installation
 
@@ -338,11 +405,12 @@ A copied file is not proof that the client loaded it.
 
 ## Portable Web Toolkit integration
 
-The exact-tested optional integration targets the version recorded in
-`integrations/portable-web-toolkit.json`. See that metadata and its human-readable
-companion for compatibility details.
-Newer toolkit releases require revalidation. The toolkit is never installed
-automatically by this package.
+The exact-tested optional integration targets Portable Web Toolkit `0.4.0` at
+the immutable release commit recorded in `integrations/portable-web-toolkit.json`.
+The static ownership review covers the current discovery and accessibility
+skills, but does not claim live toolkit command execution. A newer toolkit
+release requires a new manifest and overlap review. The toolkit is never
+installed automatically by this package.
 
 When toolkit management is established, its manifest-declared skills and tools
 own Astro + Cloudflare readiness, scaffolding, deployment, discovery, brand,
@@ -354,9 +422,16 @@ parallel systems.
 ```bash
 python3 scripts/validate_bundle.py
 python3 scripts/inspect_contract.py source
-python3 scripts/inspect_tree.py . --exclude .git --exclude .env
+python3 scripts/inspect_tree.py . --exclude .git --exclude .env \
+  --exclude MEMORY.md --exclude AGENTS.override.md \
+  --exclude CLAUDE.local.md --exclude .claude/settings.local.json
 python3 tests/run_portable_tests.py
 ```
+
+When run in a Git checkout, `validate_bundle.py` rejects tracked private local
+agent state: any case-variant of `MEMORY.md`, Codex `AGENTS.override.md`, Claude
+`CLAUDE.local.md`, or `.claude/settings.local.json`. Release inventory and
+archive validation reject those files even when Git is unavailable.
 
 For an archive:
 
@@ -380,15 +455,20 @@ installation, rollback, or uninstall.
 
 ## Known limitations
 
-- Cursor global file Rules and user skill roots remain version-sensitive.
-- Claude Code has not yet been runtime-tested in the local release environment.
-- Antigravity must prove both imported fragments are loaded in a new session.
+- Cursor's account-synced User Rules and documented machine-local user rule
+  files have different storage behavior; file-backed format and skill roots
+  remain version-sensitive until the target client passes runtime checks.
+- Claude Code has not yet been runtime-tested in this environment. The root
+  `CLAUDE.md` uses the documented `@AGENTS.md` import for compatibility with
+  sessions that do not load `AGENTS.md` directly.
+- Antigravity's dedicated always-on rule has not been runtime-tested. Check the
+  current 24,000-byte per-file and 20,000-token aggregate rule limits against
+  each target environment.
 - Model-operated lifecycle operations are reviewable best-effort procedures,
   not crash-atomic multi-client transactions.
-- The canonical 13,898-byte contract consumes a meaningful share of each
-  client's always-on context and Codex's aggregate instruction budget.
-- The canonical instruction-priority wording and always-on operator profile
-  remain explicit review items for future release maintenance.
+- The complete contract is an optional always-loaded context cost. Use the
+  portable skills alone when users want workflow coverage without that full
+  always-on instruction load.
 - The public GitHub installation prompt has source and negative conformance
   coverage but has not completed a four-client live installation exercise.
 - Windows reparse-point behavior requires a Windows validation run.
@@ -416,7 +496,7 @@ The package is available under the [MIT License](LICENSE). The canonical
 repository is
 [ImYourBoyRoy/agent-continuity-stack](https://github.com/ImYourBoyRoy/agent-continuity-stack).
 
-Maintained by **Roy Dawson IV**:
+Maintained by **[@imyourboyroy](https://github.com/ImYourBoyRoy)**:
 
 - GitHub: [@ImYourBoyRoy](https://github.com/ImYourBoyRoy)
 - Website: [ImYourBoyRoy.com](https://imyourboyroy.com)

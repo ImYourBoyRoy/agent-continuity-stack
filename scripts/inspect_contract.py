@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 
-PLACEHOLDER_RE = re.compile(r"\{\{([a-z0-9_]+)\}\}")
+PLACEHOLDER_RE = re.compile(r"\{\{(.*?)\}\}", re.DOTALL)
 
 
 def normalized_utf8(path: Path) -> tuple[bytes, bool]:
@@ -66,50 +66,54 @@ def source_status(root: Path) -> dict:
     }
 
 
-def rendered_status(root: Path, rendered_path: Path, parts: list[Path]) -> dict:
+def rendered_status(
+    root: Path,
+    rendered_path: Path,
+    antigravity_rule: Path | None,
+) -> dict:
     metadata = load_metadata(root)
     content, already_normalized = normalized_utf8(rendered_path)
     text = content.decode("utf-8")
     remaining = sorted(set(PLACEHOLDER_RE.findall(text)))
-    unexpected = sorted(set(remaining) - set(metadata["renderable_placeholders"]))
     errors: list[str] = []
-    if unexpected:
-        errors.append("rendered contract contains unexpected placeholders")
+    if remaining:
+        errors.append("rendered contract contains unresolved placeholders")
     if not text.startswith(f"# {metadata['contract_title']}\n"):
         errors.append("rendered contract title is missing")
     if not already_normalized:
         errors.append("rendered bytes are not canonical UTF-8/LF")
 
-    part_status: list[dict] = []
-    reconstruction_matches = None
-    if parts:
-        if len(parts) != 2:
-            errors.append("Antigravity validation requires exactly two parts")
-        else:
-            part_contents: list[bytes] = []
-            maximum = metadata["clients"]["antigravity"][
-                "maximum_segment_characters"
-            ]
-            for part in parts:
-                part_content, part_normalized = normalized_utf8(part)
-                part_characters = len(part_content.decode("utf-8"))
-                part_contents.append(part_content)
-                part_status.append(
-                    {
-                        "path": str(part),
-                        "sha256": digest(part_content),
-                        "characters": part_characters,
-                        "below_limit": part_characters < maximum,
-                        "already_normalized": part_normalized,
-                    }
-                )
-                if part_characters >= maximum:
-                    errors.append(f"{part}: exceeds Antigravity segment limit")
-                if not part_normalized:
-                    errors.append(f"{part}: bytes are not canonical UTF-8/LF")
-            reconstruction_matches = b"".join(part_contents) == content
-            if not reconstruction_matches:
-                errors.append("Antigravity fragments do not reconstruct rendered contract")
+    rule_status = None
+    if antigravity_rule:
+        antigravity = metadata["clients"]["antigravity"]
+        frontmatter = antigravity["frontmatter"]
+        expected_prefix = (
+            "---\n"
+            f"trigger: {frontmatter['trigger']}\n"
+            f"description: {frontmatter['description']}\n"
+            "---\n"
+        ).encode("utf-8")
+        rule_content, rule_normalized = normalized_utf8(antigravity_rule)
+        maximum_bytes = antigravity["maximum_file_bytes"]
+        below_limit = len(rule_content) < maximum_bytes
+        body = rule_content[len(expected_prefix) :] if rule_content.startswith(expected_prefix) else None
+        body_matches = body == content
+        rule_status = {
+            "path": str(antigravity_rule),
+            "sha256": digest(rule_content),
+            "bytes": len(rule_content),
+            "below_limit": below_limit,
+            "body_matches_rendered_contract": body_matches,
+            "already_normalized": rule_normalized,
+        }
+        if not rule_content.startswith(expected_prefix):
+            errors.append("Antigravity rule frontmatter does not match metadata")
+        if not below_limit:
+            errors.append("Antigravity rule exceeds its declared byte limit")
+        if not body_matches:
+            errors.append("Antigravity rule body does not match rendered contract")
+        if not rule_normalized:
+            errors.append("Antigravity rule bytes are not canonical UTF-8/LF")
 
     return {
         "kind": "rendered-contract-status",
@@ -119,10 +123,8 @@ def rendered_status(root: Path, rendered_path: Path, parts: list[Path]) -> dict:
         "already_normalized": already_normalized,
         "characters": len(text),
         "bytes": len(content),
-        "remaining_permitted_placeholders": remaining,
-        "unexpected_placeholders": unexpected,
-        "parts": part_status,
-        "fragment_reconstruction_matches": reconstruction_matches,
+        "unresolved_placeholders": remaining,
+        "antigravity_rule": rule_status,
         "errors": errors,
         "files_modified": False,
     }
@@ -141,11 +143,9 @@ def main() -> int:
     rendered_parser = subparsers.add_parser("rendered")
     rendered_parser.add_argument("path", type=Path)
     rendered_parser.add_argument(
-        "--part",
-        action="append",
-        default=[],
+        "--antigravity-rule",
         type=Path,
-        help="Antigravity fragment; supply exactly twice",
+        help="Dedicated Antigravity global rule to validate against the rendered contract",
     )
     arguments = parser.parse_args()
 
@@ -156,7 +156,9 @@ def main() -> int:
             result = rendered_status(
                 arguments.root.resolve(),
                 arguments.path.resolve(),
-                [path.resolve() for path in arguments.part],
+                arguments.antigravity_rule.resolve()
+                if arguments.antigravity_rule
+                else None,
             )
     except (OSError, ValueError, KeyError, json.JSONDecodeError) as error:
         print(json.dumps({"errors": [str(error)], "files_modified": False}))

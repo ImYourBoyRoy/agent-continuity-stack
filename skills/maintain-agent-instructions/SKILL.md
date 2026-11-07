@@ -52,7 +52,11 @@ If no canonical project file exists, create root `AGENTS.md` unless:
 In those cases, report the missing or alternate foundation. Prefer `AGENTS.md`
 for portable project guidance. Do not maintain independent, contradictory
 `AGENT.md` and `AGENTS.md` bodies; when compatibility requires both, keep one as
-a concise router to the declared canonical file.
+a concise router to the declared canonical file. For Claude Code, a root
+`CLAUDE.md` may use the documented `@AGENTS.md` import so both current and older
+Claude Code sessions receive the canonical instructions. Do not duplicate the
+full file. Check whether the client already loads `AGENTS.md` directly and
+verify the import in a fresh session.
 
 Include only applicable durable repository guidance:
 
@@ -104,7 +108,12 @@ sets.
 
 ## Protect portability and privacy
 
-Exclude from public or global instruction artifacts:
+Keep public package sources and shared core Skills portable. Do not embed the
+maintainer's personal profile in them. For user-specific rendered global
+instructions, include only explicit user-provided or user-designated values
+after the required disclosure and review.
+
+Exclude from public package sources and shared core Skills:
 
 - personal names, usernames, emails, profiles, and home paths
 - credentials, tokens, private keys, and environment dumps
@@ -115,7 +124,10 @@ Exclude from public or global instruction artifacts:
 
 Use placeholders only in user-facing templates that require configuration.
 Prefer repository discovery over persistent placeholders when values already
-exist in project metadata.
+exist in project metadata. For the optional operator profile, run
+`scripts/render_contract.py` with explicit values and validate its output with
+`scripts/inspect_contract.py rendered`; never copy the raw template into a
+client or leave unanswered placeholder bullets in installed instructions.
 
 ## Validate
 

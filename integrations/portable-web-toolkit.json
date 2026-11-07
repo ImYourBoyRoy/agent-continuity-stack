@@ -3,13 +3,13 @@
   "id": "portable-web-toolkit",
   "repository": "https://github.com/ImYourBoyRoy/Portable_Web_toolkit",
   "compatibility": "exact-tested",
-  "tested_on": "2026-07-26",
-  "tested_version": "0.3.1",
-  "release_commit": "cdbc33ff40bedab48fc86bfb7e1ea06a5d81f6f3",
-  "skill_content_base_commit": "86dddd9efb64c5b4219afe986699135a51e63f83",
+  "tested_on": "2026-11-05",
+  "tested_version": "0.4.0",
+  "release_commit": "1675019d3eec9dbdb81bcff93e3e918b3e29fc34",
+  "skill_content_base_commit": "fffa17c8f95e3613b0b1530107e06e010fe16675",
   "manifest_path": "skill-pack.json",
-  "manifest_sha256": "ad676cc0fbc59cc81a1167e777250a426d2beea0c3e55f59d32f679f8b46765e",
-  "skill_pack_version": "1.0.0",
+  "manifest_sha256": "76b9f37dee5d96bcb80cbf666dcbef8c1dda4629a05a4ded5142de0882bb2fa7",
+  "skill_pack_version": "1.4.0",
   "revalidate_newer_versions": true,
   "install_automatically": false,
   "management_signals": [
@@ -20,12 +20,20 @@
     "the user explicitly selects Portable Web Toolkit"
   ],
   "toolkit_owned_skills": [
+    "brand-doctor",
+    "discovery-doctor",
+    "image-pipeline",
+    "instagram-clone",
+    "pagespeed-diagnostics",
     "portable-web-toolkit",
+    "portable-web-toolkit-router",
+    "site-maintenance",
+    "site-onboarding",
     "site-readiness",
     "site-starter",
     "toolkit-update",
-    "instagram-clone",
-    "vectorize-pipeline"
+    "vectorize-pipeline",
+    "wcag-auditor"
   ],
   "deferring_generic_skills": [
     "release-web-application",
@@ -33,6 +41,6 @@
     "maintain-web-design-system",
     "prepare-web-assets"
   ],
-  "optional_fallback_skill": "build-astro-on-cloudflare"
+  "optional_fallback_skill": "build-astro-on-cloudflare",
+  "validation_notes": "Static compatibility and ownership review against the immutable v0.4.0 release manifest; no live cross-project runtime was exercised."
 }
-

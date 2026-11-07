@@ -25,9 +25,10 @@ workstation, private project, account, or repository owner.
   behavior.
 - `CLIENT_COMPATIBILITY.md` records version-sensitive discovery assumptions.
 - `ARCHITECTURE.md` records durable component, lifecycle, and trust boundaries.
-- `MEMORY.md` is private local continuity; keep it Git-ignored. Never stage,
-  commit, release, or upload it without explicit user authorization.
+- `MEMORY.md` records verified durable project state.
 - `HANDOFF.md` records the concise current continuation point for another model.
+- `CLAUDE.md` is a one-line Claude Code import of the canonical `AGENTS.md`;
+  do not duplicate project instructions there.
 
 Repository policy and current host safety instructions retain their actual
 client-defined precedence.
@@ -46,6 +47,16 @@ client-defined precedence.
   guided additions or the complete contract.
 - Keep backups, receipts, baselines, and removed copies outside every client
   discovery root.
+- Keep `MEMORY.md` local-only and Git-ignored. Never stage, commit, release, or
+  upload it unless the user explicitly authorizes sharing it.
+- For maintainer-authored commits and annotated tags, use the GitHub-linked
+  account `ImYourBoyRoy` with `@imyourboyroy` as the Git name and an
+  account-linked GitHub no-reply email. Do not use the public contact email as
+  commit metadata, and preserve other contributors' and bot identities during
+  any history rewrite.
+- Keep Codex `AGENTS.override.md` and Claude `CLAUDE.local.md` plus
+  `.claude/settings.local.json` local-only; shared policy belongs in canonical
+  `AGENTS.md` or tracked project settings.
 - Reject symlinks, junctions, reparse points, and unsupported special files in
   copied or restored trees.
 - Do not embed personal identity, home paths, emails, private hosts,
@@ -53,6 +64,10 @@ client-defined precedence.
 - Maintain one workflow owner. Toolkit-managed Astro + Cloudflare implementation
   belongs to Portable Web Toolkit; generic skills may delegate but must not
   reproduce its commands or configuration systems.
+- For Python runtime-manager recommendations, follow the README's Python
+  runtime preference only when neither the user nor repository already selects
+  a manager. Never install it or replace the project's package manager or
+  lockfile implicitly.
 - Keep optional skills uninstalled by default and require collision tests before
   adding one to the core tier.
 - Update `README.md`, `MEMORY.md`, `HANDOFF.md`, `ARCHITECTURE.md`,
@@ -68,7 +83,9 @@ Run from the repository root:
 ```bash
 python3 scripts/validate_bundle.py
 python3 scripts/inspect_contract.py source
-python3 scripts/inspect_tree.py . --exclude .git --exclude .env
+python3 scripts/inspect_tree.py . --exclude .git --exclude .env \
+  --exclude MEMORY.md --exclude AGENTS.override.md \
+  --exclude CLAUDE.local.md --exclude .claude/settings.local.json
 python3 tests/run_portable_tests.py
 ```
 

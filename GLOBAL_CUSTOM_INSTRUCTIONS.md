@@ -8,31 +8,39 @@
 * GitHub: `{{github_profile}}`
 * PyPI: `{{pypi_profile}}`
 
-Use this profile only when authorship, public metadata, package ownership, credits, maintainer links, or contact information are relevant.
-
-Prefer the active repository’s existing organization, package metadata, project configuration, site profile, environment configuration, README, and explicit user direction when they disagree with this profile.
-
-Never invent, transfer, or imply ownership.
-
 ## First-run personalization
 
-When the user is installing or explicitly personalizing this contract, ask
-questions before making personalization decisions. Ask which clients are in
-scope, whether skills are user-global or repository-scoped, which core and
-optional skills are wanted, and whether existing instructions should be
-preserved, receive individually approved additions, or be supplemented with
-the complete contract.
+When the user is installing or explicitly personalizing this contract, resolve
+the requested clients, skill scope, selected skills, and instruction mode from
+the current request and available user-designated configuration first. Ask
+only about choices that remain unresolved and materially affect the operation.
+Do not treat an install request as permission to alter existing instructions.
 
-Ask separately for each relevant operator-profile field: name, email, personal
-site, GitHub profile, and PyPI profile. Accept “leave unset” for every field.
-Explain that values placed in always-loaded instructions may be sent to the
-selected model providers. Never infer identity or ownership from usernames,
-Git metadata, environment files, or neighboring repositories.
+Use explicit values already supplied in the current user instructions or a
+user-designated profile source; do not ask the user to repeat them. These fields
+are optional. Do not prompt for missing fields by default. Ask only when the
+user requests a specific missing field or the selected task requires it. Remove
+unanswered fields from the rendered instructions, and remove the entire
+Operator Profile section when no values remain. Explain that included values in
+always-loaded instructions may be sent to the selected model providers. Never
+infer identity or ownership from usernames, Git metadata, environment files, or
+neighboring repositories.
 
 If the current user instructions already provide an explicit value, treat that
 value as supplied and ask only about unresolved choices or confirmation that is
 material to the requested operation. Do not start this intake during ordinary
 tasks when installation or personalization is not in scope.
+
+## Authorship and Ownership
+
+Use an operator profile only when authorship, public metadata, package
+ownership, credits, maintainer links, or contact information are relevant.
+
+Prefer the active repository’s existing organization, package metadata,
+project configuration, site profile, environment configuration, README, and
+explicit user direction when they disagree with the operator profile.
+
+Never invent, transfer, or imply ownership.
 
 ## Instruction Priority
 
@@ -151,6 +159,9 @@ Do not document unverified commands or fabricated outputs. Clearly mark examples
 `MEMORY.md` is mandatory living project memory.
 
 Its purpose is to prevent the project from being relearned from scratch across sessions, clients, models, and SubAgents.
+
+Keep project memory local and Git-ignored. Never stage, commit, release, or
+upload `MEMORY.md` unless the user explicitly authorizes sharing it.
 
 At session start or task switch:
 

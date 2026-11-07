@@ -11,7 +11,7 @@ import subprocess
 import sys
 import tempfile
 import zipfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -59,8 +59,24 @@ def test_bundle_and_inventory() -> None:
     assert summary["optional_skills"] == 1
     assert summary["errors"] == 0
     release_inventory = json.loads((ROOT / "release-files.json").read_text("utf-8"))
+
+    def is_private_agent_state(relative: str) -> bool:
+        parts = tuple(part.casefold() for part in PurePosixPath(relative).parts)
+        if parts and parts[-1] in {
+            "memory.md",
+            "agents.override.md",
+            "claude.local.md",
+        }:
+            return True
+        return any(
+            part == ".claude"
+            and index + 1 < len(parts)
+            and parts[index + 1] == "settings.local.json"
+            for index, part in enumerate(parts)
+        )
+
     assert not any(
-        Path(item["path"]).name.casefold() == "memory.md"
+        is_private_agent_state(item["path"])
         for item in release_inventory["files"]
     )
 
@@ -92,41 +108,84 @@ def test_bundle_and_inventory() -> None:
     assert inventory["explicit_sources"][0]["id"] == "companion-tool"
 
 
-def test_local_memory_is_ignored_and_unpublishable() -> None:
+def test_git_local_agent_state_guard() -> None:
     sys.dont_write_bytecode = True
     sys.path.insert(0, str(ROOT / "scripts"))
     from validate_bundle import validate_git_index
 
-    with tempfile.TemporaryDirectory(prefix="portable-memory-index-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="portable-agent-state-index-") as temporary:
         repository = Path(temporary)
+        local_claude = repository / "nested" / ".claude"
+        local_claude.mkdir(parents=True)
+        (repository / "nested" / "mEmOrY.Md").write_text(
+            "local-only\n", encoding="utf-8"
+        )
+        (repository / "nested" / "AGENTS.override.md").write_text(
+            "local-only\n", encoding="utf-8"
+        )
+        (local_claude / "settings.local.json").write_text("{}\n", encoding="utf-8")
         subprocess.run(
-            ["git", "init", "--quiet", str(repository)], check=True
-        )
-        (repository / ".gitignore").write_text(
-            "[Mm][Ee][Mm][Oo][Rr][Yy].[Mm][Dd]\n", encoding="utf-8"
-        )
-        ignored = ("MEMORY.md", "nested/mEmOrY.Md")
-        for relative in ignored:
-            path = repository / relative
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text("local-only fixture\n", encoding="utf-8")
-        result = subprocess.run(
-            ["git", "-C", str(repository), "check-ignore", "--no-index", "--stdin"],
-            input="\n".join(ignored) + "\n",
-            text=True,
+            ["git", "init", "--quiet", str(repository)],
+            check=True,
             capture_output=True,
-            check=True,
         )
-        assert set(result.stdout.splitlines()) == set(ignored)
         subprocess.run(
-            ["git", "-C", str(repository), "add", "--force", ignored[1]],
+            ["git", "-C", str(repository), "add", "nested"],
             check=True,
+            capture_output=True,
         )
         errors: list[str] = []
         validate_git_index(repository, errors)
         assert errors == [
-            "Git index tracks a prohibited local-only MEMORY.md file"
+            "Git index tracks prohibited local-only agent state"
         ]
+
+
+def test_local_agent_state_is_gitignored() -> None:
+    with tempfile.TemporaryDirectory(prefix="portable-local-state-ignore-") as temporary:
+        repository = Path(temporary)
+        (repository / ".gitignore").write_bytes((ROOT / ".gitignore").read_bytes())
+        subprocess.run(
+            ["git", "init", "--quiet", str(repository)],
+            check=True,
+            capture_output=True,
+        )
+        ignored_paths = (
+            "MEMORY.md",
+            "nested/mEmOrY.Md",
+            "AGENTS.override.md",
+            "nested/AGENTS.override.md",
+            "CLAUDE.local.md",
+            "nested/CLAUDE.local.md",
+            ".claude/settings.local.json",
+            "nested/.claude/settings.local.json",
+        )
+        for relative in ignored_paths:
+            path = repository / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("local-only\n", encoding="utf-8")
+            result = subprocess.run(
+                ["git", "-C", str(repository), "check-ignore", "--quiet", relative],
+                check=False,
+                capture_output=True,
+            )
+            assert result.returncode == 0, f"Git does not ignore {relative}"
+
+        shared_settings = repository / "nested" / ".claude" / "settings.json"
+        shared_settings.write_text("{}\n", encoding="utf-8")
+        result = subprocess.run(
+            [
+                "git",
+                "-C",
+                str(repository),
+                "check-ignore",
+                "--quiet",
+                "nested/.claude/settings.json",
+            ],
+            check=False,
+            capture_output=True,
+        )
+        assert result.returncode == 1, "shared Claude project settings must remain trackable"
 
 
 def test_update_audit_boundaries() -> None:
@@ -194,9 +253,9 @@ def test_contract_integrity() -> None:
     normalized_contract_text = " ".join(contract_text.split())
     for required in (
         "## First-run personalization",
-        "Ask which clients are in scope",
-        "Ask separately for each relevant operator-profile field",
-        "Accept “leave unset” for every field",
+        "Use explicit values already supplied in the current user instructions",
+        "Do not prompt for missing fields by default",
+        "remove the entire Operator Profile section",
     ):
         assert required in normalized_contract_text
     source = json.loads(run("scripts/inspect_contract.py", "source").stdout)
@@ -204,42 +263,233 @@ def test_contract_integrity() -> None:
     assert source["already_normalized"] is True
     assert source["errors"] == []
 
+    readme = (ROOT / "README.md").read_text("utf-8")
+    installation_policy = readme.split("## Resolve installation choices", 1)[1].split(
+        "## Copy-paste installation prompt", 1
+    )[0]
+    assert "Resolve choices from the user's request" in installation_policy
+    assert "Do not ask the user to repeat supplied choices" in installation_policy
+    assert "must ask rather than infer" not in readme
+    prompt = readme.split("## Copy-paste installation prompt", 1)[1].split(
+        "## Package layout", 1
+    )[0]
+    assert "Do not ask me to repeat" in prompt
+    assert "Use `preserve-existing` as the default instruction mode" in prompt
+    assert "Ask me which clients to select" not in prompt
+
     with tempfile.TemporaryDirectory(prefix="portable-rendered-contract-") as temporary:
         area = Path(temporary)
-        rendered_text = contract.decode("utf-8")
-        values = {
-            "operator_name": "Example Operator",
-            "operator_email": "operator@example.invalid",
-            "personal_site": "https://example.invalid",
-            "github_profile": "https://github.com/example",
-            "pypi_profile": "https://pypi.org/user/example",
-        }
-        for key, value in values.items():
-            rendered_text = rendered_text.replace(f"{{{{{key}}}}}", value)
-        rendered = area / "rendered.md"
-        rendered.write_text(rendered_text, encoding="utf-8", newline="\n")
-        split_at = rendered_text.index(
-            metadata["clients"]["antigravity"]["split_before_heading"]
+        profile = area / "operator-profile.json"
+        profile.write_text(
+            json.dumps(
+                {
+                    "operator_name": "Example Operator",
+                    "github_profile": "https://github.com/example",
+                }
+            ),
+            encoding="utf-8",
         )
-        part_one = area / "part-1.md"
-        part_two = area / "part-2.md"
-        part_one.write_text(rendered_text[:split_at], encoding="utf-8", newline="\n")
-        part_two.write_text(rendered_text[split_at:], encoding="utf-8", newline="\n")
+        rendered = area / "rendered.md"
+        render_result = json.loads(
+            run(
+                "scripts/render_contract.py",
+                "--profile-json",
+                str(profile),
+                "--output",
+                str(rendered),
+            ).stdout
+        )
+        rendered_text = rendered.read_text(encoding="utf-8")
+        assert render_result["included_fields"] == [
+            "github_profile",
+            "operator_name",
+        ]
+        assert render_result["omitted_fields"] == [
+            "operator_email",
+            "personal_site",
+            "pypi_profile",
+        ]
+        assert render_result["package_files_modified"] is False
+        if os.name == "posix":
+            assert stat.S_IMODE(rendered.stat().st_mode) == 0o600
+        assert "* Name: `Example Operator`" in rendered_text
+        assert "* GitHub: `https://github.com/example`" in rendered_text
+        for unanswered in ("* Email:", "* Personal site:", "* PyPI:"):
+            assert unanswered not in rendered_text
+        assert "{{" not in rendered_text
+
+        complete_values = {
+            "operator_name": "Example Operator",
+            "operator_email": "operator@example.test",
+            "personal_site": "https://example.test",
+            "github_profile": "https://github.com/example",
+            "pypi_profile": "https://pypi.org/user/example/",
+        }
+        complete_profile = area / "complete-profile.json"
+        complete_profile.write_text(json.dumps(complete_values), encoding="utf-8")
+        complete_output = area / "complete-rendered.md"
+        complete_result = json.loads(
+            run(
+                "scripts/render_contract.py",
+                "--profile-json",
+                str(complete_profile),
+                "--output",
+                str(complete_output),
+            ).stdout
+        )
+        complete_text = complete_output.read_text(encoding="utf-8")
+        assert complete_result["included_fields"] == sorted(complete_values)
+        assert complete_result["omitted_fields"] == []
+        assert all(value in complete_text for value in complete_values.values())
+        assert "{{" not in complete_text
+
+        source_hash = hashlib.sha256(
+            (ROOT / metadata["source"]).read_bytes()
+        ).hexdigest()
+        assert source_hash == metadata["source_sha256"]
+        package_output = ROOT / "tests" / "fixtures" / "rendered-in-repo.md"
+        run(
+            "scripts/render_contract.py",
+            "--profile-json",
+            str(profile),
+            "--output",
+            str(package_output),
+            expected=1,
+        )
+        assert not package_output.exists()
+        run(
+            "scripts/render_contract.py",
+            "--profile-json",
+            str(profile),
+            "--output",
+            str(rendered),
+            expected=1,
+        )
+
+        antigravity = metadata["clients"]["antigravity"]
+        frontmatter = antigravity["frontmatter"]
+        rule = area / "expert-agent-operating-contract.md"
+        rule.write_text(
+            "---\n"
+            f"trigger: {frontmatter['trigger']}\n"
+            f"description: {frontmatter['description']}\n"
+            "---\n"
+            + rendered_text,
+            encoding="utf-8",
+            newline="\n",
+        )
         result = json.loads(
             run(
                 "scripts/inspect_contract.py",
                 "rendered",
                 str(rendered),
-                "--part",
-                str(part_one),
-                "--part",
-                str(part_two),
+                "--antigravity-rule",
+                str(rule),
             ).stdout
         )
         assert result["rendered_sha256"] != metadata["source_sha256"]
-        assert result["fragment_reconstruction_matches"] is True
-        assert result["unexpected_placeholders"] == []
+        assert result["antigravity_rule"]["body_matches_rendered_contract"] is True
+        assert result["antigravity_rule"]["below_limit"] is True
+        assert result["unresolved_placeholders"] == []
         assert result["errors"] == []
+
+        empty_profile = area / "empty-profile.json"
+        empty_profile.write_text("{}\n", encoding="utf-8")
+        empty_profile_output = area / "empty-profile.md"
+        empty_result = json.loads(
+            run(
+                "scripts/render_contract.py",
+                "--profile-json",
+                str(empty_profile),
+                "--output",
+                str(empty_profile_output),
+            ).stdout
+        )
+        empty_profile_text = empty_profile_output.read_text(encoding="utf-8")
+        assert empty_result["included_fields"] == []
+        assert empty_result["omitted_fields"] == sorted(
+            metadata["renderable_placeholders"]
+        )
+        assert "## Operator Profile" not in empty_profile_text
+        assert "## Authorship and Ownership" in empty_profile_text
+        assert "{{" not in empty_profile_text
+        result = json.loads(
+            run(
+                "scripts/inspect_contract.py",
+                "rendered",
+                str(empty_profile_output),
+            ).stdout
+        )
+        assert result["unresolved_placeholders"] == []
+        assert result["errors"] == []
+
+        invalid_profile = area / "unknown-profile-field.json"
+        invalid_profile.write_text('{"unknown_field": "value"}\n', encoding="utf-8")
+        invalid_output = area / "invalid.md"
+        result = json.loads(
+            run(
+                "scripts/render_contract.py",
+                "--profile-json",
+                str(invalid_profile),
+                "--output",
+                str(invalid_output),
+                expected=1,
+            ).stdout
+        )
+        assert "unknown fields" in result["errors"][0]
+        assert not invalid_output.exists()
+
+        invalid_email = area / "invalid-email.json"
+        invalid_email.write_text(
+            '{"operator_email": "not an email"}\n', encoding="utf-8"
+        )
+        result = json.loads(
+            run(
+                "scripts/render_contract.py",
+                "--profile-json",
+                str(invalid_email),
+                "--output",
+                str(invalid_output),
+                expected=1,
+            ).stdout
+        )
+        assert "single plain-text email" in result["errors"][0]
+        assert not invalid_output.exists()
+
+        in_package_profile = ROOT / "tests" / "fixtures" / "private-profile.json"
+        run(
+            "scripts/render_contract.py",
+            "--profile-json",
+            str(in_package_profile),
+            "--output",
+            str(invalid_output),
+            expected=1,
+        )
+
+
+def test_portable_web_toolkit_boundary() -> None:
+    metadata = json.loads(
+        (ROOT / "integrations" / "portable-web-toolkit.json").read_text("utf-8")
+    )
+    assert metadata["tested_version"] == "0.4.0"
+    assert metadata["skill_pack_version"] == "1.4.0"
+    assert metadata["compatibility"] == "exact-tested"
+    assert len(metadata["release_commit"]) == 40
+    assert len(metadata["manifest_sha256"]) == 64
+    assert {
+        "discovery-doctor",
+        "wcag-auditor",
+        "site-onboarding",
+        "site-maintenance",
+    } <= set(metadata["toolkit_owned_skills"])
+    expected_deferrals = {
+        "release-web-application",
+        "web-discovery-artifacts",
+        "maintain-web-design-system",
+        "prepare-web-assets",
+    }
+    assert set(metadata["deferring_generic_skills"]) == expected_deferrals
+    assert metadata["optional_fallback_skill"] == "build-astro-on-cloudflare"
 
 
 def test_record_schemas() -> None:
@@ -276,6 +526,7 @@ def test_record_schemas() -> None:
             ROOT
             / "tests"
             / "evidence"
+            / "historical"
             / "codex-0.146.0-alpha.3-linux-project.json"
         ),
     )
@@ -529,27 +780,38 @@ def test_archive_validation() -> None:
         )
         assert result["safe"] is True
 
-        private_payloads = {**payloads, "nested/mEmOrY.Md": b"local-only\n"}
-        private_inventory = {
-            **inventory,
+        memory_archive = area / "private-memory.zip"
+        private_memory = b"private local notes\n"
+        memory_payloads = {
+            **payloads,
+            "mEmOrY.Md": private_memory,
+            "nested/AGENTS.override.md": b"local override\n",
+            ".claude/settings.local.json": b"{}\n",
+        }
+        memory_inventory = {
+            "schema": 1,
+            "hash_algorithm": "sha256",
+            "excluded": ["release-files.json"],
             "files": [
                 {
                     "path": name,
                     "sha256": hashlib.sha256(content).hexdigest(),
                     "bytes": len(content),
                 }
-                for name, content in sorted(private_payloads.items())
+                for name, content in sorted(memory_payloads.items())
             ],
         }
-        private_archive = area / "private-memory.zip"
-        with zipfile.ZipFile(private_archive, "w") as archive:
-            for name, content in private_payloads.items():
+        with zipfile.ZipFile(memory_archive, "w") as archive:
+            for name, content in memory_payloads.items():
                 archive.writestr(f"package/{name}", content)
             archive.writestr(
                 "package/release-files.json",
-                json.dumps(private_inventory, sort_keys=True).encode("utf-8"),
+                json.dumps(memory_inventory, sort_keys=True).encode("utf-8"),
             )
-        run("scripts/validate_archive.py", str(private_archive), expected=1)
+        memory_result = run(
+            "scripts/validate_archive.py", str(memory_archive), expected=1
+        )
+        assert "prohibited private local agent state" in memory_result.stdout
 
         undeclared = area / "undeclared.zip"
         with zipfile.ZipFile(undeclared, "w") as archive:
@@ -586,15 +848,16 @@ def test_boundaries_and_integration() -> None:
     assert not (ROOT / "scripts" / "install_skills.py").exists()
     manifest = json.loads((ROOT / "manifest.json").read_text("utf-8"))
     assert manifest["package"] == "agent-continuity-stack"
-    assert manifest["version"] == "3.1.0"
+    assert manifest["version"] == "3.2.0"
     optional = {item["name"]: item for item in manifest["optional_skills"]}
     assert optional["build-astro-on-cloudflare"]["install_by_default"] is False
 
     integration = json.loads(
         (ROOT / "integrations" / "portable-web-toolkit.json").read_text("utf-8")
     )
-    assert integration["tested_version"] == "0.3.1"
+    assert integration["tested_version"] == "0.4.0"
     assert integration["compatibility"] == "exact-tested"
+    assert "no live cross-project runtime" in integration["validation_notes"]
     assert integration["install_automatically"] is False
     assert len(integration["release_commit"]) == 40
     assert len(integration["skill_content_base_commit"]) == 40
@@ -608,9 +871,11 @@ def test_boundaries_and_integration() -> None:
 
 def main() -> int:
     test_bundle_and_inventory()
-    test_local_memory_is_ignored_and_unpublishable()
+    test_git_local_agent_state_guard()
+    test_local_agent_state_is_gitignored()
     test_update_audit_boundaries()
     test_contract_integrity()
+    test_portable_web_toolkit_boundary()
     test_record_schemas()
     test_tree_inspection()
     test_archive_validation()

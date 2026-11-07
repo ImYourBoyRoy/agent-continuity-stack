@@ -4,69 +4,62 @@
 
 1. `AGENTS.md`
 2. Relevant sections of `README.md`
-3. `MEMORY.md` when present; private local state, Git-ignored and excluded
-   from release archives
+3. `MEMORY.md` when present; it is local-only and must never be staged or
+   uploaded without explicit authorization
 4. `ARCHITECTURE.md`
 5. The authority file for the requested task
 
 Do not read or print `.env`.
 
-## Current state
+## Current release
 
-- Package version: `3.1.0`
-- Status: stable `v3.1.0` published
-- Branch: `main`
-- Canonical remote:
-  `https://github.com/ImYourBoyRoy/agent-continuity-stack`
-- Published release:
-  `https://github.com/ImYourBoyRoy/agent-continuity-stack/releases/tag/v3.1.0`
-- Release commit: `aea50869de75e3036e250cb9551218687520acbc`
-- Release archive: `agent-continuity-stack-3.1.0.zip`
-- Release archive SHA-256:
-  `af03d6704aedebbab126875666ebccadefdaf293f11f614dba59ff52b01626f5`
-- Installation: model-operated, status-first, and explicit-approval-only
-- Public default: install selected skills while preserving custom instructions
-- Inventory: 14 core skills and 1 optional, default-uninstalled skill
+- Stable package: `3.2.0`, published at
+  <https://github.com/ImYourBoyRoy/agent-continuity-stack/releases/tag/v3.2.0>.
+- The GitHub release records the tag commit, archive filename, SHA-256, and
+  validation results.
+- Canonical repository:
+  <https://github.com/ImYourBoyRoy/agent-continuity-stack>.
+- Maintainer Git author and committer name: `@imyourboyroy`, linked to the
+  `ImYourBoyRoy` account with its account-linked no-reply address. Do not use
+  the public contact email for Git metadata.
+- Minimum validation runtime: Python 3.11.
+- When neither the user nor repository selects a Python runtime manager,
+  recommend pyenv-native. Never install it or replace a project package manager
+  implicitly.
 
-## Completed in this release work
+## Package rules and boundaries
 
-- Added explicit first-run personalization questions to the canonical contract.
-- Removed hard-coded client and integration software versions from the README
-  compatibility summary.
-- Converted package metadata and validation to stable `3.1.0`.
-- Replaced multiple release tracks with one stable publication checklist.
-- Updated the pinned `actions/setup-python` workflow dependency and synchronized
-  the release inventory.
-- Preserved the Antigravity two-fragment loader adapter as a functional client
-  requirement.
-- Updated fixtures, contract hashes, release inventory, and project memory.
-- Published the stable annotated tag and GitHub Release with the validated ZIP
-  and checksum sidecar.
-- Closed the obsolete Dependabot pull request and deleted its remote branch.
+- `GLOBAL_CUSTOM_INSTRUCTIONS.md` is the canonical portable contract.
+- Root `CLAUDE.md` imports canonical `AGENTS.md` with `@AGENTS.md`; do not
+  maintain a second copy of project rules.
+- `scripts/render_contract.py` verifies the template hash and renders only
+  explicit profile values. It removes unanswered fields and an empty profile
+  section, never infers or prompts, and refuses to overwrite or write inside
+  the package.
+- Installation is status-first, client-by-client, explicitly authorized, and
+  rollback-aware. Preserve existing instructions by default.
+- `MEMORY.md`, `AGENTS.override.md`, `CLAUDE.local.md`, and
+  `.claude/settings.local.json` are local-only. Keep them ignored, untracked,
+  and out of release inventories and archives.
+- Portable Web Toolkit ownership review targets release `0.4.0` and is static;
+  no live toolkit commands were run.
 
-## Validation baseline
+## Verification and compatibility
 
-Run from the repository root:
+- Bundle, contract, safe-tree, and portable conformance checks passed locally.
+- GitHub Actions passed the Python 3.11 and 3.14 matrix on the release commit.
+- The release archive passed inventory, checksum, and extraction checks; the
+  extracted package suite passed.
+- Fresh-session v3.2.0 runtime smoke tests were not completed. Codex, Cursor,
+  and Antigravity are installed but unverified for this package version;
+  Claude Code was unavailable. The older Codex 3.1.0 evidence is retained only
+  under `tests/evidence/historical/` and is not current runtime evidence.
+- Cursor file-backed user-rule behavior and per-client skill roots remain
+  version-sensitive. Antigravity and Windows behavior require target-surface
+  runtime checks.
 
-```bash
-python3 scripts/validate_bundle.py
-python3 scripts/inspect_contract.py source
-python3 scripts/inspect_tree.py . --exclude .git --exclude .env
-python3 tests/run_portable_tests.py
-```
+## Next action
 
-The 2026-08-08 run passed with zero errors and zero warnings. This proves
-source, metadata, tree safety, schemas, and portable conformance; it does not
-prove every installed client's live discovery.
-
-## Remaining maintenance actions
-
-- Treat deletion of any legacy remote release/tag as a separate explicitly
-  identified destructive operation.
-
-## Handoff discipline
-
-- Update `MEMORY.md` and this file when stable package behavior or verified
-  compatibility evidence changes.
-- Keep credentials, private paths, logs, and transient reasoning out of both
-  files.
+Run fresh-session smoke tests on available supported clients and record only
+evidence tied to the tested package and skill hashes. Do not treat source,
+archive, or CI validation as proof that a client loaded instructions or skills.

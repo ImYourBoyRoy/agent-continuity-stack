@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "name": "maintain-agent-instructions",
-  "version": "1.1.0",
+  "version": "1.3.0",
   "content_hash_definition": "inspect_tree sha256 excluding skill-manifest.json",
-  "content_sha256": "216f7a016e618923ef4c0f710ae7fbf76be453c7d891dbb5ec1b422e619d8f7e"
+  "content_sha256": "67c703cd4f2db1a143f136fa37012b62d2592289233e8038c3a4629ca8798915"
 }

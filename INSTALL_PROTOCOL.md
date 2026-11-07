@@ -51,11 +51,14 @@ conflicts and show the exact proposed merge before approval. Do not attach the
 package contract's ownership, integrity, or runtime-verification claims to a
 partial derivative.
 
-Never infer operator-profile values from machine usernames, Git metadata,
-emails, or unrelated files. Obtain them explicitly or leave the published
-placeholders intact for review. Before personalization, disclose that values in
-an always-loaded contract can be transmitted to, logged by, or retained by each
-selected model provider. Unresolved public placeholders are the default.
+Use operator-profile values already supplied in the active user instructions or
+a user-designated profile source; do not ask the user to repeat them. Never
+infer identity or ownership from machine usernames, Git metadata, environment
+files, or unrelated repositories. Profile fields are optional. Do not prompt
+for missing fields by default. Ask only when the user requests a specific
+missing field or the selected task requires it. Before installing any
+personalized value, disclose that values in an always-loaded contract can be
+transmitted to, logged by, or retained by each selected model provider.
 
 Record the reviewed operation in an `install-plan` document conforming to
 `schemas/install-plan.schema.json`. Plan generation remains read-only. Compute
@@ -134,12 +137,14 @@ Perform this section only when `complete-contract` was explicitly authorized.
 The full contract is all-or-nothing: if the operator does not accept every
 section, use `guided-additions` or `preserve-existing` instead.
 
-Use `GLOBAL_CUSTOM_INSTRUCTIONS.md` without shortening it. Read and write
-deliberate UTF-8 with LF line endings and no byte-order mark. Verify the
-canonical normalized bytes against `source_sha256` before rendering.
+Use `GLOBAL_CUSTOM_INSTRUCTIONS.md` without shortening it. The source is a
+portable template, not installable output: never copy it directly into a client
+when it still contains profile placeholders. Read and write deliberate UTF-8
+with LF line endings and no byte-order mark. Verify the canonical normalized
+bytes against `source_sha256` before rendering.
 
-Render only these
-operator-profile placeholders when explicitly provided:
+Render only these operator-profile placeholders from explicit user-provided or
+user-designated profile values:
 
 - `{{operator_name}}`
 - `{{operator_email}}`
@@ -147,11 +152,37 @@ operator-profile placeholders when explicitly provided:
 - `{{github_profile}}`
 - `{{pypi_profile}}`
 
-Reject unexpected placeholders. Any permitted placeholder left unresolved must
-be intentional and reported. Compute `rendered_sha256` from the complete
-rendered UTF-8/LF bytes. This value is installation-specific: record it in the
-plan, transaction receipt, ownership records, and client status records; do not
-add a fixed rendered hash to the package manifest.
+Do not ask the user to repeat values already present in their current
+instructions or a user-designated profile source. Ask about missing values only
+when the requested operation requires them; otherwise omit them. Reject
+unexpected placeholders. Remove each unanswered profile bullet from rendered
+output; if no values remain, remove the entire `## Operator Profile` section.
+No placeholder may remain in installed instructions.
+
+Use `scripts/render_contract.py` to perform substitutions deterministically.
+Create its JSON input in the transaction staging area outside the package and
+all client discovery roots, using only explicit values. Use `{}` when no fields
+were supplied. The renderer verifies the canonical source hash, refuses
+unknown or malformed fields, removes unanswered bullets, writes a new output
+file outside the package, and does not overwrite existing output. It does not
+ask questions or infer values. Delete the temporary profile JSON and rendered
+copy after installation or rollback unless the user asks to keep them.
+
+```bash
+python3 scripts/render_contract.py \
+  --profile-json <transaction-root>/operator-profile.json \
+  --output <transaction-root>/rendered-contract.md
+python3 scripts/inspect_contract.py rendered \
+  <transaction-root>/rendered-contract.md
+```
+
+Show the inspected rendered contract for user review before installation.
+For Antigravity, also pass `--antigravity-rule <rule-file>` to the inspector and
+confirm the rendered body and size checks pass. A failed check blocks the
+operation. Compute `rendered_sha256` from the complete rendered UTF-8/LF bytes.
+This value is installation-specific: record it in the plan, transaction
+receipt, ownership records, and client status records; do not add a fixed
+rendered hash to the package manifest.
 
 Apply the adapter in `CLIENT_COMPATIBILITY.md`:
 
@@ -160,12 +191,13 @@ Apply the adapter in `CLIENT_COMPATIBILITY.md`:
   content and maintain exactly one contract block between the markers declared
   in `instruction-pack.json`. Refuse an ambiguous or malformed marker layout.
 - Claude Code: install one dedicated user rule.
-- Antigravity: split at the heading declared in `instruction-pack.json`,
-  verify both fragments remain below the declared character limit, verify their
-  byte-for-byte concatenation has `rendered_sha256`, and idempotently add both
-  ordered import lines to the global loader.
-- Cursor: the documented user-global authority is the plain-text User Rules
-  field in Cursor Settings. Provide the complete rendered contract for an
+- Antigravity: install one dedicated global rule at the target declared in
+  `instruction-pack.json`, with the declared `always_on` frontmatter. Verify
+  its body is byte-for-byte the rendered contract and its complete size is
+  below the current per-rule byte limit. Inspect the active aggregate rule
+  budget before installation.
+- Cursor: the package targets the account-synced plain-text User Rules under
+  Customize > Rules. Provide the complete rendered contract for an
   operator-reviewed import and do not edit Cursor's internal settings storage.
   For a disposable project-level runtime test, generate one `.mdc` file with:
 
@@ -177,6 +209,13 @@ Apply the adapter in `CLIENT_COMPATIBILITY.md`:
   ```
 
   followed by the complete rendered contract.
+
+When updating a legacy Antigravity installation that used the two-fragment
+`GEMINI.md` adapter, plan migration to the dedicated rule separately. Remove
+old imports or fragments only when receipts and hashes prove they are
+package-owned and unchanged, and only after the new rule is validated. If
+ownership cannot be proven, preserve the old content and report the duplicate
+loading risk for review.
 
 ## Install skills
 

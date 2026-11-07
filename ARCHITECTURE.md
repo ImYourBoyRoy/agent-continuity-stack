@@ -49,7 +49,9 @@ Package identity and inventory
 `manifest.json` declares the package, skill inventory, adapters, schemas, and
 integrations. `VERSION` and `instruction-pack.json` must agree with it.
 `release-files.json` hashes every publishable file except itself. Local secrets,
-Git metadata, caches, and release archives are not package content.
+project `MEMORY.md`, Git metadata, caches, and release archives are not package
+content. Project memory remains local and Git-ignored unless sharing is
+explicitly authorized.
 
 ### Operating contract
 
@@ -65,7 +67,9 @@ three instruction modes:
 
 The template's source hash never changes during personalization. A separate
 `rendered_sha256` identifies the exact installed bytes and exists only in
-installation records.
+installation records. Explicit user-profile values may replace template fields;
+unanswered fields and the empty profile section are removed before installation.
+Rendered instructions must contain no template markers.
 
 ### Skills
 
@@ -118,6 +122,10 @@ Receipts are evidence, not executable absolute-path instructions.
 - Downloaded helpers are inspected before execution.
 - `.env` is local-only, ignored by Git, excluded from release inventory, and
   never needed by installed skills.
+- `MEMORY.md` is local-only, ignored by Git, excluded from release inventory,
+  and never staged or uploaded without explicit authorization.
+- Claude `CLAUDE.local.md` and `.claude/settings.local.json` are local user
+  state and remain Git-ignored.
 - Backups and lifecycle records live outside every client discovery root.
 - Symlinks, junctions, reparse points, special files, path traversal, ambiguous
   ownership markers, and independently unverified roots are rejected.
@@ -133,8 +141,10 @@ Client paths and precedence are version-sensitive:
 - Codex resolves the active `CODEX_HOME` and its effective `AGENTS` file.
 - Cursor uses client-managed User Rules for the complete global contract;
   project MDC is a disposable test adapter.
-- Claude Code uses a dedicated user rule instead of replacing `CLAUDE.md`.
-- Antigravity imports two ordered contract fragments under its per-file limit.
+- Claude Code uses a root `CLAUDE.md` import of canonical `AGENTS.md`; the
+  complete global contract remains a separate user rule.
+- Antigravity uses a dedicated global `always_on` rule within current per-file
+  and aggregate limits.
 - Antigravity CLI has a separate, opt-in skill root.
 
 `CLIENT_COMPATIBILITY.md` owns the current adapter details. Documentation is not
@@ -144,10 +154,12 @@ substitute runtime proof for an installed client version.
 
 The dependency-free helpers validate normalized contract bytes, package trees,
 schemas, lifecycle records, archives, and inventory. The portable test suite
-also exercises negative cases. A stable release may be published after its
-source, inventory, conformance, archive-safety, clean-commit, CI, and disclosure
-gates pass. Live client, recovery, and platform evidence is reported per
-surface and must never be inferred from source validation.
+also exercises negative cases. Python 3.11 is the minimum validation runtime;
+Python 3.10 reached end of life in October 2026. A stable release may be
+published after its source, inventory, conformance, archive-safety, clean-
+commit, CI, and disclosure gates pass. Live client, recovery, and platform
+evidence is reported per surface and must never be inferred from source
+validation.
 
 Package-level behavior changes increment the package version. Material skill
 changes increment that skill's version and content hash. A release is built only

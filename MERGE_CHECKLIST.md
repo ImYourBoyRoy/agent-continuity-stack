@@ -6,12 +6,15 @@ tracks.
 Before publishing a stable release:
 
 1. Confirm `VERSION`, package manifest version, instruction-pack version,
-   stable status, README, memory, and changelog agree.
+   stable status, README, local memory, and changelog agree. Confirm
+   `MEMORY.md` is Git-ignored, untracked, and absent from the release inventory.
 2. Confirm `.env` and other local credentials are ignored, absent from the
    release inventory, absent from staged/tracked content, and mode-restricted
    when present.
 3. Confirm the normalized UTF-8/LF canonical contract matches its source
    SHA-256 and contains all required sections and only permitted placeholders.
+   Rendered contract output must contain no placeholders; unanswered profile
+   bullets and an empty profile section must be removed.
 4. Confirm rendered-hash fields exist only in runtime plans, receipts,
    ownership, and client-status records.
 5. Confirm the model-operated installation protocol remains status-first and
@@ -23,8 +26,9 @@ Before publishing a stable release:
    instructions and confirm no wholesale replacement is proposed.
 8. Recheck current first-party client paths. Runtime-test supported clients
    when available and label every untested adapter honestly.
-9. Confirm rendered Antigravity fragments remain below the rule-file limit and
-   reconstruct `rendered_sha256`.
+9. Confirm the Antigravity `always_on` rule matches the rendered contract,
+   remains below 24,000 bytes, and fits the target's aggregate rule budget.
+   Confirm the Claude `CLAUDE.md` adapter imports `AGENTS.md` without a copy.
 10. Inventory built-in, global, plugin, and repository-local skills for trigger
     or ownership collisions.
 11. Keep one primary workflow owner. Confirm the optional Astro + Cloudflare
@@ -49,11 +53,15 @@ Before publishing a stable release:
     ```bash
     python3 scripts/validate_bundle.py
     python3 scripts/inspect_contract.py source
-    python3 scripts/inspect_tree.py . --exclude .git --exclude .env
+    python3 scripts/inspect_tree.py . --exclude .git --exclude .env \
+      --exclude MEMORY.md --exclude AGENTS.override.md \
+      --exclude CLAUDE.local.md --exclude .claude/settings.local.json
     python3 tests/run_portable_tests.py
     ```
 
-20. Confirm required GitHub branch protection, Actions permissions, and CI.
+20. Confirm required GitHub branch protection, verify its required status-check
+    names and provider match the current workflow matrix, and check Actions
+    permissions and CI.
 21. Create the release archive from an identified clean commit.
 22. Validate it with `scripts/validate_archive.py`, extract it,
     and rerun the suite.
